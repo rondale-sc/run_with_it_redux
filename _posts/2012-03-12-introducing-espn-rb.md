@@ -1,6 +1,7 @@
 ---
 layout: article
 title: Introducing EspnRb
+description: Announcing EspnRb my wrapper around the ESPN developer API.  It covers some basic usage examples and where you can learn more about it.
 permalink: /introducing-espn-rb.html
 ---
 

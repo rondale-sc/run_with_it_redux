@@ -1,6 +1,7 @@
 ---
 layout: article
 title: Life in a shade of ruby
+description: Conway's Game of Life is a mainstay in Hacker culture.  Here I'll go in depth about it's rules and my implementation.
 permalink: /life-in-a-shade-of-ruby.html
 ---
 

@@ -1,6 +1,7 @@
 ---
 layout: article
 title: We're here to encapsulate
+description: The concept is familiar to most programmers.  Put simply it is bringing data and the methods that operate on it together under a single namespace. This article will showcase a few ways to encapsulate data in javascript.  Specifically we will create a constructor class, and a module.
 permalink: /encapsulation-in-javascript.html
 ---
 

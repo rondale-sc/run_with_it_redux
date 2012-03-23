@@ -1,6 +1,7 @@
 ---
 layout: article
 title: Make it your own
+description: In my last article I spoke about Pry.  Here I'll walk you through how to customize your Pry session.
 permalink: /make-it-your-own.html
 ---
 

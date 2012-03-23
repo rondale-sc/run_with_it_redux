@@ -1,6 +1,7 @@
 ---
 layout: article
 title: Man and Ruby
+description: If you've had any experience with Unix operating systems you undoubtedly know the value of a good man page.  Here I'll show you how to incorporate man pages into your work flow and maybe even author your own.
 permalink: /man-and-ruby.html
 ---
 
@@ -28,7 +29,7 @@ If you pass gem-man the `-s` argument it will fall back to searching system file
 
 Man pages must be written in an unfortunate format called roff [[3]](http://en.wikipedia.org/wiki/Roff). Roff is a format originally created in the 1970's with a limited set of formatting options.  Fortunately there is an alternative to writing in roff.  You can write in ronn!
 
-<img src="/images/Ron.jpg" width="200px"/>
+<img src="http://www.jonathan-jackson.net/images/Ron.jpg" width="200px"/>
 
 ## Ronn
 Ronn is a little command-line application for constructing valid roff from [markdown](http://daringfireball.net/projects/markdown/) by [Ryan Tomayko](https://github.com/rtomayko).  Ronn can also generate the familiar html renditions of your man page from markdown [[4]](https://github.com/rtomayko/ronn).  Markdown is easy to learn so I won't go into that for now, instead we'll talk about the content of a man page.

@@ -1,6 +1,7 @@
 ---
 layout: article
 title: An Introduction to Logging
+description: In this screencast I'll give you a brief introduction to the Logging framework.  It's a popular logging tool that allows for greater transparency in your applications.
 permalink: /an-introduction-to-logging.html
 ---
 

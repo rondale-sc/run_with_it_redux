@@ -1,6 +1,7 @@
 ---
 layout: article
 title: String Theory
+description: I like many of you have often idly wondered about the inner workings of Ruby.  This time I wanted to see if I was correct.  Here I'll show whether single quoted strings or double quoted strings are faster in 1.9.
 permalink: /string-theory.html
 ---
 

@@ -1,6 +1,7 @@
 ---
 layout: article
 title: Make the most of your tweet
+description: Here I'll show you how to integrate google's url shortening service, and Twitter's tweet button to help make your site's tweet a little more friendly.
 permalink: /make-the-most-of-your-tweet.html
 ---
 

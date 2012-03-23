@@ -1,6 +1,7 @@
 ---
 layout: article
 title: Ruby <3's Sass
+description: SCSS is now standard in rails.  I previously have not used SASS because I don't particularly care for significant white space.  However, now having use SCSS just a little I know that I should have been on this bandwagon a long time ago.  Here I'll how to use ruby to define your own functions and then how to write a dynamic CSS grid using SCSS.
 permalink: /ruby-loves-sass.html
 ---
 

@@ -1,6 +1,7 @@
 ---
 layout: article
 title: Give it a Pry
+description: Pry is an amazing tool for code exploration, and a great addition to your utility belt.  Here I'll highlight a few of the reasons why I think Pry is worth your time.
 permalink: /give-it-a-pry.html
 ---
 

@@ -1,6 +1,7 @@
 ---
 layout: article
 title: Caller Method
+description: It's Friday and this week has been fraught with complicated bugs.  Here I share a method I found useful while trying to hack through these issues.
 permalink: /caller-method.html
 ---
 

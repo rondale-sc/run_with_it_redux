@@ -1,6 +1,7 @@
 ---
 layout: article
 title: RVM and rbenv
+description: RVM is the reigning champion of Ruby versioning.  Here I take a look at rbenv and how it pairs with RVM.
 permalink: /rvm-and-rbenv.html
 ---
 

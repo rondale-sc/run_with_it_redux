@@ -1,6 +1,7 @@
 ---
 layout: article
 title: Ruby Hough Hack
+description: The hough transform is an algorithm used to detect edges/objects in an image.  I recently needed to use it to straighten an image so that I could process it.  Here is the (imperfect) solution me and my brother hacked out today.
 permalink: /ruby-hough-hack.html
 ---
 

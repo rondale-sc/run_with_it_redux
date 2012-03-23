@@ -1,6 +1,7 @@
 ---
 layout: article
 title: Setting Up a Remote Environment
+description: Here I'll show you how easy it is to set up an alternate remote dev environment in Rails.  Allowing you to work from home.  ^_^
 permalink: /setting-up-a-remote-environment.html
 ---
 

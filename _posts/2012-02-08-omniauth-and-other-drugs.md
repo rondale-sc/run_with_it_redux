@@ -1,6 +1,7 @@
 ---
 layout: article
 title: Omniauth and Other Drugs
+description: Hello everyone, I'm back.  Here to share a neat piece of code with you.  It isn't very practical but it illustrates how easy it is to use Omniauth
 permalink: /omniauth-and-other-drugs.html
 ---
 

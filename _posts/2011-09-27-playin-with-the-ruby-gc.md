@@ -1,6 +1,7 @@
 ---
 layout: article
 title: Playin' with the Ruby GC
+description: Here I walk you through my attempt at finding the increase (or decrease) in performance from ruby 1.9.2-p290  to 1.9.3-preview1 garbage collection.  I use GC profiler which is a wonderful tool, and some hacks to print a nice little graph.  Check it out.
 permalink: /playin-with-the-ruby-gc.html
 ---
 

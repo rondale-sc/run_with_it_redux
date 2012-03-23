@@ -1,6 +1,7 @@
 ---
 layout: article
 title: 'Hippo: your friend in 5010'
+description: HIPAA 5010 can be quite overwhelming at first.  The complexity the X12 people have fit into a simple flat file consisting a string separated by tildes is very impressive.  However, now you have hippo. A DSL to create and read transactions sets  in pure ruby!
 permalink: /hippo-your-friend-for-5010.html
 ---
 
