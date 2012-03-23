@@ -1,4 +1,12 @@
-Run With it.
+Run With it
+
+License
+The following directories and their contents are Copyright Jonathan Jackson. You may not reuse anything therein without my permission:
+
+* _posts/
+* images/
+
+All other directories and files are BSD Licensed.
 
 ### Licensed under Simplified BSD License
 
