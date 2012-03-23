@@ -22,11 +22,11 @@ The vertical axis is the time in milliseconds, and the horizontal axis represent
 
 While doing the research I came across a nifty little script by the Narihiro Nakamura <a href="http://redmine.ruby-lang.org/attachments/959/bm_gc_fragmentation.rb">here</a>.  I modified it slightly, but kept the same idea of creating a number of objects to fill up the heap.
 
-<script src="https://gist.github.com/2156260.js?file=gist-1.rb"></script>
+{% gist 2156260 gist-1.rb %}
 
 This returns a result set from the GC profiler.  Which I call about a hundred times like so:
 
-<script src="https://gist.github.com/2156260.js?file=gist-2.rb"></script>
+{% gist 2156260 gist-2.rb %}
 
 I attempted to run this ten thousand times but it just took too long.  I wanted to get a large sample because the GC can run at off times and isn't at all guaranteed to be consistent. I ended up just going with a 100 run set for sake of speed.  Once I had the script all set I just used RVM to set my ruby and ran it.  As of writing this article RVM didn't offer 1.9.3-rc1 so I used 1.9.3-preview1 instead.
 

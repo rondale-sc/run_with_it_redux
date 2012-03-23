@@ -10,7 +10,7 @@ The concept of encapsulation is familiar to most programmers.  Put simply it is 
 
 ## Be a Builder
 
-<script src="https://gist.github.com/2155999.js?file=gist-1.js"></script>
+{% gist 2155999 gist-1.js %}
 
 The above code creates an instance of Mammal for cat and dog.  Each instance is fully contained within itself.  You'll note that the prototype method is used to extend print() to Mammal without having to redefine it for each instance. Subsequently each Mammal has the prototype method print() defined.
 
@@ -18,7 +18,7 @@ Likely none of this is new to you, after all javascript has been around for well
 
 ## Modules are where it's at.
 
-<script src="https://gist.github.com/2155999.js?file=gist-2.js"></script>
+{% gist 2155999 gist-2.js %}
 
 The **module pattern** is similar to constructor pattern in many ways.  It offers a way to create an instance of an object, and limits namespace exposure.  However, the **module pattern** brings another useful feature to the table.  That is, it offers the ability to deliniate between public and private functions/variables.  The functions and methods you define inside the enclosure (the parenthesis surrounding the anonymous function) are only available publicly if they are explicitly returned.
 

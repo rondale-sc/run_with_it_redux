@@ -14,7 +14,7 @@ Pry lets you define commands which make the inclusion and execution of arbitrary
 
 If you are anything like me then your ~/.irbrc file had many top level methods(like below), well with pry these can be transformed into commands.
 
-<script src="https://gist.github.com/2156369.js?file=gist-1.rb"></script>
+{% gist 2156369 gist-1.rb %}
 
 This method is limited because if, while in the IRB session, I define something like so I'll over-ride my top-level method.
 
@@ -31,7 +31,7 @@ This method is limited because if, while in the IRB session, I define something 
 
 If instead we implemented the #clear method as a Pry command we would not over-ride the existing functionality.  Oh, and it's easy.
 
-<script src="https://gist.github.com/2156369.js?file=gist-2.rb"></script>
+{% gist 2156369 gist-2.rb %}
 
     $-> pry
 

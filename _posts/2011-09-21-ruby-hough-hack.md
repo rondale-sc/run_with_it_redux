@@ -8,7 +8,7 @@ permalink: /ruby-hough-hack.html
 
 The hough transform<a href="#footnote_1">[1]</a> is an algorithm used to detect lines <s>detect edges/objects</s> in an image. I recently needed to use it to straighten an image so that I could process it. Here is the solution me and my brother hacked out today using Chunky PNG
 
-<script src="https://gist.github.com/2156226.js?file=gist-1.rb"></script>
+{% gist 2156226 gist-1.rb %}
 
 Was fun to work on.  Hope someone finds a use for it.  Just remember that the important part here is how you define your restriction.  In my case I was looking for a straight black line.
 

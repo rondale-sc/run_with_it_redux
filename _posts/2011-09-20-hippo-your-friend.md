@@ -39,14 +39,14 @@ The classes per transaction set have all of the segments (fields) that are permi
 
 The following code illustrates how you would create an instance of an 835 transaction set and populate its ST(Transaction Set Header) segment in Hippo.
 
-<script src="https://gist.github.com/2156191.js?file=gist-1.rb"></script>
+{% gist 2156191 gist-1.rb %}
 
 ##To loop, or not to loop?
 
 
 One of the fundamental constructs found in the X12 transaction set standard is the loop. Loops repeat within a section of the final output, sometimes an arbitrary number of times. Creating this structure with Hippo is easy. Simply call the loop by name like so:
 
-<script src="https://gist.github.com/2156191.js?file=gist-2.rb"></script>
+{% gist 2156191 gist-2.rb %}
 
 Here the loop is created by simply calling the L1000A loop directly on the transaction set. In the code above are two forms that are functionally equivalent and can be used according to preference. Each form will create a loop at that position within the transaction set.
 

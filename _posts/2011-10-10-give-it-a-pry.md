@@ -16,11 +16,11 @@ Here are the top five reasons why I switched to pry.
 
 Using the shell from inside an pry session is simple, convenient, and practical.  You simply prepend the command you would like to run in your shell with a period [[1]](https://github.com/pry/pry/wiki/Shell-Integration).
 
-<script src="https://gist.github.com/2156313.js?file=gist-1.sh"></script>
+{% gist 2156313 gist-1.sh %}
 
 This becomes a really convenient way to launch Vi or Textmate, run Git commands, interact with ImageMagick, et al.  What's more is you can also shunt ruby output directly into your command with  '#{}' like this.
 
-<script src="https://gist.github.com/2156313.js?file=gist-2.sh"></script>
+{% gist 2156313 gist-2.sh %}
 
 ### 2.) Object transparency
 
@@ -28,19 +28,19 @@ With Pry you get some real syntactic sugar for interacting with your objects.  Y
 
 Don't forget you can further filter what you are searching for with 'ls' by passing a regex to the --grep flag.
 
-<script src="https://gist.github.com/2156313.js?file=gist-3.sh"></script>
+{% gist 2156313 gist-3.sh %}
 
 ### 3.) View Source
 
 Once you've got your mind wrapped around contexts and found out how easy it is to navigate your code you're ready to really pop the hood on your code.  Pry offers a way to look at your source code directly via #show-method [[3]](https://github.com/pry/pry/wiki/Source-browsing). If you install pry-doc with Pry you'll find that the show-method allows you to view Ruby's C source code also.  (Great tool for comparing Rubinius/MRI for example)
 
-<script src="https://gist.github.com/2156313.js?file=gist-4.sh"></script>
+{% gist 2156313 gist-4.sh %}
 
 ### 4.) Editor Integration
 
 Now here is my favorite feature.  I've been using interactive_editor for a long time, which is a gem by [jberkel](https://github.com/jberkel) inspired by Giles Bowkett.  It offered a nice little convenience for opening a tempfile in your favorite editor, allowed you to edit it, and executed it when you closed the editor pane.  Pry offers similar functionality [[4]](https://github.com/pry/pry/wiki/Editor-integration).
 
-<script src="https://gist.github.com/2156313.js?file=gist-5.sh"></script>
+{% gist 2156313 gist-5.sh %}
 
 The difference between this and interactive_editor(ie) is that ie will save the buffer so that the next time you invoke the command it will return you to your previous state.  Interactive Editor is compatible with Pry and can simply be required in your ~/.pryrc file to load it into your pry session if you want that particular functionality (Highly recommend).
 
@@ -48,13 +48,13 @@ That's not all!
 
 edit-method will open the file that contains the method passed to it as its args, and place your cursor exactly where it is defined.
 
-<script src="https://gist.github.com/2156313.js?file=gist-6.sh"></script>
+{% gist 2156313 gist-6.sh %}
 
 ### 5.) Gists!!!
 
 Push your current buffer directly to a gist.
 
-<script src="https://gist.github.com/2156313.js?file=gist-7.sh"></script>
+{% gist 2156313 gist-7.sh %}
 
 That just happened!
 

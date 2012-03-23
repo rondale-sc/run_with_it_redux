@@ -16,7 +16,7 @@ Each cell has eight neighbors, three above, one on either side, and three below.
 
 That's it.  For real.  The entire list of rules can be summarized in Ruby like so.
 
-<script src="https://gist.github.com/2156522.js?file=gist-1.rb"></script>
+{% gist 2156522 gist-1.rb %}
 
 After seeing that, you get an idea of why this CGOL is so interesting.  Its set of rules create extreme complexity from little input. Take a look at the pattern, acorn. It is a methuselah that takes 5206 generations to generate 633 cells including 13 escaped gliders [[2]](http://en.wikipedia.org/wiki/Methuselah_(cellular_automaton)).  (It won't mature fully in the video because it's on a 50x50 grid)
 
@@ -28,7 +28,7 @@ Now that you understand Conway's Game of Life, we can start talking about how to
 
 #The Cell
 
-<script src="https://gist.github.com/2156522.js?file=gist-2.rb"></script>
+{% gist 2156522 gist-2.rb %}
 
 This is your basic cell.  It stores its own coordinates and whether it is alive or not.  The Cell#is_alive? sets a variable called future_alive which dictates its state in the next generation.  The reason we need to store its future state in its own variable is because if we change its alive status (while iterating over each celll) it will alter its neighbors calculations.  Each new generation must be computed using the previous generation's information.  To avoid violating this principle, we need to store the calculated value while operating on the original state.
 
@@ -36,13 +36,13 @@ It might be better not to save the coordinates within the cell itself, but it ma
 
 After that, creating the grid of cells is as easy as:
 
-<script src="https://gist.github.com/2156522.js?file=gist-3.rb"></script>
+{% gist 2156522 gist-3.rb %}
 
 #The Game
 
 To tie all the cells together, I created the Game class.  It creates the playing board and processes each generation.  We initialize it with the dimensions of the board and how many generations we'd like to process, and tell it to #play.
 
-<script src="https://gist.github.com/2156522.js?file=gist-4.rb"></script>
+{% gist 2156522 gist-4.rb %}
 
 The cool part is Game#alive_neighbors it's here where we determine how many neighbors are alive.  I've said before that when you have Ennumerable#inject everything looks like a nail.  It's definitely my favorite ennumerable method, and here I use it to get a count of neighboring cells with their internal state set to alive.  We just take the point we are testing and add the points from the @neighbors array and add to sum if that cell is alive.  Super simple.
 
@@ -52,11 +52,11 @@ The cool part is Game#alive_neighbors it's here where we determine how many neig
 
 Alright, that's all well and good, but we don't actually have any cells alive in the initial state so our entire program (though perfectly functional) does exactly nothing.  So I created a pattern Class:
 
-<script src="https://gist.github.com/2156522.js?file=gist-5.rb"></script>
+{% gist 2156522 gist-5.rb %}
 
 You'll notice that the Pattern#set_cells method looks a lot like the alive_neighbors method and it is.  This allows you to trigger certain cells alive by calculating their points relative to an origin point.  It sounds complicated, but it's actually quite simple, assuming you have a pattern you just call:
 
-<script src="https://gist.github.com/2156522.js?file=gist-6.rb"></script>
+{% gist 2156522 gist-6.rb %}
 
 Call that directly before you begin iterating over @steps in Game#Play and you'll create your origin points.  Once you've gotten familiar with that, you can create any pattern you like (there are many great patterns online).  Here is the famous gospers-glider-gun:
 
@@ -64,7 +64,7 @@ Call that directly before you begin iterating over @steps in Game#Play and you'l
 
 Defined like so:
 
-<script src="https://gist.github.com/2156522.js?file=gist-7.rb"></script>
+{% gist 2156522 gist-7.rb %}
 
 #Conclusions
 

@@ -20,27 +20,27 @@ In order to use the espn api you must have an api key.  Your api key can be requ
 
 ### Installation
 
-<script src="https://gist.github.com/2156594.js?file=gist-1.rb"></script>
+{% gist 2156594 gist-1.rb %}
 
 ### Use it
 
 The easiest way to set your api key for use with espn_rb is to export it as an environment variable. Do that like so:
 
-<script src="https://gist.github.com/2156594.js?file=gist-2.sh"></script>
+{% gist 2156594 gist-2.sh %}
 
 ### Get the headlines
 
-<script src="https://gist.github.com/2156594.js?file=gist-3.rb"></script>
+{% gist 2156594 gist-3.rb %}
 
 ### HeadlineResponse
 
-<script src="https://gist.github.com/2156594.js?file=gist-4.rb"></script>
+{% gist 2156594 gist-4.rb %}
 
 ### HeadlineItem
 
 The HeadlineResponse Object holds in it the contens of the ESPN JSON response  split into HeadlineItems.  Here is where you can get Specific information about each story.  Some of the options are:
 
-<script src="https://gist.github.com/2156594.js?file=gist-5.rb"></script>
+{% gist 2156594 gist-5.rb %}
 
 There is a lot more inside the gem, be sure to check out the source.  ^_^
 

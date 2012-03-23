@@ -12,7 +12,10 @@ Let's create a development_remote environment to tunnel our traffic through an s
 
 I'll assume that you are running a MySQL server on 192.168.0.1:3306 and you have a box with an external IP that has local access to it.
 
-<script src="https://gist.github.com/2156604.js?file=gist-1.sh"></script>Forward 3307 192.168.100.1:3306
+{% gist 2156604  gist-1.sh %}
+
+
+Forward 3307 192.168.100.1:3306
 
 You'll want to copy your public key into the ~/.ssh/authorized_keys file to prevent those pesky password prompts.  With that done you simply ssh into the rails_blog_db box like so:
 
@@ -23,14 +26,14 @@ Alright that part was easy let's move on to the Rails stuff.
 
 ## Create your environment file
 
-<script src="https://gist.github.com/2156604.js?file=gist-2.rb"></script>
+{% gist 2156604  gist-2.rb %}
 
 This will load your development configuration file when you load your development_remote environment.
 
 ## Edit your database YAML
 Once you've done that you need to add another entry to your database.yml file.
 
-<script src="https://gist.github.com/2156604.js?file=gist-3.yml"></script>
+{% gist 2156604  gist-3.yml %}
 
 Some of the fancy YML syntax aside, it's pretty straightforward.  You are assigning the default attributes to development_remote, assigning the database attribute to the dev db, and assiging the host and port to your remote's forward.
 
@@ -38,7 +41,7 @@ Some of the fancy YML syntax aside, it's pretty straightforward.  You are assign
 
 In order to render the pages the environment needs to know how to serve assets.  To do that you'll need to edit your application.rb file.
 
-<script src="https://gist.github.com/2156604.js?file=gist-4.rb"></script>
+{% gist 2156604 gist-4.rb%}
 
 Find the line for the bundler require and add development_remote to the assets array.  Once that's done you can simply run your server and everything will work as you expect:
 

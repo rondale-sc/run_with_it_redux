@@ -10,26 +10,26 @@ permalink: /an-introduction-to-logging.html
 
 ###Installation
 
-<script src="https://gist.github.com/2156472.js?file=gist-1.sh"></script>
+{% gist 2156472 gist-1.sh %}
 
 ###Features
 Here we create individual logging objects rather than one monstrous global logger [[1]](https://github.com/TwP/logging/blob/master/examples/loggers.rb).  Once they have been individually created you can customize the behavior of each.
 
-<script src="https://gist.github.com/2156472.js?file=gist-2.rb"></script>
+{% gist 2156472 gist-2.rb %}
 
 Here we use multiple appenders [[2]](https://github.com/TwP/logging/blob/master/examples/appenders.rb). Appenders allow you to shunt your logging messages to different output media.  Here we set our messages to log to standard out and to a file.
 
-<script src="https://gist.github.com/2156472.js?file=gist-3.rb"></script>
+{% gist 2156472 gist-3.rb %}
 
 Here we create log objects at initialization of class Foo and Foo::Bar [[3]](https://github.com/TwP/logging/blob/master/examples/classes.rb).  Once we've done that we can refine our logging parameters to reveal behavior specific to each class.
 
-<script src="https://gist.github.com/2156472.js?file=gist-4.rb"></script>
+{% gist 2156472 gist-4.rb %}
 
 ###Incorporating Rails
 
 Incorporate rails easily with the logging-rails gem [[4]](https://github.com/TwP/logging-rails).
 
-<script src="https://gist.github.com/2156472.js?file=gist-5.rb"></script>
+{% gist 2156472 gist-5.rb %}
 
 ### Thanks for Watching
 

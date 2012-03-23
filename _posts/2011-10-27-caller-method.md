@@ -10,7 +10,7 @@ Hey everyone, It's Friday so I thought I might share with you a little snippet I
 
 I started using Pry [[2]](http://www.jonathan-jackson.net/give-it-a-pry) a while ago and decided I should convert Michael Grosser's script into a Pry command.  Which when used in combination with 'binding.pry' would help me better digest the caller method.
 
-<script src="https://gist.github.com/2156399.js?file=gist-1.rb"></script>
+{% gist 2156399 gist-1.rb %}
 
 ## Using the Caller Method
 

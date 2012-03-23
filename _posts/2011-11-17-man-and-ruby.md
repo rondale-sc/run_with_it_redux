@@ -22,7 +22,7 @@ Gem-man checks to see if any man pages exist and displays it accordingly.  If mu
 
 If you pass gem-man the `-s` argument it will fall back to searching system files for your man page.  With that in mind you can create an easy alias which will let you use `man` to search both your systems man pages and any man pages found in your gems:
 
-<script src="https://gist.github.com/2156493.js?file=gist-1.sh"></script>
+{% gist 2156493 gist-1.sh %}
 
 ## Authoring Your Own
 

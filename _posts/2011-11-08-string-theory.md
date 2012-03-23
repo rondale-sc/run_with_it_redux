@@ -26,7 +26,7 @@ Anyways, I won right?  Wrong! Let's move onto the methodology and dig into why i
 
 ## Methodology
 
-<script src="https://gist.github.com/2156488.js?file=gist-1.rb"></script>
+{% gist 2156488 gist-1.rb %}
 
 In the above code I'm requiring './stats.rb' which is just a down and dirty stats class that I created [[1]](https://gist.github.com/1346872). All it does is let me calculate standard deviation and export the results to a csv file.  So here I ran each test string a thousand times calculating and storing the result(seconds) for each.  The test string simply instantiates a hundred thousand _a_'s and returns the time it took.  Sure enough we get that ~0.19% increase.  Nothing too fancy here.
 

@@ -14,7 +14,7 @@ Twitter's 'Tweet Button' has become the standard for websites and blogs around t
 
 Twitter allows you to include the button with an iframe or via a snippet of javascript.  I'm going to walk through the javascript setup because it's the most convenient and it's also what Twitter recommends.  If you go to the [Twitter Button](https://twitter.com/about/resources/tweetbutton) resource page you'll be given a set of options to configure your Tweet Button.  Once you've figure out how you want it laid out you should have something that looks like this.
 
-<script src="https://gist.github.com/2156432.js?file=gist-1.html"></script>
+{% gist 2156432 gist-1.html %}
 
 This is the basic outline for a tweet button.  The _data_ attributes allow you to customize the behavior of your button.  We'll focus on these [[1]](https://dev.twitter.com/docs/tweet-button):
 
@@ -37,7 +37,7 @@ First things first, generate a migration to add a short_url field to your Articl
 
 Once that's done we can go into the Article model and get to the important stuff.
 
-<script src="https://gist.github.com/2156432.js?file=gist-2.rb"></script>
+{% gist 2156432 gist-2.rb %}
 
 Now you'll immediately notice a few things about the above code.  First is the use of ssl.  Do it [[2]](http://www.rubyinside.com/how-to-cure-nethttps-risky-default-https-behavior-4010.html). I've snagged the curl PEM [[3]](http://curl.haxx.se/ca/cacert.pem) which is a reliable authority and stored it in /lib/cacert.pem. Also set the `verify_mode` to OpenSSL::SSL::VERIFY_PEER.  The rest is pretty [vanilla net/http stuff](https://github.com/augustl/net-http-cheat-sheet).
 
@@ -47,11 +47,11 @@ The next thing you'll notice is the line directly under that, which is where I r
 
 Alright so now you have the short url for your site we'll come back to our Tweet Button.  Only now we'll set the _data-url_ to our short url.  Not so fast!  We also have to set the _data-counturl_ to the original url so that your count bubble will be accurate.
 
-<script src="https://gist.github.com/2156432.js?file=gist-3.erb"></script>
+{% gist 2156432 gist-3.erb %}
 
 Now we have a decent looking tweet.  It's going to use your &lt;title&gt; for your text by default.  I think this is a great default as it encourages you to use the &lt;title&gt; properly.  I think the easiest way of setting your title tag is to set '<%= yield :head %>' in your layout's &lt;head&gt; tag then:
 
-<script src="https://gist.github.com/2156432.js?file=gist-4.erb"></script>
+{% gist 2156432 gist-4.erb %}
 
 And there you have it a nice looking tweet.
 

@@ -14,11 +14,11 @@ Anyways, that's not what I want to talk about today.  Today is all about Omniaut
 
 Surprise Code!
 
-<script src="https://gist.github.com/2156513.js?file=gist-1.rb"></script>
+{% gist 2156513 gist-1.rb %}
 
 Weird combiniation of authorization mechanisms I know, but it will be illustrative. This is what a typical omniauth initializer looks like.  You specify which providers you want to be available and the necessary information required by the strategy.  Most of the strategies available have good documentation, with the possible exception of LDAP ( though it has enough to start ). Once we realized we wanted to have a single custom form (the default forms are kinda bland) that didn't require the specifying of a provider we started tinkering.
 
-<script src="https://gist.github.com/2156513.js?file=gist-2.rb"></script>
+{% gist 2156513 gist-2.rb %}
 
 As you can see it's actually quite trivial to have it call another authentication strategy. You have to set the environment, and in this case the username to be authenticated.  Once that's done simply call calback_call which performs the steps necessary to run the callback phase of a strategy.
 
