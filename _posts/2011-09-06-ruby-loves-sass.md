@@ -7,6 +7,8 @@ permalink: /ruby-loves-sass.html
 
 # {{ page.title }}
 
+{% include _twitter_share.html %}
+
 <span class="small">**TL;DR** -- <a href="#sass_implementation">Grid in SCSS</a></span>
 
 I recently tweeted:

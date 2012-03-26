@@ -7,6 +7,8 @@ permalink: /make-it-your-own.html
 
 # {{ page.title }}
 
+{% include _twitter_share.html %}
+
 So you've started using pry.  You've likely found this article from my previous article <a href="http://www.jonathan-jackson.net/give-it-a-pry">Give it a Pry</a>, and your digging Pry.  You've already found how quickly the Pry repl becomes second nature, how useful having easy shell access is, and how easily it slices to the heart of your code (I'm assuming).  If you're at that point you're probably looking around to see what else you can do.  I'll re-iterate a point made in "Give it a Pry", go to the WIKI! There is a ton of documentation that will not only help you understand Pry better, but also help you to shed light on your own code.  In this article I'm going to quickly show you how to use commands, which are yet another cool feature provided by Pry.
 
 ## Commands, a unique solution.

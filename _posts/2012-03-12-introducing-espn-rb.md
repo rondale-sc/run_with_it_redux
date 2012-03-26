@@ -7,6 +7,8 @@ permalink: /introducing-espn-rb.html
 
 # {{ page.title }}
 
+{% include _twitter_share.html %}
+
 <span  style="font-size:12px;">For those who found this via Reddit here is a <a href="https://github.com/rondale-sc/EspnRb">link to the repository</a>.</span>
 
 ###EspnRb ('ESPN-ar-bee')

@@ -7,6 +7,8 @@ permalink: /setting-up-a-remote-environment.html
 
 # {{ page.title }}
 
+{% include _twitter_share.html %}
+
 Let's create a development_remote environment to tunnel our traffic through an ssh tunnel so we can work with your development environment from home.
 
 ## Set up your SSH forward

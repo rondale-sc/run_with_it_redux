@@ -7,6 +7,8 @@ permalink: /encapsulation-in-javascript.html
 
 # {{ page.title }}
 
+{% include _twitter_share.html %}
+
 The concept of encapsulation is familiar to most programmers.  Put simply it is bringing data and the methods that operate on it together under a single namespace (or object)<a href="#footnote_1">[1]</a>. This article will showcase a few ways to encapsulate data, which in Javascript is quite important as many scripts may be rendered on a single page with little or no knowledge of one another. We we will take a quick tour of the prototype/constructor pattern, then follow up with the popular (and my favorite) module pattern.
 
 ## Be a Builder

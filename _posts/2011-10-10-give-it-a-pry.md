@@ -7,6 +7,8 @@ permalink: /give-it-a-pry.html
 
 # {{ page.title }}
 
+{% include _twitter_share.html %}
+
 If you are familiar with the Ruby programming language you've almost assuredly had some experience with IRB. Pry expands upon the functionality of IRB.  It offers some interesting features that allow you to really dive in and explore your code.  I've been using it for a little while now and already it has proven to be one of my favorite tools. Here are a few of my favorite things about Pry.  Sprinkled throughout will be links to the wiki, where the Pry folks have put together some really solid documentation behind all this.
 
 <img style="margin:auto;" src='http://www.jonathan-jackson.net/assets/pry_image.png'/>

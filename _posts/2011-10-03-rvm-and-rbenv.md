@@ -7,6 +7,8 @@ permalink: /rvm-and-rbenv.html
 
 # {{ page.title }}
 
+{% include _twitter_share.html %}
+
 Many of you are familiar with rbenv and some of the controversy surrounding it. I love RVM and will more than likely continue to use it, but one of the things I truly value in the ruby community is always having more than one option.  I was delightfully surprised with the simplicity of rbenv, how easy it was, and how familiar it felt right out of the box. This article will provide a (humorous) side-by-side comparison of the basic usage and installation of rbenv and RVM.
 
 # Installation

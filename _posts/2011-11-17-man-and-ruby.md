@@ -7,6 +7,8 @@ permalink: /man-and-ruby.html
 
 # {{ page.title }}
 
+{% include _twitter_share.html %}
+
 If you've found this blog it's likely that you are at least somewhat familiar with Unix and Unix-like operating systems.  If so you undoubtedly know about Man pages.  For those of you who don't; the man page is the unix system for documenting command-line applications.  They are succinct and clear guides to how you can interact with an application.  If you are on a *nix system you can pop open your terminal right now and type `man man` and see what I'm talking about.  As developers, we often baulk at documenting our code.  We enjoy creating new things, not tediously writing about our last project.  Here I'll give a brief overview of how you can incorporate man pages into your workflow, then show you how easy it can be to create this basic documentation. Trust me, you'll make a lot of friends if you do it, and probably find that its not as tedious as you think.
 
 ## WorkFlow

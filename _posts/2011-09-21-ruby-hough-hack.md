@@ -7,6 +7,8 @@ permalink: /ruby-hough-hack.html
 
 # {{ page.title }}
 
+{% include _twitter_share.html %}
+
 The hough transform<a href="#footnote_1">[1]</a> is an algorithm used to detect lines <s>detect edges/objects</s> in an image. I recently needed to use it to straighten an image so that I could process it. Here is the solution me and my brother hacked out today using Chunky PNG
 
 {% gist 2156226 gist-1.rb %}

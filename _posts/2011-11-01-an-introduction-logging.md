@@ -7,6 +7,8 @@ permalink: /an-introduction-to-logging.html
 
 # {{ page.title }}
 
+{% include _twitter_share.html %}
+
 <iframe src="http://player.vimeo.com/video/31431112?title=0&amp;byline=0&amp;portrait=0" width="630" height="394" frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>
 
 ###Installation

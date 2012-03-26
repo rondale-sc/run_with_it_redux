@@ -7,6 +7,8 @@ permalink: /life-in-a-shade-of-ruby.html
 
 # {{ page.title }}
 
+{% include _twitter_share.html %}
+
 Conway's Game of Life is a great way to practice your craft.  I recently created my own rendition in Ruby, and have plans to implement it in Javascript and Erlang.  If you haven't heard of Conway's Game of life (CGOL), it is a cellular automaton [[1]](http://en.wikipedia.org/wiki/Cellular_automaton), essentially a mathematical model, consisting of a two dimensional grid where each x and y coordinate are either alive or dead.  Whether a cell is alive or dead is governed by a simple set of rules, and the game advances/evolves by applying the rules to each cell based on the previous generation's configuration and then repeating.  Wow, that was seriously a mouthful.  I would go into why this game has kept programmers interested in it despite being ~forty years old, but as soon as you start with CGOL you'll see how fascinating it is to see an entire world of complexity arise from low level constructs. Let's go through the rules and then meet back up to discuss the code.
 
 #Rules

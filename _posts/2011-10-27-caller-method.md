@@ -7,6 +7,8 @@ permalink: /caller-method.html
 
 # {{ page.title }}
 
+{% include _twitter_share.html %}
+
 Hey everyone, It's Friday so I thought I might share with you a little snippet I found useful this past week.  I was debugging a particularly insidious bug, and wanted to see where the method I suspected of causing the bug was called.  Naturally, I thought of using the #caller method, which I did.  However, using the caller method seemed a bit unwieldy as its return value is a little difficult to read.  So I looked around to see if anyone had found a way to make the caller method a little more usable.  I found a post from Michael Grosser [[1]](http://grosser.it/2009/07/01/getting-the-caller-method-in-ruby/) which presented a neat solution.
 
 I started using Pry [[2]](http://www.jonathan-jackson.net/give-it-a-pry) a while ago and decided I should convert Michael Grosser's script into a Pry command.  Which when used in combination with 'binding.pry' would help me better digest the caller method.

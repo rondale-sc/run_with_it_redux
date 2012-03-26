@@ -7,6 +7,8 @@ permalink: /omniauth-and-other-drugs.html
 
 # {{ page.title }}
 
+{% include _twitter_share.html %}
+
 First of all I'd like to apologize for my extended absence these last few months.  I have been extremely busy revamping three old rails apps, one of which was using rails ~1.2.
 
 

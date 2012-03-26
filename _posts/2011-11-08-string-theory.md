@@ -7,6 +7,8 @@ permalink: /string-theory.html
 
 # {{ page.title }}
 
+{% include _twitter_share.html %}
+
 The other day I found myself in an argument about whether or not a single quoted string was faster than a double quoted string. I know that there are conventions that dictate the use of one over the other for clarity, but I was curious to see if there was actually a performance component.  I being on the side of the single quoted string(SQ) thought surely since SQ strings aren't interpolated they'd be loads faster.  Unfortunately, proving myself right was not as easy as I had initially thought.
 
 ## Define the parameters

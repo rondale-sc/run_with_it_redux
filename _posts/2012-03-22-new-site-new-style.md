@@ -6,6 +6,8 @@ title: New Site, New Style
 
 # {{ page.title }}
 
+{% include _twitter_share.html %}
+
 <small>TL:DR Migrated from Rails to Jekyll and here is why:</small>
 
 I know everyone hates getting on their RSS in the morning, seeing a new post from an author who you are (hopefully) excited about, and it being a trivial post about changes to the site.  But in this case I think you'll find that it's worth it.  I've migrated this blog to jekyll!  Here's why I switched.

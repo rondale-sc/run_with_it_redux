@@ -7,6 +7,8 @@ permalink: /make-the-most-of-your-tweet.html
 
 # {{ page.title }}
 
+{% include _twitter_share.html %}
+
 Twitter's 'Tweet Button' has become the standard for websites and blogs around the internet. Yeah, it's that little button to the right of this paragraph. <img alt="twitter bird" src="http://www.jonathan-jackson.net/assets/single_bird.png" style="vertical-align:bottom;float:left"/> Run with it (this blog) has had that implemented since day one thanks in large part to the fact that Twitter makes including the button really simple.  Just grab the snippet of code and throw it into your html.  It took me a little while to realize that the default settings, while great for getting you up and running, do not result in the prettiest of tweets.  Here I'll walk you through how to utilize google's url shortener, and get the basic Tweet Button functionality down.
 
 <br/><br/>

@@ -7,6 +7,8 @@ permalink: /playin-with-the-ruby-gc.html
 
 # {{ page.title }}
 
+{% include _twitter_share.html %}
+
 So I, like many of you geeks out there heard about the changes to Ruby in 1.9.3-rc1.  Upon hearing the news, I hurriedly scanned the intra-webz to see if there were any cool features that would affect me or my production apps.  Some of the changes in the release candidate were pleasantly surprising, especially file loading (which saw a notable ~38% speed boost).  When I saw the garbage collector was being changed to something called "Lazy Sweeping" I had to figure out how much this was going to impact performance.  I mean c'mon "lazy sweeping", sounds so interesting right?  So I started writing a script to tell me just that.
 
 Let's start this in reverse order.
