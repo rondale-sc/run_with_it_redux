@@ -6,7 +6,7 @@ title: Run With It
   <h1>Articles</h1>
   <ul>
   {% for post in site.posts %}
-  <li><a href="{{  post.url | remove_extension  }}">{{ post.title }}</a> (<abbr>{{ post.date | date_to_string }}</abbr>)<br/>
+  <li><a href="{{  post.url | remove_extension  }}">{{ post.title }}</a> (<span>{{ post.date | date_to_string }}</span>)<br/>
     <p>{{ post.description }}</p>
   </li>
   {% endfor %}
