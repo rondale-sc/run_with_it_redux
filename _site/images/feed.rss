@@ -1,0 +1,2149 @@
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Run With It</title>
+    <link>http://coyled.com/</link>
+    <description>Ruby, Javascript, and all else under the sun./description>
+    <language>en-us</language>
+    <pubDate>Fri, 30 Mar 2012 00:37:40 -0400</pubDate>
+    <lastBuildDate>Fri, 30 Mar 2012 00:37:40 -0400</lastBuildDate>
+
+    
+    <item>
+      <title>New Site, New Style</title>
+      <link>http://jonathan-jackson.net/2012/03/22/new-site-new-style.html</link>
+      <pubDate>Thu, 22 Mar 2012 00:00:00 -0400</pubDate>
+      <author>Jonathan Jackson</author>
+      <guid>http://jonathan-jackson.net/2012/03/22/new-site-new-style</guid>
+      <description>&lt;h1&gt;New Site, New Style&lt;/h1&gt;
+
+&lt;p&gt;&lt;span&gt;&lt;a href=&quot;http://twitter.com/share&quot; class=&quot;twitter-share-button&quot;
+                                         data-count=&quot;horizontal&quot;
+                                         data-via=&quot;rondale_sc&quot;&gt;Tweet&lt;/a&gt;
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;small&gt;TL:DR Migrated from Rails to Jekyll and here is why:&lt;/small&gt;&lt;/p&gt;
+
+&lt;p&gt;I know everyone hates getting on their RSS in the morning, seeing a new post from an author who you are (hopefully) excited about, and it being a trivial post about changes to the site.  But in this case I think you'll find that it's worth it.  I've migrated this blog to jekyll!  Here's why I switched.&lt;/p&gt;
+
+&lt;p&gt;I think you know by now how much I care for Rails.  It was my first experience with the ruby language and still allows for extremely speedy development.  With that said, I don't think it fits for this blog.  I originally wanted to create my own commenting system, allow for rich user interaction, and integrate with other forms of social media.  I believe I hit some of those markers right out of the gate, but quickly realized I wasn't using the additional features.  Here are a few of the reasons why:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Users don't and shouldn't implicitly trust your website.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Use Disqus for comments.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Don't roll your own authentication (or any authentication) if you don't need it.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Bad form to require your users to provide information about themselves to use basic functionality (like comments)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;You must reduce friction between yourself creating the content and that content being available.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Web-UI's can be polished and awesome, but as a person who spends most of my time in robust text editors I'm a little spoiled.  Let me write where I feel comfortable and then git push to deploy.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Enter Jekyll.  Jekyll is a static site generator that basically just pre-processes your site so that they can be served statically through nginx/apache.  It helps solve all of the problems above.  Allowing you to include disqus comments and other social widgets easily.  It's configurable; you can write in textile, html, markdown, or plain text.  Also you can extend Jekyll with plugins written in &lt;em&gt;Ruby&lt;/em&gt;!&lt;/p&gt;
+
+&lt;p&gt;I've also felt that I wasn't able to spend enough time on the Rails codebase for Run With It.  This basically turned my repo into a junk drawer, with inline styles, little testing, etc...&lt;/p&gt;
+
+&lt;p&gt;With Jekyll I front-loaded all the dev time.  I used Twitter bootstrap to help keep my layout clean, and use github Gists to embed my code.&lt;/p&gt;
+
+&lt;p&gt;Along the way I learned a lot about Jekyll.  I'll leave a few of the links that really helped  me below in the references section.  I hope you all like the new look.  Please let me know what you think!  ^_^&lt;/p&gt;
+
+&lt;p&gt;&lt;span style=&quot;font-size:10px&quot;&gt;PS: The RSS feed is slightly different than before so your reader might mark them all as unread.  I'm sorry for any inconvenience&lt;/span&gt;&lt;/p&gt;
+
+&lt;h4&gt;Additional References&lt;/h4&gt;
+
+&lt;p&gt;&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;https://github.com/mojombo/jekyll/wiki&quot;&gt;Jekyll Wiki, Great Info Here&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;https://gist.github.com/2158360&quot;&gt;BinaryMuse's gist liquid tag extension, for rendering gists and raw code in noscript tags for RSS&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;http://www.ph-lee.com/2011/07/05/nginx-rewrite-rules-for-html-extensions.html&quot;&gt;Rewrite urls without .html extension in Nginx&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;https://github.com/mojombo/mojombo.github.com&quot;&gt;Tom Preston Werner's Jekyll site for basic idea of jekyll tree&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Setting Up a Remote Environment</title>
+      <link>http://jonathan-jackson.net/setting-up-a-remote-environment.html</link>
+      <pubDate>Tue, 20 Mar 2012 00:00:00 -0400</pubDate>
+      <author>Jonathan Jackson</author>
+      <guid>http://jonathan-jackson.net/setting-up-a-remote-environment</guid>
+      <description>&lt;h1&gt;Setting Up a Remote Environment&lt;/h1&gt;
+
+&lt;p&gt;&lt;span&gt;&lt;a href=&quot;http://twitter.com/share&quot; class=&quot;twitter-share-button&quot;
+                                         data-count=&quot;horizontal&quot;
+                                         data-via=&quot;rondale_sc&quot;&gt;Tweet&lt;/a&gt;
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Let's create a development_remote environment to tunnel our traffic through an ssh tunnel so we can work with your development environment from home.&lt;/p&gt;
+
+&lt;h2&gt;Set up your SSH forward&lt;/h2&gt;
+
+&lt;p&gt;I'll assume that you are running a MySQL server on 192.168.0.1:3306 and you have a box with an external IP that has local access to it.&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156604.js?file=gist-1.sh'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;$ vi ~/.ssh/config
+
+# Add the following information
+
+Host rails_blog_db
+HostName 0.0.0.0 # your remote's public facing IP
+Port 3122
+User jjackson # your username
+LocalForward 3307 192.168.100.1:3306
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;Forward 3307 192.168.100.1:3306&lt;/p&gt;
+
+&lt;p&gt;You'll want to copy your public key into the ~/.ssh/authorized_keys file to prevent those pesky password prompts.  With that done you simply ssh into the rails_blog_db box like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ssh rails_blog_db
+# Leave this running...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Alright that part was easy let's move on to the Rails stuff.&lt;/p&gt;
+
+&lt;h2&gt;Create your environment file&lt;/h2&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156604.js?file=gist-2.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;# ~$ touch rails_blog/config/environments/development_remote.rb
+# ~$ vi config/environments/development_remote.rb
+
+# Add this and save!
+require File.join(File.expand_path(File.dirname(__FILE__)),'development')
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;This will load your development configuration file when you load your development_remote environment.&lt;/p&gt;
+
+&lt;h2&gt;Edit your database YAML&lt;/h2&gt;
+
+&lt;p&gt;Once you've done that you need to add another entry to your database.yml file.&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156604.js?file=gist-3.yml'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;# rails_blog/config/database.yml
+
+default: &amp;amp;default
+  adapter: mysql
+  username: rails_blog_user
+  password: ENV['your_super_secret_password']
+  host: 192.168.100.1
+
+development:
+  database: rails_blog_development
+  &amp;lt;&amp;lt;: *default
+
+production:
+  database: rails_blog
+  &amp;lt;&amp;lt;: *default
+
+# set the database option to your development db and the host to your
+# ssh forward
+
+development_remote:
+  database: rails_blog_development
+  host: 127.0.0.1
+  port: 3307  # This is where the ssh is forwarding your DB traffic
+  &amp;lt;&amp;lt;: *default
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;Some of the fancy YML syntax aside, it's pretty straightforward.  You are assigning the default attributes to development_remote, assigning the database attribute to the dev db, and assiging the host and port to your remote's forward.&lt;/p&gt;
+
+&lt;h2&gt;Update your application.rb&lt;/h2&gt;
+
+&lt;p&gt;In order to render the pages the environment needs to know how to serve assets.  To do that you'll need to edit your application.rb file.&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156604.js?file=gist-4.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;# rails_blog/config/application.rb
+
+require File.expand_path('../boot', __FILE__)
+
+require 'rails/all'
+
+if defined?(Bundler)
+  # Add your new development_remote environment to the assets hash below
+  Bundler.require(*Rails.groups(:assets =&amp;gt; %w(development development_remote test)))
+end
+
+# Rest of file...
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;Find the line for the bundler require and add development_remote to the assets array.  Once that's done you can simply run your server and everything will work as you expect:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ rails s -e development_remote
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;Conclusions&lt;/h2&gt;
+
+&lt;p&gt;Alright so now you are cruising and working from home.  Hopefully, this is a technique that will help you better interact with your code.  Don't think that you can only use this to tunnel to your dev setup, you can also use it to create a staging environment, run tests remotely, and a whole host of other things.  So by all means, go, be creative!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Introducing EspnRb</title>
+      <link>http://jonathan-jackson.net/introducing-espn-rb.html</link>
+      <pubDate>Mon, 12 Mar 2012 00:00:00 -0400</pubDate>
+      <author>Jonathan Jackson</author>
+      <guid>http://jonathan-jackson.net/introducing-espn-rb</guid>
+      <description>&lt;h1&gt;Introducing EspnRb&lt;/h1&gt;
+
+&lt;p&gt;&lt;span&gt;&lt;a href=&quot;http://twitter.com/share&quot; class=&quot;twitter-share-button&quot;
+                                         data-count=&quot;horizontal&quot;
+                                         data-via=&quot;rondale_sc&quot;&gt;Tweet&lt;/a&gt;
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span  style=&quot;font-size:12px;&quot;&gt;For those who found this via Reddit here is a &lt;a href=&quot;https://github.com/rondale-sc/EspnRb&quot;&gt;link to the repository&lt;/a&gt;.&lt;/span&gt;&lt;/p&gt;
+
+&lt;h3&gt;EspnRb ('ESPN-ar-bee')&lt;/h3&gt;
+
+&lt;p&gt;Since its release I've been working on creating a Ruby wrapper for the ESPN api.  I began because it sounded fun to fiddle around with sports data for a change.  And.. It was, I've had a blast building EspnRb.  EspnRb allows you to use the Espn API with all that Ruby goodness we all know and love.  Here I'll very briefly walk you through installation and getting the espn credentials, then we'll dive straight into some EspnRb examples.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://a.espncdn.com/i/apis/attribution/espn-api-black_200.png&quot; alt=&quot;ESPN api logo&quot; title=&quot;See more branding options at developer.espn.com/branding&quot;&gt;
+&lt;/p&gt;
+
+&lt;h3&gt;ESPN api&lt;/h3&gt;
+
+&lt;p&gt;In order to use the espn api you must have an api key.  Your api key can be requested at the ESPN developer center website &lt;a href=&quot;http://developer.espn.com/member/register&quot;&gt;[1]&lt;/a&gt;.  Just fill out the form and they'll assign you a key.  Important note: the use of ESPN's api requires an attribution link (like above) which can be found &lt;a href=&quot;http://developer.espn.com/branding&quot;&gt;here&lt;/a&gt;.  The attribution links look pretty good and range from 50 by 14px to 200 by 75px, so finding one that fits your use shouldn't be too hard. Once you have the key you can begin working with EspnRb.&lt;/p&gt;
+
+&lt;h3&gt;Installation&lt;/h3&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156594.js?file=gist-1.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;# On the command line.
+# ~$ gem install espn_rb
+
+# Or in a Gemfile
+gem &amp;quot;espn_rb&amp;quot;, &amp;quot;~&amp;gt; 0.0.4&amp;quot;
+# ~$ bundle
+# That's it.
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;h3&gt;Use it&lt;/h3&gt;
+
+&lt;p&gt;The easiest way to set your api key for use with espn_rb is to export it as an environment variable. Do that like so:&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156594.js?file=gist-2.sh'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;# If you want to pass it in to your objects you may do so explicitly like so:
+# espn = EspnRb.headlines(:api_key =&amp;gt; YOUR_SUPER_SECRET_API_KEY)
+
+$ export espn_api_key=YOUR_SUPER_SECRET_API_KEY
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;h3&gt;Get the headlines&lt;/h3&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156594.js?file=gist-3.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;require 'espn_rb'
+espn = Espn.headlines
+
+#   Each sport available via the API can be called on the Espn.headlines
+# [ :all, :golf, :boxing, :mma, :racing, :soccer, :tennis, :mlb
+#   :nba, :nfl, :nhl, :nascar, :wnba, :ncaa_basketball, :ncaa_football
+#   :ncaa_womens_basketball]
+
+espn.all #=&amp;gt; HeadlineResponse
+
+espn.nba(:news) #=&amp;gt; HeadlineResponse
+espn.nfl(:top)  #=&amp;gt; HeadlineResponse
+espn.ncaa_football({:for_date =&amp;gt; &amp;quot;2012-03-09&amp;quot;}) #=&amp;gt; HeadlineResponse # Will include all stories for that date
+espn.nba({:for_athlete =&amp;gt; &amp;quot;1234&amp;quot; #=&amp;gt; HeadlineResponse # Will include all stories for that athleteId
+
+espn.all.response
+#=&amp;gt; ESPN's response string as JSON
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;h3&gt;HeadlineResponse&lt;/h3&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156594.js?file=gist-4.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;# HeadlineResponse includes Enum so you can do things like this:
+espn.all.map(&amp;amp;:title)
+
+#=&amp;gt; [&amp;quot;Celtics-Clippers Preview&amp;quot;,
+#    &amp;quot;Warriors 97, Clippers 93&amp;quot;,
+#    &amp;quot;Hawks 106, Kings 99&amp;quot;,
+#    &amp;quot;Warriors-Clippers, Box&amp;quot;,
+#    &amp;quot;Warriors 97, Clippers 93&amp;quot;,
+#    &amp;quot;Hawks 106, Kings 99&amp;quot;,
+#    &amp;quot;Bucks-Nets Preview&amp;quot;,
+#    &amp;quot;Hawks-Kings, Box&amp;quot;,
+#    &amp;quot;Grizzlies 94, Nuggets 91&amp;quot;,
+#    &amp;quot;Grizzlies-Nuggets, Box&amp;quot;]
+
+# Some methods like titles, descriptions etc are available directly.
+
+espn.all.titles
+#=&amp;gt; Same as above.
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;h3&gt;HeadlineItem&lt;/h3&gt;
+
+&lt;p&gt;The HeadlineResponse Object holds in it the contens of the ESPN JSON response  split into HeadlineItems.  Here is where you can get Specific information about each story.  Some of the options are:&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156594.js?file=gist-5.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;espn = EspnRb.headlines
+headline_response = espn.nba[2] #=&amp;gt; HeadlineItem
+
+headline_response.web_url #=&amp;gt; &amp;quot;http://sports.espn.go.com/espn/wire?section=nba&amp;amp;id=7664408&amp;amp;ex_cid=espnapi_public&amp;quot;
+headline_response.id #=&amp;gt; 7664408
+headline_response.title #=&amp;gt; &amp;quot;Mavericks-Kings Preview&amp;quot;
+headline_response.athletes #=&amp;gt; [&amp;quot;Johnny B&amp;quot;, &amp;quot;Freddie Flintstone&amp;quot;, &amp;quot;Etc&amp;quot;]
+headline_response.leagues #=&amp;gt; [&amp;quot;46&amp;quot;]
+headline_response.athlete_ids #=&amp;gt; [&amp;quot;123&amp;quot;, &amp;quot;132&amp;quot;, &amp;quot;123&amp;quot;]
+
+# More to come in future versions.
+headline_response.headline #=&amp;gt; JSON hash from original response.
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;There is a lot more inside the gem, be sure to check out the source.  ^_^&lt;/p&gt;
+
+&lt;h3&gt;Documentation&lt;/h3&gt;
+
+&lt;p&gt;So far I've built up a decent little readme &lt;a href=&quot;https://github.com/rondale-sc/EspnRb&quot;&gt;[2]&lt;/a&gt; and there are YARD docs &lt;a href=&quot;http://rubydoc.info/gems/espn_rb&quot;&gt;[3]&lt;/a&gt;. I'm also available if you need any help just ping me on &lt;a href=&quot;https://github.com/rondale-sc&quot;&gt;github&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3&gt;Conclusions&lt;/h3&gt;
+
+&lt;p&gt;An example of espn_rb can be found &lt;a href=&quot;http://espn-api-samples.heroku.com/headlines&quot;&gt;here&lt;/a&gt;.  It was created by Brian Jackson, a developer at ESPN.com (&lt;a href=&quot;http://about.me/jaxzin&quot;&gt;@jaxzin&lt;/a&gt;), and he plans to expand the examples over the next little while, so be sure to check back.&lt;/p&gt;
+
+&lt;p&gt;This is just a start. I hope to expand this gem to encompass more and more of the ESPN functionality.  The folks at ESPN have done a good job of making their data available. I've had a lot of fun working on this project so far, and I hope you guys find some use for it.  ^_^&lt;/p&gt;
+
+&lt;h4&gt;References&lt;/h4&gt;
+
+&lt;p&gt;&lt;span  style=&quot;font-size:12px;&quot;&gt;1.&lt;a href=&quot;http://developer.espn.com/member/register&quot;&gt;Register for ESPN api key&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span  style=&quot;font-size:12px;&quot;&gt;2.&lt;a href=&quot;https://github.com/rondale-sc/EspnRb&quot;&gt;Main EspnRb Repository&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span  style=&quot;font-size:12px;&quot;&gt;3.&lt;a href=&quot;http://rubydoc.info/gems/espn_rb&quot;&gt;Yard for EspnRb&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;&lt;/p&gt;
+
+&lt;h4&gt;Additional References&lt;/h4&gt;
+
+&lt;p&gt;&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;http://espn-api-samples.heroku.com/headlines&quot;&gt;@jaxzin's example page&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Life in a shade of ruby</title>
+      <link>http://jonathan-jackson.net/life-in-a-shade-of-ruby.html</link>
+      <pubDate>Mon, 27 Feb 2012 00:00:00 -0500</pubDate>
+      <author>Jonathan Jackson</author>
+      <guid>http://jonathan-jackson.net/life-in-a-shade-of-ruby</guid>
+      <description>&lt;h1&gt;Life in a shade of ruby&lt;/h1&gt;
+
+&lt;p&gt;&lt;span&gt;&lt;a href=&quot;http://twitter.com/share&quot; class=&quot;twitter-share-button&quot;
+                                         data-count=&quot;horizontal&quot;
+                                         data-via=&quot;rondale_sc&quot;&gt;Tweet&lt;/a&gt;
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Conway's Game of Life is a great way to practice your craft.  I recently created my own rendition in Ruby, and have plans to implement it in Javascript and Erlang.  If you haven't heard of Conway's Game of life (CGOL), it is a cellular automaton &lt;a href=&quot;http://en.wikipedia.org/wiki/Cellular_automaton&quot;&gt;[1]&lt;/a&gt;, essentially a mathematical model, consisting of a two dimensional grid where each x and y coordinate are either alive or dead.  Whether a cell is alive or dead is governed by a simple set of rules, and the game advances/evolves by applying the rules to each cell based on the previous generation's configuration and then repeating.  Wow, that was seriously a mouthful.  I would go into why this game has kept programmers interested in it despite being ~forty years old, but as soon as you start with CGOL you'll see how fascinating it is to see an entire world of complexity arise from low level constructs. Let's go through the rules and then meet back up to discuss the code.&lt;/p&gt;
+
+&lt;h1&gt;Rules&lt;/h1&gt;
+
+&lt;p&gt;Each cell has eight neighbors, three above, one on either side, and three below.  The rules of CGOL simply govern the state of the cell in question as it relates to the state of its neighbor cells.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.jonathan-jackson.net/assets/game_of_life_rules.png&quot; alt=&quot;game_of_life_rules&quot;/&gt;&lt;/p&gt;
+
+&lt;p&gt;That's it.  For real.  The entire list of rules can be summarized in Ruby like so.&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156522.js?file=gist-1.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;# If cell is alive then it continues to stay alive if it has
+# 2 or 3 alive neighbors.  If the cell is dead then it comes
+# back to life only if it has exactly 3 alive neighbors.
+
+@alive ? [2,3].include?(alive_neighbors) : alive_neighbors == 3
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;After seeing that, you get an idea of why this CGOL is so interesting.  Its set of rules create extreme complexity from little input. Take a look at the pattern, acorn. It is a methuselah that takes 5206 generations to generate 633 cells including 13 escaped gliders &lt;a href=&quot;http://en.wikipedia.org/wiki/Methuselah_(cellular_automaton&quot;&gt;[2]&lt;/a&gt;).  (It won't mature fully in the video because it's on a 50x50 grid)&lt;/p&gt;
+
+&lt;iframe src=&quot;http://player.vimeo.com/video/37406843&quot; width=&quot;488&quot; height=&quot;274&quot; frameborder=&quot;0&quot; webkitAllowFullScreen mozallowfullscreen allowFullScreen&gt;&lt;/iframe&gt;
+
+&lt;h1&gt;The Code&lt;/h1&gt;
+
+&lt;p&gt;Now that you understand Conway's Game of Life, we can start talking about how to implement it.  The examples found here are from my first attempt at creating CGOL.  It's not perfect, but it'll serve to illustrate why this is such a fun problem.  &lt;a href=&quot;https://github.com/radar&quot;&gt;Ryan Bigg&lt;/a&gt; did a screencast in which he creates CGOL through a test driven approach &lt;a href=&quot;http://www.rubyinside.com/screencast-coding-conways-game-of-life-in-ruby-the-tdd-way-with-rspec-5564.html&quot;&gt;[3]&lt;/a&gt;.  It's well worth your time and probably a better implementation.  For now, we'll just go off my version.&lt;/p&gt;
+
+&lt;h1&gt;The Cell&lt;/h1&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156522.js?file=gist-2.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;class Cell
+  attr_accessor :y, :x, :alive, :future_alive
+
+  def initialize(x,y,alive=false)
+    @x = x
+    @y = y
+    @alive = alive
+  end
+
+  def is_alive?(sum)
+    self.future_alive = if @alive
+                          [2,3].include?(sum)
+                        else
+                          sum == 3
+                        end
+  end
+
+  def set_next_generation
+    self.alive        = self.future_alive
+    self.future_alive = nil
+  end
+
+  def to_s; @alive ? ' O ' : &amp;quot;   &amp;quot; end
+end
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;This is your basic cell.  It stores its own coordinates and whether it is alive or not.  The Cell#is_alive? sets a variable called future_alive which dictates its state in the next generation.  The reason we need to store its future state in its own variable is because if we change its alive status (while iterating over each celll) it will alter its neighbors calculations.  Each new generation must be computed using the previous generation's information.  To avoid violating this principle, we need to store the calculated value while operating on the original state.&lt;/p&gt;
+
+&lt;p&gt;It might be better not to save the coordinates within the cell itself, but it makes working with the object much, much easier.  Basically, with the Cell class we have a mini state machine.&lt;/p&gt;
+
+&lt;p&gt;After that, creating the grid of cells is as easy as:&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156522.js?file=gist-3.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;# Array#new accepts a block....radical!
+@cells = Array.new(@height) { |y| Array.new(@width) { |x| Cell.new(x,y) }}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;h1&gt;The Game&lt;/h1&gt;
+
+&lt;p&gt;To tie all the cells together, I created the Game class.  It creates the playing board and processes each generation.  We initialize it with the dimensions of the board and how many generations we'd like to process, and tell it to #play.&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156522.js?file=gist-4.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;class Game
+  def initialize(w,h,steps)
+    @width,@height,@steps = w,h,steps
+    @cells   = Array.new(@height) { |y| Array.new(@width) { |x| Cell.new(x,y) }}
+    @neighbors = [[-1, 0],[1, 0],[-1, 1],[0, 1],[1, 1],[-1, -1],[0, -1], [1, -1]]
+  end
+
+  def play
+    (1..@steps).each_with_index do |i|
+      system('clear')
+      puts self.to_s
+      step
+      sleep 0.1
+    end
+  end
+
+  def step
+    @cells.reverse.each do |row|
+      row.each do |cell|
+        cell.is_alive? alive_neighbors(cell.x, cell.y)
+      end
+    end
+    @cells.each {|r| r.each {|c| c.set_next_generation }}
+  end
+
+  def alive_neighbors(x,y)
+    @neighbors.inject(0) do |sum, (neighbor_x, neighbor_y)|
+      sum += 1 if @cells[y + neighbor_y][x + neighbor_x].alive; sum
+    end
+  end
+
+  def to_s
+    @cells.reverse.map { |row| row.join }.join(&amp;quot;\n&amp;quot;)
+  end
+end
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;The cool part is Game#alive_neighbors it's here where we determine how many neighbors are alive.  I've said before that when you have Ennumerable#inject everything looks like a nail.  It's definitely my favorite ennumerable method, and here I use it to get a count of neighboring cells with their internal state set to alive.  We just take the point we are testing and add the points from the @neighbors array and add to sum if that cell is alive.  Super simple.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.jonathan-jackson.net/assets/alive_neighbors.png&quot; width=&quot;630&quot; alt=&quot;skitch outline of #alive_neighbors&quot;/&gt;&lt;/p&gt;
+
+&lt;h1&gt;The Pattern&lt;/h1&gt;
+
+&lt;p&gt;Alright, that's all well and good, but we don't actually have any cells alive in the initial state so our entire program (though perfectly functional) does exactly nothing.  So I created a pattern Class:&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156522.js?file=gist-5.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;class Pattern
+  def initialize(x, y, pattern=nil)
+    @origin_x, @origin_y = origin_x, origin_y
+    @default_patterns = {:acorn =&amp;gt; [[-3,0],[-2,0],[-2,2],[0,1],[1,0],[2,0],[3,0]]}
+    @pattern = @default_patterns[pattern].nil? ? @default_patterns[:acorn] : @default_patterns[pattern]
+  end
+
+  def set_cells(cells)
+    @pattern.each  do |(x,y)|
+      unless cells[@origin_x + x].nil? || cells[@origin_x + x][@origin_y + y].nil?
+        cells[@origin_y + y][@origin_x + x].alive = true;
+      end
+    end
+  end
+end
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;You'll notice that the Pattern#set_cells method looks a lot like the alive_neighbors method and it is.  This allows you to trigger certain cells alive by calculating their points relative to an origin point.  It sounds complicated, but it's actually quite simple, assuming you have a pattern you just call:&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156522.js?file=gist-6.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;Pattern.new(somepoint_x, somepoint_y, :acorn).set_cells(@cells)
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;Call that directly before you begin iterating over @steps in Game#Play and you'll create your origin points.  Once you've gotten familiar with that, you can create any pattern you like (there are many great patterns online).  Here is the famous gospers-glider-gun:&lt;/p&gt;
+
+&lt;iframe src=&quot;http://player.vimeo.com/video/37540376&quot; width=&quot;488&quot; height=&quot;274&quot; frameborder=&quot;0&quot; webkitAllowFullScreen mozallowfullscreen allowFullScreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;Defined like so:&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156522.js?file=gist-7.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;:glider_gun =&amp;gt; [[0,0],[-1,0],[-1,1],[-1,-1],[-2,2],[-2,-2],[-3,0],
+                      [-4,3],[-5,3],[-4,-3],[-5,-3],[-6, 2],[-6,-2],
+                      [-7,1],[-7,0],[-7,-1],[-16,0],[-17,0],[-16,1],
+                      [-17,1],[3,3],[3,2],[3,1],[4,3],[4,2],[4,1],[5,4],
+                      [5,0],[7,4],[7,5],[7,0],[7,-1],[17,2],[17,3],[18,2],
+                      [18,3]]
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;h1&gt;Conclusions&lt;/h1&gt;
+
+&lt;p&gt;In Ruby, I completed my first working prototype CGOL in an hour or two.  It was a lot of fun. It's a great problem and has probably been written in every language ever created. The reasons for that are clear; it's a fun problem that forces you to use many different aspects of the language.  In Ruby, this was pretty simple, but I've been writing in Ruby for years.  I'm going to try writing this in a language I don't know well and use it for what it is: a fun learning tool.  Some of the patterns I've seen around the web have truly impressed me.  While rules of the game are simple, the resulting complexity is truly amazing.  Take some time and try coding this in your language of choice, or improve this one.  Either way, have fun with it.  ^_^&lt;/p&gt;
+
+&lt;h4&gt;References&lt;/h4&gt;
+
+&lt;p&gt;&lt;span  style=&quot;font-size:12px;&quot;&gt;1.) &lt;a href=&quot;http://en.wikipedia.org/wiki/Cellular_automaton&quot;&gt;Wiki Entry on Cellular Automaton&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span  style=&quot;font-size:12px;&quot;&gt;2.) &lt;a href=&quot;http://en.wikipedia.org/wiki/Methuselah_(cellular_automaton)&quot;&gt;Methuselah Definition&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span  style=&quot;font-size:12px;&quot;&gt;3.) &lt;a href=&quot;http://www.rubyinside.com/screencast-coding-conways-game-of-life-in-ruby-the-tdd-way-with-rspec-5564.html&quot;&gt;Ryan Bigg's Solution TDD&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;&lt;/p&gt;
+
+&lt;h4&gt;Additional References&lt;/h4&gt;
+
+&lt;p&gt;&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;http://pentadecathlon.com/lifeNews/&quot;&gt;Awesome Life News Site&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;http://www.youtube.com/watch?v=XcuBvj0pw-E&quot;&gt;Game of Life Demo on YouTube&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Omniauth and Other Drugs</title>
+      <link>http://jonathan-jackson.net/omniauth-and-other-drugs.html</link>
+      <pubDate>Wed, 08 Feb 2012 00:00:00 -0500</pubDate>
+      <author>Jonathan Jackson</author>
+      <guid>http://jonathan-jackson.net/omniauth-and-other-drugs</guid>
+      <description>&lt;h1&gt;Omniauth and Other Drugs&lt;/h1&gt;
+
+&lt;p&gt;&lt;span&gt;&lt;a href=&quot;http://twitter.com/share&quot; class=&quot;twitter-share-button&quot;
+                                         data-count=&quot;horizontal&quot;
+                                         data-via=&quot;rondale_sc&quot;&gt;Tweet&lt;/a&gt;
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;First of all I'd like to apologize for my extended absence these last few months.  I have been extremely busy revamping three old rails apps, one of which was using rails ~1.2.&lt;/p&gt;
+
+&lt;p&gt;Anyways, that's not what I want to talk about today.  Today is all about Omniauth.  I originally chalked Omniauth up as yet another flavor of the week authentication mechanism.  Boy was I wrong.  Omniauth is an authentication framework that allows you to incorporate standardized 'Strategies' quickly in your applications.  It's a Rack middleware so including it into Rails/Sinatra/whatever is incredibly easy and even fun.  Here I'm going to show you a trick that our team used to create a default provider login in a rails application using Omniauth's #on_failed_registration hook.&lt;/p&gt;
+
+&lt;p&gt;Surprise Code!&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156513.js?file=gist-1.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;#config/initializers/omniauth.rb
+provider :LDAP,
+         :host =&amp;gt; '0.0.0.0',
+         :port =&amp;gt; 389,
+         :method =&amp;gt; :plain,
+         :base =&amp;gt; 'dc=example,dc=com',
+         :uid =&amp;gt; 'samaccountname',
+         :bind_dn =&amp;gt; 'Authorized User',
+         :password =&amp;gt; 'Password',
+         :name_proc =&amp;gt; Proc.new {|name| name.gsub(/@.*$/,'') }
+
+provider :identity
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;Weird combiniation of authorization mechanisms I know, but it will be illustrative. This is what a typical omniauth initializer looks like.  You specify which providers you want to be available and the necessary information required by the strategy.  Most of the strategies available have good documentation, with the possible exception of LDAP ( though it has enough to start ). Once we realized we wanted to have a single custom form (the default forms are kinda bland) that didn't require the specifying of a provider we started tinkering.&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156513.js?file=gist-2.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;# First we abstract the parameters of the LDAP
+# strategy for use in our callback.
+
+provider :LDAP,
+         ldap_parameters = {  :host =&amp;gt; '0.0.0.0',
+                              :port =&amp;gt; 389,
+                              :method =&amp;gt; :plain,
+                              :base =&amp;gt; 'dc=example,dc=com',
+                              :uid =&amp;gt; 'samaccountname',
+                              :bind_dn =&amp;gt; 'Authorized User',
+                              :password =&amp;gt; 'Password',
+                              :name_proc   =&amp;gt; Proc.new {|name| name.gsub(/@.*$/,'') }
+                            }
+provider :identity
+
+#----- Focus on this code! ------------------------------------
+
+on_failure do |env|
+  # Set up variables in case LDAP fails.
+  # this is the ugliest part of all of this.
+  # especially the strategy gsub (Yuck)
+  message_key = env['omniauth.error.type']
+  strategy    = env['omniauth.error.strategy'].class.name.gsub('OmniAuth::Strategies::','')
+  new_path    = &amp;quot;#{OmniAuth.config.path_prefix}/failure?provider=#{strategy}&amp;amp;message=#{message_key}&amp;quot;
+
+  # If they failed to authenticate with default strategy. Use LDAP strategy.
+  if env['omniauth.error.strategy'].class == OmniAuth::Strategies::Identity
+    ldap_provider = OmniAuth::Strategies::LDAP.new( @app, ldap_parameters)
+    env['rack.request.form_hash']['username'] = env['rack.request.form_hash']['auth_key']
+    ldap_provider.instance_variable_set(:@env, env)
+    ldap_provider.callback_call # run LDAP strategy
+  else
+    [302, {'Location' =&amp;gt; new_path, 'Content-Type'=&amp;gt; 'text/html'}, []]
+  end
+end
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;As you can see it's actually quite trivial to have it call another authentication strategy. You have to set the environment, and in this case the username to be authenticated.  Once that's done simply call calback_call which performs the steps necessary to run the callback phase of a strategy.&lt;/p&gt;
+
+&lt;p&gt;Now that you understand what is going on let me explain our use case.  We have an application that is accessible to clients via the web (for reporting and the like), but is also an important part of our employee's daily workflow.  We wanted to use this to allow the same form to be used for both people logging in from Identity (clients) and from LDAP (employees).&lt;/p&gt;
+
+&lt;p&gt;This accomplished that but felt hackish, so we ended up creating our own oauth strategy/provider.  Still I really like how easy Omniauth made this.  Hope this was interesting.&lt;/p&gt;
+
+&lt;h4&gt;References&lt;/h4&gt;
+
+&lt;p&gt;&lt;span  style=&quot;font-size:12px;&quot;&gt;1.) &lt;a href=&quot;https://github.com/intridea/omniauth&quot;&gt;Omniauth&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;h4&gt;Additional References&lt;/h4&gt;
+
+&lt;p&gt;&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;http://railscasts.com/episodes/235-omniauth-part-1&quot;&gt;Railscasts Omniauth&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Back Soon</title>
+      <link>http://jonathan-jackson.net/be-back-soon.html</link>
+      <pubDate>Wed, 30 Nov 2011 00:00:00 -0500</pubDate>
+      <author>Jonathan Jackson</author>
+      <guid>http://jonathan-jackson.net/be-back-soon</guid>
+      <description>&lt;h1&gt;Back Soon&lt;/h1&gt;
+
+&lt;p&gt;&lt;span&gt;&lt;a href=&quot;http://twitter.com/share&quot; class=&quot;twitter-share-button&quot;
+                                         data-count=&quot;horizontal&quot;
+                                         data-via=&quot;rondale_sc&quot;&gt;Tweet&lt;/a&gt;
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Hello everyone,&lt;/p&gt;
+
+&lt;p&gt;I just want to reassure you that I've not forgotten about this blog.  I'm eager to continue writing.  Unfortunately over the Thanksgiving holiday I suffered a loss in my family.  I will hopefully have a new article next week once I get back to work in ernest.  Until then check out my other blog posts or follow me on Twitter.&lt;/p&gt;
+
+&lt;p&gt;Warmest regards,
+Jonathan Jackson&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.jonathan-jackson.net/assets/be_back_soon.png&quot; width=&quot;630&quot;/&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Man and Ruby</title>
+      <link>http://jonathan-jackson.net/man-and-ruby.html</link>
+      <pubDate>Thu, 17 Nov 2011 00:00:00 -0500</pubDate>
+      <author>Jonathan Jackson</author>
+      <guid>http://jonathan-jackson.net/man-and-ruby</guid>
+      <description>&lt;h1&gt;Man and Ruby&lt;/h1&gt;
+
+&lt;p&gt;&lt;span&gt;&lt;a href=&quot;http://twitter.com/share&quot; class=&quot;twitter-share-button&quot;
+                                         data-count=&quot;horizontal&quot;
+                                         data-via=&quot;rondale_sc&quot;&gt;Tweet&lt;/a&gt;
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;If you've found this blog it's likely that you are at least somewhat familiar with Unix and Unix-like operating systems.  If so you undoubtedly know about Man pages.  For those of you who don't; the man page is the unix system for documenting command-line applications.  They are succinct and clear guides to how you can interact with an application.  If you are on a *nix system you can pop open your terminal right now and type &lt;code&gt;man man&lt;/code&gt; and see what I'm talking about.  As developers, we often baulk at documenting our code.  We enjoy creating new things, not tediously writing about our last project.  Here I'll give a brief overview of how you can incorporate man pages into your workflow, then show you how easy it can be to create this basic documentation. Trust me, you'll make a lot of friends if you do it, and probably find that its not as tedious as you think.&lt;/p&gt;
+
+&lt;h2&gt;WorkFlow&lt;/h2&gt;
+
+&lt;p&gt;Using man is easy as typing '&lt;code&gt;man &amp;lt; command_name &amp;gt;&lt;/code&gt;'.  If you want to view a specific secition of a man page you can type '&lt;code&gt;man &amp;lt; section_number &amp;gt; &amp;lt; command_name &amp;gt;&lt;/code&gt;'. The beauty of man pages and Unix is that it really is that simple.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://carboni.ca/blog&quot;&gt;Michael Edgar&lt;/a&gt; submitted a patch &lt;a href=&quot;http://rubyforge.org/tracker/index.php?func=detail&amp;aid=27691&amp;group_id=126&amp;atid=577&quot;&gt;[1]&lt;/a&gt; to rubygems to allow for explicit inclusion of man pages in the gemspec or implicit inclusion in the /man directory.  Unfortunately this patch has not been included despite being projected for inclusion in 1.4.  All is not lost, @defunkt, of GitHub fame and huge proponent of man page usage, wrote a nice little plugin called gem-man &lt;a href=&quot;https://github.com/defunkt/gem-man&quot;&gt;[2]&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Gem-man checks to see if any man pages exist and displays it accordingly.  If multiple man sections are found it will provide you with an option to select one. It can be installed like so.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gem install gem-man
+gem man gem-man
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you pass gem-man the &lt;code&gt;-s&lt;/code&gt; argument it will fall back to searching system files for your man page.  With that in mind you can create an easy alias which will let you use &lt;code&gt;man&lt;/code&gt; to search both your systems man pages and any man pages found in your gems:&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156493.js?file=gist-1.sh'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;# for zsh
+  # echo 'alias man=&amp;quot;gem man -s&amp;quot;' &amp;gt;&amp;gt; ~/.zshrc
+  # source ~/.zshrc
+
+  echo 'alias man=&amp;quot;gem man -s&amp;quot;' &amp;gt;&amp;gt; ~/.bashrc
+  source ~/.bashrc
+  man gem-man
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;h2&gt;Authoring Your Own&lt;/h2&gt;
+
+&lt;p&gt;Man pages must be written in an unfortunate format called roff &lt;a href=&quot;http://en.wikipedia.org/wiki/Roff&quot;&gt;[3]&lt;/a&gt;. Roff is a format originally created in the 1970's with a limited set of formatting options.  Fortunately there is an alternative to writing in roff.  You can write in ronn!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.jonathan-jackson.net/images/Ron.jpg&quot; width=&quot;200px&quot;/&gt;&lt;/p&gt;
+
+&lt;h2&gt;Ronn&lt;/h2&gt;
+
+&lt;p&gt;Ronn is a little command-line application for constructing valid roff from &lt;a href=&quot;http://daringfireball.net/projects/markdown/&quot;&gt;markdown&lt;/a&gt; by &lt;a href=&quot;https://github.com/rtomayko&quot;&gt;Ryan Tomayko&lt;/a&gt;.  Ronn can also generate the familiar html renditions of your man page from markdown &lt;a href=&quot;https://github.com/rtomayko/ronn&quot;&gt;[4]&lt;/a&gt;.  Markdown is easy to learn so I won't go into that for now, instead we'll talk about the content of a man page.&lt;/p&gt;
+
+&lt;p&gt;Man pages are broken into sections.  Let's build a general man page &lt;a href=&quot;http://rtomayko.github.com/ronn/ronn-format.7&quot;&gt;[5]&lt;/a&gt;, which incidentally would be the first section.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;The first thing we need to do is create a title, which should be the the name of your application then the number one in parenthesis to indicate that this is section one of your man page.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Next is to create a synopsis of the application by putting code tags around comands, then doing the same for any flags.  Should look something like this once its compiled to roff:
+&lt;img src=&quot;/images/man_synopsis.png&quot; width=&quot;630px&quot;/&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;After that is a description.  Briefly describe what your application does.  This should be concise and strike at the heart of what you are trying to accomplish.  Don't be flowery, just get to the point.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Then onto options where you'll list your flags and give a one line description of what each does.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Once you've done the above steps you can write whatever you like.  Keep it on point, things like examples, basic usage, and any otherwise pertinent information that a user will need to use your app.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Finally, write your bug &amp;amp; author sections where you tell people where to file issues and who is responsible for the amazing application.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;That's it.  Now all is left is to compile to roff and add to your project.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ ronn path/to/your/amazing/man.1.ronn
+  -&amp;gt; roff: path/to/your/amazing/man.1
+  -&amp;gt; html: path/to/your/amazing/man.1.html
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;Conclusions&lt;/h2&gt;
+
+&lt;p&gt;You've just created a man-page to the absolute delight of programmers world-wide.  Alright so maybe that's a little grandiose, but man-pages are an amazing asset to any program.  If you craft a well made application a man page should be the first step you take to increase its accessibility.  Also as we've learned it's easy!  Creating a man page is so easy that it's really a matter of why not.  I've found from writing a few for my own projects that it has helped me flesh out some behavior as well.  Though I believe that could be the act of documenting and not specific to man pages.  Either way man pages.  Do it.&lt;/p&gt;
+
+&lt;p&gt;Thanks for reading!&lt;/p&gt;
+
+&lt;h4&gt;References&lt;/h4&gt;
+
+&lt;p&gt;&lt;span  style=&quot;font-size:12px;&quot;&gt;1.) &lt;a href=&quot;http://rubyforge.org/tracker/index.php?func=detail&amp;aid=27691&amp;group_id=126&amp;atid=577&quot;&gt;Michael  Edgar's Rubygems Patch&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span  style=&quot;font-size:12px;&quot;&gt;2.) &lt;a href=&quot;https://github.com/defunkt/gem-man&quot;&gt;gem-man GitHub page&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span  style=&quot;font-size:12px;&quot;&gt;3.) &lt;a href=&quot;http://en.wikipedia.org/wiki/Roff&quot;&gt;Wikipedia: Roff&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span  style=&quot;font-size:12px;&quot;&gt;4.) &lt;a href=&quot;https://github.com/rtomayko/ronn&quot;&gt;Ronn Github page&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span  style=&quot;font-size:12px;&quot;&gt;5.) &lt;a href=&quot;http://rtomayko.github.com/ronn/ronn-format.7&quot;&gt;Ronn-Format man 7&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;&lt;/p&gt;
+
+&lt;h4&gt;Additional References&lt;/h4&gt;
+
+&lt;p&gt;&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;http://ozmm.org/posts/man_what.html&quot;&gt;Chris Wanstrath on Man&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;http://tldp.org/HOWTO/Man-Page/&quot;&gt;Jens Schweikhardt's Man Page tutorial&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>String Theory</title>
+      <link>http://jonathan-jackson.net/string-theory.html</link>
+      <pubDate>Tue, 08 Nov 2011 00:00:00 -0500</pubDate>
+      <author>Jonathan Jackson</author>
+      <guid>http://jonathan-jackson.net/string-theory</guid>
+      <description>&lt;h1&gt;String Theory&lt;/h1&gt;
+
+&lt;p&gt;&lt;span&gt;&lt;a href=&quot;http://twitter.com/share&quot; class=&quot;twitter-share-button&quot;
+                                         data-count=&quot;horizontal&quot;
+                                         data-via=&quot;rondale_sc&quot;&gt;Tweet&lt;/a&gt;
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;The other day I found myself in an argument about whether or not a single quoted string was faster than a double quoted string. I know that there are conventions that dictate the use of one over the other for clarity, but I was curious to see if there was actually a performance component.  I being on the side of the single quoted string(SQ) thought surely since SQ strings aren't interpolated they'd be loads faster.  Unfortunately, proving myself right was not as easy as I had initially thought.&lt;/p&gt;
+
+&lt;h2&gt;Define the parameters&lt;/h2&gt;
+
+&lt;p&gt;The first thing I needed to do to prove my point was to define how we would measure and quantify success of one string over the other.  We came up with these criteria:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;The positive difference must be statistically significant.&lt;/li&gt;
+&lt;li&gt;The test must be consistent.&lt;/li&gt;
+&lt;li&gt;The sample size must be ample enough to account for any external factors.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2&gt;The results&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.jonathan-jackson.net/assets/ruby_1.9.3.png&quot; width=&quot;630&quot;/&gt;&lt;/p&gt;
+
+&lt;p&gt;Right out of the shoots you can see that there is actually very little difference.  I found that single quoted strings were about ~0.19% faster than double quoted strings. This is hardly the victory I was hoping for.  The difference was more pronounced in jruby, but the test was significantly more erratic.&lt;/p&gt;
+
+&lt;p&gt;Anyways, I won right?  Wrong! Let's move onto the methodology and dig into why it might still be too early to bust out the ticker tape.&lt;/p&gt;
+
+&lt;h2&gt;Methodology&lt;/h2&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156488.js?file=gist-1.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;# ./test_single_or_double.rb
+
+require './stats.rb'
+
+test_strings = {:double =&amp;gt; 'ruby -e &amp;quot;start_time = Time.now; 100_000.times { \&amp;quot;a\&amp;quot; }; puts Time.now - start_time&amp;quot;',
+                :single =&amp;gt; &amp;quot;ruby -e \&amp;quot;start_time = Time.now; 100_000.times { 'a' }; puts Time.now - start_time\&amp;quot;&amp;quot;}
+
+sr =  1000.times.inject([]) {|memo, result| memo &amp;lt;&amp;lt; `#{test_strings[:single]}`.strip }
+dr = 1000.times.inject([]) {|memo, result| memo &amp;lt;&amp;lt; `#{test_strings[:double]}`.strip }
+
+single_quotes = Stats.new(sr)
+double_quotes = Stats.new(dr)
+
+single_quotes.to_csv(&amp;quot;/path/to/file/single_quote_#{RUBY_VERSION}.csv&amp;quot;)
+double_quotes.to_csv(&amp;quot;/path/to/file/double_quote_#{RUBY_VERSION}.csv&amp;quot;)
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;In the above code I'm requiring './stats.rb' which is just a down and dirty stats class that I created &lt;a href=&quot;https://gist.github.com/1346872&quot;&gt;[1]&lt;/a&gt;. All it does is let me calculate standard deviation and export the results to a csv file.  So here I ran each test string a thousand times calculating and storing the result(seconds) for each.  The test string simply instantiates a hundred thousand &lt;em&gt;a&lt;/em&gt;'s and returns the time it took.  Sure enough we get that ~0.19% increase.  Nothing too fancy here.&lt;/p&gt;
+
+&lt;p&gt;Not so fast.&lt;/p&gt;
+
+&lt;p&gt;Remember that we specified criteria for this argument.  The test is mostly consistent so we satisfy rule 2.  Rule 3 also as 1000 results is probably an ample enough size.  However not so lucky when we run into rule 1.  The standard deviation for the single quoted string was larger than the SQ string speed increase(at ~.003s). This discrepancy means, at least to me, that the difference in speed between a sinqle quoted string and double quoted string is not statistically significant.&lt;/p&gt;
+
+&lt;p&gt;If I had more time I would increase the result set and attempt to account for outliers, but I think that this is probably a fairly typical outcome.&lt;/p&gt;
+
+&lt;h2&gt;Conclusions&lt;/h2&gt;
+
+&lt;p&gt;At first I thought that this entire endeavor was a waste.  But, I think this was actually quite good for me.  It made me think scientifically and outside the box.  Also, the pestering question about whether it's better to use a single quoted string vs a double quoted string can once again be relegated to a semantic/style argument and not a practical one.  Anyways I had fun writing this one for sure, hope you found it useful.&lt;/p&gt;
+
+&lt;p&gt;If you like this sort of thing you should subscribe to this blog, thanks for reading.&lt;/p&gt;
+
+&lt;h4&gt;References&lt;/h4&gt;
+
+&lt;p&gt;&lt;span  style=&quot;font-size:12px;&quot;&gt;1.) &lt;a href=&quot;https://gist.github.com/1346872&quot;&gt;Down and Dirty Stats&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;h4&gt;Additional References&lt;/h4&gt;
+
+&lt;p&gt;&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;http://xkcd.com/171/&quot;&gt;XKCD 171&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>An Introduction to Logging</title>
+      <link>http://jonathan-jackson.net/an-introduction-to-logging.html</link>
+      <pubDate>Tue, 01 Nov 2011 00:00:00 -0400</pubDate>
+      <author>Jonathan Jackson</author>
+      <guid>http://jonathan-jackson.net/an-introduction-logging</guid>
+      <description>&lt;h1&gt;An Introduction to Logging&lt;/h1&gt;
+
+&lt;p&gt;&lt;span&gt;&lt;a href=&quot;http://twitter.com/share&quot; class=&quot;twitter-share-button&quot;
+                                         data-count=&quot;horizontal&quot;
+                                         data-via=&quot;rondale_sc&quot;&gt;Tweet&lt;/a&gt;
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;iframe src=&quot;http://player.vimeo.com/video/31431112?title=0&amp;amp;byline=0&amp;amp;portrait=0&quot; width=&quot;630&quot; height=&quot;394&quot; frameborder=&quot;0&quot; webkitAllowFullScreen allowFullScreen&gt;&lt;/iframe&gt;
+
+&lt;h3&gt;Installation&lt;/h3&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156472.js?file=gist-1.sh'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;$ gem install logging
+#  Successfully installed logging-1.6.1
+#  1 gem installed
+#  Building YARD (yri) index for logging-1.6.1...
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;h3&gt;Features&lt;/h3&gt;
+
+&lt;p&gt;Here we create individual logging objects rather than one monstrous global logger &lt;a href=&quot;https://github.com/TwP/logging/blob/master/examples/loggers.rb&quot;&gt;[1]&lt;/a&gt;.  Once they have been individually created you can customize the behavior of each.&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156472.js?file=gist-2.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;require 'logging'
+
+ Logging.logger.root.level = :warn
+
+ Logging.logger.root.appenders = Logging.appenders.stdout
+
+ log1 = Logging.logger['log1']
+ log2 = Logging.logger['log2']
+
+ log2.level = :debug
+
+ log1.info &amp;quot;This will not be shown.&amp;quot;
+ log2.info &amp;quot;This will be shown.&amp;quot;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;Here we use multiple appenders &lt;a href=&quot;https://github.com/TwP/logging/blob/master/examples/appenders.rb&quot;&gt;[2]&lt;/a&gt;. Appenders allow you to shunt your logging messages to different output media.  Here we set our messages to log to standard out and to a file.&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156472.js?file=gist-3.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;require 'logging'
+
+log1 = Logging.logger['log1']
+
+log1.add_appenders(
+    Logging.appenders.stdout,
+    Logging.appenders.file('example.log')
+)
+log1.level = :info
+
+log1.debug &amp;quot;this debug message will not be output by the logger&amp;quot;
+log1.info &amp;quot;just some friendly advice&amp;quot;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;Here we create log objects at initialization of class Foo and Foo::Bar &lt;a href=&quot;https://github.com/TwP/logging/blob/master/examples/classes.rb&quot;&gt;[3]&lt;/a&gt;.  Once we've done that we can refine our logging parameters to reveal behavior specific to each class.&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156472.js?file=gist-4.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;require 'logging'
+
+Logging.logger.root.appenders = Logging.appenders.stdout
+Logging.logger.root.level = :info
+
+class Foo
+  attr_reader :log
+  def initialize; @log = Logging.logger[self]; end
+end
+
+class Foo::Bar
+  attr_reader :log
+  def initialize; @log = Logging.logger[self]; end
+end
+
+foo = Foo.new.log
+bar = Foo::Bar.new.log
+
+# you'll notice in these log messages that the logger names were taken
+# from the class names of the Foo and Foo::Bar instances
+foo.info 'this message came from Foo'
+bar.warn 'this is a warning from Foo::Bar'
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;h3&gt;Incorporating Rails&lt;/h3&gt;
+
+&lt;p&gt;Incorporate rails easily with the logging-rails gem &lt;a href=&quot;https://github.com/TwP/logging-rails&quot;&gt;[4]&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156472.js?file=gist-5.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;gem 'logging-rails', :require =&amp;gt; 'logging/rails'
+rails generate logging:install
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;h3&gt;Thanks for Watching&lt;/h3&gt;
+
+&lt;p&gt;This was my first screen-cast so thank you for bearing with me.  The production quality on my next cast should be markedly increased as I have learned much by making this one.  The Logging framework has a lot to offer and I hope that you've found this helpful.  Thanks.&lt;/p&gt;
+
+&lt;h4&gt;References&lt;/h4&gt;
+
+&lt;p&gt;&lt;span  style=&quot;font-size:12px;&quot;&gt;1.) &lt;a href=&quot;https://github.com/TwP/logging/blob/master/examples/loggers.rb&quot;&gt;Custom Loggers&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span  style=&quot;font-size:12px;&quot;&gt;2.) &lt;a href=&quot;https://github.com/TwP/logging/blob/master/examples/appenders.rb&quot;&gt;Appenders&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span  style=&quot;font-size:12px;&quot;&gt;3.) &lt;a href=&quot;https://github.com/TwP/logging/blob/master/examples/classes.rb&quot;&gt;Class Loggers&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span  style=&quot;font-size:12px;&quot;&gt;4.) &lt;a href=&quot;https://github.com/TwP/logging-rails&quot;&gt;logging-rails&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;&lt;/p&gt;
+
+&lt;h4&gt;Additional References&lt;/h4&gt;
+
+&lt;p&gt;&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;https://github.com/TwP/logging&quot;&gt;TWP Logging GitHub&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;http://rubyrogues.com/025-rr-logging-i-do-not-think-it-means-what-you-think-it-means/&quot;&gt;Ruby Rogues episode 025&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;http://c2.com/cgi/wiki?ScrollBlindness&quot;&gt;Scroll Blindness&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;http://pry.github.com/&quot;&gt;Pry an alternative to IRB&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;http://www.engineyard.com/blog/2010/extending-rails-3-with-railties/&quot;&gt;Extending Rails 3 with Railties, 2010&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Caller Method</title>
+      <link>http://jonathan-jackson.net/caller-method.html</link>
+      <pubDate>Thu, 27 Oct 2011 00:00:00 -0400</pubDate>
+      <author>Jonathan Jackson</author>
+      <guid>http://jonathan-jackson.net/caller-method</guid>
+      <description>&lt;h1&gt;Caller Method&lt;/h1&gt;
+
+&lt;p&gt;&lt;span&gt;&lt;a href=&quot;http://twitter.com/share&quot; class=&quot;twitter-share-button&quot;
+                                         data-count=&quot;horizontal&quot;
+                                         data-via=&quot;rondale_sc&quot;&gt;Tweet&lt;/a&gt;
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Hey everyone, It's Friday so I thought I might share with you a little snippet I found useful this past week.  I was debugging a particularly insidious bug, and wanted to see where the method I suspected of causing the bug was called.  Naturally, I thought of using the #caller method, which I did.  However, using the caller method seemed a bit unwieldy as its return value is a little difficult to read.  So I looked around to see if anyone had found a way to make the caller method a little more usable.  I found a post from Michael Grosser &lt;a href=&quot;http://grosser.it/2009/07/01/getting-the-caller-method-in-ruby/&quot;&gt;[1]&lt;/a&gt; which presented a neat solution.&lt;/p&gt;
+
+&lt;p&gt;I started using Pry &lt;a href=&quot;http://www.jonathan-jackson.net/give-it-a-pry&quot;&gt;[2]&lt;/a&gt; a while ago and decided I should convert Michael Grosser's script into a Pry command.  Which when used in combination with 'binding.pry' would help me better digest the caller method.&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156399.js?file=gist-1.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;command &amp;quot;caller_method&amp;quot; do |depth|
+   depth = depth.to_i || 1
+   if /^(.+?):(\d+)(?::in `(.*)')?/ =~ caller(depth+1).first
+     file   = Regexp.last_match[1]
+     line   = Regexp.last_match[2].to_i
+     method = Regexp.last_match[3]
+     output.puts [file, line, method]
+   end
+ end
+
+ # If you don't want to use pry
+ # you can try this method anyways like so
+
+ def caller_method(depth)
+   depth = depth.to_i || 1
+   if /^(.+?):(\d+)(?::in `(.*)')?/ =~ caller(depth+1).first
+      file   = Regexp.last_match[1]
+      line   = Regexp.last_match[2].to_i
+      method = Regexp.last_match[3]
+      return [file, line, method]
+    end
+ end
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;h2&gt;Using the Caller Method&lt;/h2&gt;
+
+&lt;p&gt;The caller method is defined within Kernel and returns the current execution stack.  You can specify an optional start parameter which will suppress &lt;em&gt;n&lt;/em&gt; number of stack entries to omit.  With the above command in your ~/.pryrc file you can call caller_method and pass in the stack depth and it will return you the file, line, and method of that stack level.  Pretty neat.&lt;/p&gt;
+
+&lt;p&gt;As it turns out this didn't particularly help me to fix the bug, but nevertheless I found the method useful and hopefully you will too. I have a few ideas about making it accept a range so that I can specify the depth and see the level (like the above method) as well as its context.&lt;/p&gt;
+
+&lt;p&gt;Thanks for reading.  ^_^&lt;/p&gt;
+
+&lt;h4&gt;References&lt;/h4&gt;
+
+&lt;p&gt;&lt;span  style=&quot;font-size:12px;&quot;&gt;1.) &lt;a href=&quot;http://grosser.it/2009/07/01/getting-the-caller-method-in-ruby/&quot;&gt;Michael Grosser's Class for using Caller Method, 2009&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span  style=&quot;font-size:12px;&quot;&gt;2.) &lt;a href=&quot;http://www.jonathan-jackson.net/give-it-a-pry&quot;&gt;Give it a Pry, 2011&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;&lt;/p&gt;
+
+&lt;h4&gt;Additional References&lt;/h4&gt;
+
+&lt;p&gt;&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;http://www.ruby-doc.org/core-1.9.2/Kernel.html#method-i-caller&quot;&gt;Ruby Core Docs Kernel#caller&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;http://redmine.ruby-lang.org/issues/1906&quot;&gt;Ruby issue about possibly creating a new backtrace for caller&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Make the most of your tweet</title>
+      <link>http://jonathan-jackson.net/make-the-most-of-your-tweet.html</link>
+      <pubDate>Tue, 25 Oct 2011 00:00:00 -0400</pubDate>
+      <author>Jonathan Jackson</author>
+      <guid>http://jonathan-jackson.net/make-the-most-of-your-tweet</guid>
+      <description>&lt;h1&gt;Make the most of your tweet&lt;/h1&gt;
+
+&lt;p&gt;&lt;span&gt;&lt;a href=&quot;http://twitter.com/share&quot; class=&quot;twitter-share-button&quot;
+                                         data-count=&quot;horizontal&quot;
+                                         data-via=&quot;rondale_sc&quot;&gt;Tweet&lt;/a&gt;
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Twitter's 'Tweet Button' has become the standard for websites and blogs around the internet. Yeah, it's that little button to the right of this paragraph. &lt;img alt=&quot;twitter bird&quot; src=&quot;http://www.jonathan-jackson.net/assets/single_bird.png&quot; style=&quot;vertical-align:bottom;float:left&quot;/&gt; Run with it (this blog) has had that implemented since day one thanks in large part to the fact that Twitter makes including the button really simple.  Just grab the snippet of code and throw it into your html.  It took me a little while to realize that the default settings, while great for getting you up and running, do not result in the prettiest of tweets.  Here I'll walk you through how to utilize google's url shortener, and get the basic Tweet Button functionality down.&lt;/p&gt;
+
+&lt;p&gt;&lt;br/&gt;&lt;br/&gt;&lt;/p&gt;
+
+&lt;h2&gt;Fundamentals&lt;/h2&gt;
+
+&lt;p&gt;Twitter allows you to include the button with an iframe or via a snippet of javascript.  I'm going to walk through the javascript setup because it's the most convenient and it's also what Twitter recommends.  If you go to the &lt;a href=&quot;https://twitter.com/about/resources/tweetbutton&quot;&gt;Twitter Button&lt;/a&gt; resource page you'll be given a set of options to configure your Tweet Button.  Once you've figure out how you want it laid out you should have something that looks like this.&lt;/p&gt;
+
+&lt;script src='https://gist.github.com/2156432.js?file=gist-1.html'&gt;&lt;/script&gt;&lt;noscript&gt;
+
+```sh
+&lt;a href=&quot;https://twitter.com/share&quot; class=&quot;twitter-share-button&quot;
+                                    data-count=&quot;vertical&quot;
+                                    data-via=&quot;rondale_sc&quot;&gt;Tweet&lt;/a&gt;
+
+&lt;script type=&quot;text/javascript&quot; src=&quot;//platform.twitter.com/widgets.js&quot;&gt;&lt;/script&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;/noscript&amp;gt;
+
+This is the basic outline for a tweet button.  The _data_ attributes allow you to customize the behavior of your button.  We'll focus on these [[1]](https://dev.twitter.com/docs/tweet-button):
+
+* _via_ - Screen name of the user to attribute the Tweet to
+* _count_ - Count box position
+* _counturl_ - The URL to which your shared URL resolves to
+* _url_ - URL of the page to share
+
+But before we get to that we need to get set up.
+
+## Shortening
+
+
+First things first, generate a migration to add a short_url field to your Article/Post table (I'm going to assume a blog style app).
+
+
+    bundle exec rails g migration add_short_url_to_articles short_url:string
+    bundle exec rake db:migrate
+
+
+Once that's done we can go into the Article model and get to the important stuff.
+
+&amp;lt;script src='https://gist.github.com/2156432.js?file=gist-2.rb'&amp;gt;&amp;lt;/script&amp;gt;&amp;lt;noscript&amp;gt;
+
+```sh
+class Article &amp;lt; ActiveRecord::Base
+  before_save :populate_short_url
+
+  def populate_short_url
+    self.short_url = get_shortened_url
+  end
+
+  def get_shortened_url
+    http = Net::HTTP.new(&amp;quot;www.googleapis.com&amp;quot;, 443)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_PEER
+    http.ca_file = File.join(Rails.root, &amp;quot;lib&amp;quot;, &amp;quot;cacert.pem&amp;quot;)
+    key = File.read(File.join(Rails.root, &amp;quot;lib&amp;quot;, &amp;quot;google_api.txt&amp;quot;)).strip
+    params = {'longUrl' =&amp;gt; get_article_url }.to_json # self.url is your article slug
+    resp = http.post(&amp;quot;/urlshortener/v1/url?key=#{key}&amp;quot;, params, {'Content-Type' =&amp;gt; 'application/json'})
+    body = JSON.parse(resp.body)
+
+    if resp.code.to_i == 200
+      @short_url = body[&amp;quot;id&amp;quot;]
+    else
+      error = body[&amp;quot;error&amp;quot;]
+      raise &amp;quot;Error: #{error[&amp;quot;code&amp;quot;]} : #{error[&amp;quot;message&amp;quot;]}&amp;quot;
+    end
+  end
+
+  def get_article_url
+    &amp;quot;YOUR_ROOT_URL&amp;quot; + self.url
+  end
+end
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;Now you'll immediately notice a few things about the above code.  First is the use of ssl.  Do it &lt;a href=&quot;http://www.rubyinside.com/how-to-cure-nethttps-risky-default-https-behavior-4010.html&quot;&gt;[2]&lt;/a&gt;. I've snagged the curl PEM &lt;a href=&quot;http://curl.haxx.se/ca/cacert.pem&quot;&gt;[3]&lt;/a&gt; which is a reliable authority and stored it in /lib/cacert.pem. Also set the &lt;code&gt;verify_mode&lt;/code&gt; to OpenSSL::SSL::VERIFY_PEER.  The rest is pretty &lt;a href=&quot;https://github.com/augustl/net-http-cheat-sheet&quot;&gt;vanilla net/http stuff&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The next thing you'll notice is the line directly under that, which is where I read in my google api key to keep it out of source control.  It makes sense to add an after hook on your cap-deploy script to link to a share location on your production server and then add the file to your ./gitignore. Strictly speaking &lt;a href=&quot;http://goo.gl/&quot;&gt;goo.gl&lt;/a&gt; does not require that you submit an api key for url shortening, but it lets you track the urls if you do.&lt;/p&gt;
+
+&lt;h2&gt;Bringing it back around&lt;/h2&gt;
+
+&lt;p&gt;Alright so now you have the short url for your site we'll come back to our Tweet Button.  Only now we'll set the &lt;em&gt;data-url&lt;/em&gt; to our short url.  Not so fast!  We also have to set the &lt;em&gt;data-counturl&lt;/em&gt; to the original url so that your count bubble will be accurate.&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156432.js?file=gist-3.erb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;# app/views/_tweet_button.html.erb
+
+&amp;lt;a href=&amp;quot;https://twitter.com/share&amp;quot; class=&amp;quot;twitter-share-button&amp;quot;
+                                    data-url=&amp;quot;&amp;lt;%= @article.short_url %&amp;gt;&amp;quot;
+                                    data-counturl=&amp;quot;&amp;lt;%= request.url %&amp;gt;&amp;quot;
+                                    data-count=&amp;quot;vertical&amp;quot;
+                                    data-via=&amp;quot;rondale_sc&amp;quot;&amp;gt;Tweet&amp;lt;/a&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;Now we have a decent looking tweet.  It's going to use your &amp;lt;title&amp;gt; for your text by default.  I think this is a great default as it encourages you to use the &amp;lt;title&amp;gt; properly.  I think the easiest way of setting your title tag is to set '&amp;lt;%= yield :head %&amp;gt;' in your layout's &amp;lt;head&amp;gt; tag then:&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156432.js?file=gist-4.erb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;# in app/view/articles/show
+&amp;lt;% content_for :head do %&amp;gt;
+  &amp;lt;%= content_tag(&amp;quot;title&amp;quot;, @article.title) %&amp;gt;
+&amp;lt;% end %&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;And there you have it a nice looking tweet.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.jonathan-jackson.net/assets/share_tweet_screen_shot.png&quot;/&gt;&lt;/p&gt;
+
+&lt;h2&gt;Wrap up&lt;/h2&gt;
+
+&lt;p&gt;Alright, so there you have it a quick and relatively painless way to spruce up your website.  There are a number of additional things you can do to further customize your Tweet Button so I encourage you to take a look at the api page which is linked below.  If you have you have any questions or ideas let me know in the comments below, or tweet me.  Thanks for reading.&lt;/p&gt;
+
+&lt;h4&gt;References&lt;/h4&gt;
+
+&lt;p&gt;&lt;span  style=&quot;font-size:12px;&quot;&gt;1.) &lt;a href=&quot;https://dev.twitter.com/docs/tweet-button&quot;&gt;Tweet Button Docs&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span  style=&quot;font-size:12px;&quot;&gt;2.) &lt;a href=&quot;http://www.rubyinside.com/how-to-cure-nethttps-risky-default-https-behavior-4010.html&quot;&gt;Use HTTPS, 2010&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span  style=&quot;font-size:12px;&quot;&gt;3.) &lt;a href=&quot;http://curl.haxx.se/ca/cacert.pem&quot;&gt;Curl PEM&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;&lt;/p&gt;
+
+&lt;h4&gt;Additional References&lt;/h4&gt;
+
+&lt;p&gt;&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;https://github.com/augustl/net-http-cheat-sheet&quot;&gt;Net HTTP cheat sheet&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;http://code.google.com/apis/urlshortener/v1/getting_started.html&quot;&gt;Google Shortener Getting Started&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Make it your own</title>
+      <link>http://jonathan-jackson.net/make-it-your-own.html</link>
+      <pubDate>Wed, 19 Oct 2011 00:00:00 -0400</pubDate>
+      <author>Jonathan Jackson</author>
+      <guid>http://jonathan-jackson.net/make-it-your-own</guid>
+      <description>&lt;h1&gt;Make it your own&lt;/h1&gt;
+
+&lt;p&gt;&lt;span&gt;&lt;a href=&quot;http://twitter.com/share&quot; class=&quot;twitter-share-button&quot;
+                                         data-count=&quot;horizontal&quot;
+                                         data-via=&quot;rondale_sc&quot;&gt;Tweet&lt;/a&gt;
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;So you've started using pry.  You've likely found this article from my previous article &lt;a href=&quot;http://www.jonathan-jackson.net/give-it-a-pry&quot;&gt;Give it a Pry&lt;/a&gt;, and your digging Pry.  You've already found how quickly the Pry repl becomes second nature, how useful having easy shell access is, and how easily it slices to the heart of your code (I'm assuming).  If you're at that point you're probably looking around to see what else you can do.  I'll re-iterate a point made in &amp;quot;Give it a Pry&amp;quot;, go to the WIKI! There is a ton of documentation that will not only help you understand Pry better, but also help you to shed light on your own code.  In this article I'm going to quickly show you how to use commands, which are yet another cool feature provided by Pry.&lt;/p&gt;
+
+&lt;h2&gt;Commands, a unique solution.&lt;/h2&gt;
+
+&lt;p&gt;Pry lets you define commands which make the inclusion and execution of arbitrary bits of code trivial&lt;a href=&quot;https://github.com/pry/pry/wiki/Command-system#wiki-Invoking_commands&quot;&gt;[1]&lt;/a&gt;.  The Pry command structure is unique in that the command methods are executed before normal Ruby code is executed. This is important for reasons you'll see below.&lt;/p&gt;
+
+&lt;p&gt;If you are anything like me then your ~/.irbrc file had many top level methods(like below), well with pry these can be transformed into commands.&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156369.js?file=gist-1.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;# ~/.irbrc
+
+def clear
+  system 'clear'
+end
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;This method is limited because if, while in the IRB session, I define something like so I'll over-ride my top-level method.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$-&amp;gt; irb
+
+&amp;gt;&amp;gt; def clear
+&amp;gt;&amp;gt;   puts &amp;quot;This is going to over-ride the irbrc #clear&amp;quot;
+&amp;gt;&amp;gt; end
+=&amp;gt; nil
+
+&amp;gt;&amp;gt; clear
+=&amp;gt; &amp;quot;This is going to over-ride the irbrc #clear&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If instead we implemented the #clear method as a Pry command we would not over-ride the existing functionality.  Oh, and it's easy.&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156369.js?file=gist-2.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;# ~/.pryrc
+
+# Create a command_set which is the structure in which commands
+# are organized
+command_set = Pry::CommandSet.new do
+  command &amp;quot;clear&amp;quot;, &amp;quot;Clear the screen.&amp;quot; do
+    system 'clear'
+  end
+end
+
+# Import your command_set to the Pry session.
+Pry.config.commands.import command_set
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$-&amp;gt; pry
+
+pry(main)&amp;gt; def clear
+pry(main)*   puts &amp;quot;If there is a space before the #clear call I will be fired!&amp;quot;
+pry(main)* end
+=&amp;gt; nil
+
+pry(main)&amp;gt;clear # Will clear screen.
+pry(main)&amp;gt; clear
+=&amp;gt; &amp;quot;If there is a space before the #clear call I will be fired!&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first argument passed to command is the name of the command, the second is an optional description, the block passed in is what will be executed.  Simple.  Be creative.&lt;/p&gt;
+
+&lt;h2&gt;Conclusions&lt;/h2&gt;
+
+&lt;p&gt;Commands let you very easily customize your pry session.  I have a few methods that I really enjoy having any time I'm in Pry that I'll share in the references.  Thanks for reading this quick run-down.&lt;/p&gt;
+
+&lt;p&gt;***edit You can modify the way you call commands by changing the Pry.config.command_prefix, which defaults to '' (tick tick).&lt;/p&gt;
+
+&lt;h4&gt;References&lt;/h4&gt;
+
+&lt;p&gt;&lt;span  style=&quot;font-size:12px;&quot;&gt;1.) &lt;a href=&quot;https://github.com/pry/pry/wiki/Command-system#wiki-Invoking_commands&quot;&gt;Command Wiki Entry&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;h4&gt;Additional References&lt;/h4&gt;
+
+&lt;p&gt;&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;https://github.com/pry/pry/wiki/Customization-and-configuration#wiki-Config_commands&quot;&gt;Configure Wiki&lt;/a&gt;&lt;/span&gt;
+&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;https://gist.github.com/1297510&quot;&gt;Example ~/.pryrc&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Give it a Pry</title>
+      <link>http://jonathan-jackson.net/give-it-a-pry.html</link>
+      <pubDate>Mon, 10 Oct 2011 00:00:00 -0400</pubDate>
+      <author>Jonathan Jackson</author>
+      <guid>http://jonathan-jackson.net/give-it-a-pry</guid>
+      <description>&lt;h1&gt;Give it a Pry&lt;/h1&gt;
+
+&lt;p&gt;&lt;span&gt;&lt;a href=&quot;http://twitter.com/share&quot; class=&quot;twitter-share-button&quot;
+                                         data-count=&quot;horizontal&quot;
+                                         data-via=&quot;rondale_sc&quot;&gt;Tweet&lt;/a&gt;
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;If you are familiar with the Ruby programming language you've almost assuredly had some experience with IRB. Pry expands upon the functionality of IRB.  It offers some interesting features that allow you to really dive in and explore your code.  I've been using it for a little while now and already it has proven to be one of my favorite tools. Here are a few of my favorite things about Pry.  Sprinkled throughout will be links to the wiki, where the Pry folks have put together some really solid documentation behind all this.&lt;/p&gt;
+
+&lt;p&gt;&lt;img style=&quot;margin:auto;&quot; src='http://www.jonathan-jackson.net/assets/pry_image.png'/&gt;&lt;/p&gt;
+
+&lt;p&gt;Here are the top five reasons why I switched to pry.&lt;/p&gt;
+
+&lt;h3&gt;1.) Easy shell access&lt;/h3&gt;
+
+&lt;p&gt;Using the shell from inside an pry session is simple, convenient, and practical.  You simply prepend the command you would like to run in your shell with a period &lt;a href=&quot;https://github.com/pry/pry/wiki/Shell-Integration&quot;&gt;[1]&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156313.js?file=gist-1.sh'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;# In a rails app
+
+ pry(main)&amp;gt;.ls
+  Capfile Gemfile.lock  Rakefile  config     db     lib    public    test    vendor
+  Gemfile README.md     app       config.ru  doc    log    script    tmp
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;This becomes a really convenient way to launch Vi or Textmate, run Git commands, interact with ImageMagick, et al.  What's more is you can also shunt ruby output directly into your command with  '#{}' like this.&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156313.js?file=gist-2.sh'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;pry(main)&amp;gt; file_path = '~/.pryrc'
+    =&amp;gt; &amp;quot;~/.pryrc&amp;quot;
+
+  pry(main)&amp;gt; .ls #{file_path}
+   # /Users/jjackson/.pryrc
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;h3&gt;2.) Object transparency&lt;/h3&gt;
+
+&lt;p&gt;With Pry you get some real syntactic sugar for interacting with your objects.  You can use the 'cd' command to change self to whatever you pass to it as args &lt;a href=&quot;https://github.com/pry/pry/wiki/State-navigation&quot;&gt;[2]&lt;/a&gt;.  Once you get into the object you can use 'ls' to snoop around.  If you've spent some time in the linux shell you'll be surprised at how quickly you begin to feel at home with these commands.&lt;/p&gt;
+
+&lt;p&gt;Don't forget you can further filter what you are searching for with 'ls' by passing a regex to the --grep flag.&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156313.js?file=gist-3.sh'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;pry(main)&amp;gt; cd Article
+  pry(Article)&amp;gt;ls -mj --grep validate #many options here (--help to learn more), this one will list all singleton methods and search for validate methods
+  #=&amp;gt;   _validate_callbacks
+
+  ### at any point call 'nesting' to get an overview of where you are at.
+
+  pry(main)&amp;gt; nesting
+
+  # =&amp;gt;
+  # Nesting status:
+  # --
+  # 0. main (Pry top level)
+  # 1. Article
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;h3&gt;3.) View Source&lt;/h3&gt;
+
+&lt;p&gt;Once you've got your mind wrapped around contexts and found out how easy it is to navigate your code you're ready to really pop the hood on your code.  Pry offers a way to look at your source code directly via #show-method &lt;a href=&quot;https://github.com/pry/pry/wiki/Source-browsing&quot;&gt;[3]&lt;/a&gt;. If you install pry-doc with Pry you'll find that the show-method allows you to view Ruby's C source code also.  (Great tool for comparing Rubinius/MRI for example)&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156313.js?file=gist-4.sh'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;pry(main)&amp;gt;cd Pry
+  pry(Pry)&amp;gt;show-method run_command
+
+  # =&amp;gt;
+  # Number of lines: 4
+  #
+  # def run_command(val, target = binding_stack.last)
+  #   process_line(val, &amp;quot;&amp;quot;, target)
+  #   Pry::CommandContext::VOID_VALUE
+  # end
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;h3&gt;4.) Editor Integration&lt;/h3&gt;
+
+&lt;p&gt;Now here is my favorite feature.  I've been using interactive_editor for a long time, which is a gem by &lt;a href=&quot;https://github.com/jberkel&quot;&gt;jberkel&lt;/a&gt; inspired by Giles Bowkett.  It offered a nice little convenience for opening a tempfile in your favorite editor, allowed you to edit it, and executed it when you closed the editor pane.  Pry offers similar functionality &lt;a href=&quot;https://github.com/pry/pry/wiki/Editor-integration&quot;&gt;[4]&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156313.js?file=gist-5.sh'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;# in ~/.pryrc
+  Pry.config.editor = &amp;quot;mate&amp;quot;
+
+  # then you can simply type
+  pry(main)&amp;gt; edit -t # opens temp-file in TextMate
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;The difference between this and interactive_editor(ie) is that ie will save the buffer so that the next time you invoke the command it will return you to your previous state.  Interactive Editor is compatible with Pry and can simply be required in your ~/.pryrc file to load it into your pry session if you want that particular functionality (Highly recommend).&lt;/p&gt;
+
+&lt;p&gt;That's not all!&lt;/p&gt;
+
+&lt;p&gt;edit-method will open the file that contains the method passed to it as its args, and place your cursor exactly where it is defined.&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156313.js?file=gist-6.sh'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;pry(main)&amp;gt;cd Pry
+  pry(Pry)&amp;gt;edit-method -m run_command
+
+  # File will open in your editor to line 156 of pry_class.rb ^_^
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;h3&gt;5.) Gists!!!&lt;/h3&gt;
+
+&lt;p&gt;Push your current buffer directly to a gist.&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156313.js?file=gist-7.sh'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;# gist-method options
+# -m, --method       Gist a method's source.
+# -d, --doc          Gist a method's documentation.
+# -p, --private      Create a private gist (default: true)
+# -h, --help         This message
+
+pry(Pry):1&amp;gt; gist-method run_command
+ #=&amp;gt; Gist created at https://gist.github.com/1277098
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;That just happened!&lt;/p&gt;
+
+&lt;h2&gt;Conclusions&lt;/h2&gt;
+
+&lt;p&gt;Believe me when I tell you that I haven't even begun to scratch the surface of Pry with this blog post.  The features outlined above are just a few methods that most naturally became part of my workflow.  &lt;a href=&quot;https://github.com/banister&quot;&gt;John Mair&lt;/a&gt; and the contributors to Pry have put together extensive documentation for the Pry repl and I recommend you take a look.  &lt;a href=&quot;https://github.com/ryanb&quot;&gt;Ryan Bates&lt;/a&gt; has done a railscasts that shows how you can easily incorporate pry into your Rails apps, and &lt;a href=&quot;https://github.com/joshcheek&quot;&gt;Josh Cheek&lt;/a&gt; put together an awesome cast that gives you a crash course in Pry.  Links to both casts and wiki can be found below.&lt;/p&gt;
+
+&lt;p&gt;I hope that the brief examples above have sparked your curiosity about Pry.  I have used it now for a little while and it has proven to be an indispensable tool. Thanks for reading.&lt;/p&gt;
+
+&lt;p&gt;***edit If you got this far you may want to check out &lt;a href=&quot;http://www.jonathan-jackson.net/make-it-your-own&quot;&gt;'Make it your own'&lt;/a&gt;.  My follow up post which expands upon this post by giving a brief overview of Pry commands.&lt;/p&gt;
+
+&lt;p&gt;***edit John Mair is searching for a sponsor for Pry.  Contact him at his Github page &lt;a href=&quot;https://github.com/banister&quot;&gt;here&lt;/a&gt; if you know someone who might be interested.  Any funds would be used to improve the website and create new casts/documentation.&lt;/p&gt;
+
+&lt;p&gt;&lt;span style=&quot;font-size:12px;&quot;&gt;(An unofficial item six would be the documentation. Everywhere I looked I found great resources for exploring Pry.)&lt;/span&gt;&lt;/p&gt;
+
+&lt;h4&gt;References&lt;/h4&gt;
+
+&lt;p&gt;&lt;span  style=&quot;font-size:12px;&quot;&gt;1.) &lt;a href=&quot;https://github.com/pry/pry/wiki/Shell-Integration&quot;&gt;Shell Access&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span  style=&quot;font-size:12px;&quot;&gt;2.) &lt;a href=&quot;https://github.com/pry/pry/wiki/State-navigation&quot;&gt;Object Transparency&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span  style=&quot;font-size:12px;&quot;&gt;3.) &lt;a href=&quot;https://github.com/pry/pry/wiki/Source-browsing&quot;&gt;View Source&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span  style=&quot;font-size:12px;&quot;&gt;4.) &lt;a href=&quot;https://github.com/pry/pry/wiki/Editor-integration&quot;&gt;Editor Integration&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;&lt;/p&gt;
+
+&lt;h4&gt;Additional References&lt;/h4&gt;
+
+&lt;p&gt;&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;http://railscasts.com/episodes/280-pry-with-rails&quot;&gt;Pry RailsCast, 2011&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;http://vimeo.com/26391171&quot;&gt;Josh Cheek Introduction to Pry, 2011&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;http://news.ycombinator.com/item?id=2478724&quot;&gt;Hacker News Pry comments, 2011&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;https://github.com/jberkel/interactive_editor&quot;&gt;Interactive Editor&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>RVM and rbenv</title>
+      <link>http://jonathan-jackson.net/rvm-and-rbenv.html</link>
+      <pubDate>Mon, 03 Oct 2011 00:00:00 -0400</pubDate>
+      <author>Jonathan Jackson</author>
+      <guid>http://jonathan-jackson.net/rvm-and-rbenv</guid>
+      <description>&lt;h1&gt;RVM and rbenv&lt;/h1&gt;
+
+&lt;p&gt;&lt;span&gt;&lt;a href=&quot;http://twitter.com/share&quot; class=&quot;twitter-share-button&quot;
+                                         data-count=&quot;horizontal&quot;
+                                         data-via=&quot;rondale_sc&quot;&gt;Tweet&lt;/a&gt;
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;Many of you are familiar with rbenv and some of the controversy surrounding it. I love RVM and will more than likely continue to use it, but one of the things I truly value in the ruby community is always having more than one option.  I was delightfully surprised with the simplicity of rbenv, how easy it was, and how familiar it felt right out of the box. This article will provide a (humorous) side-by-side comparison of the basic usage and installation of rbenv and RVM.&lt;/p&gt;
+
+&lt;h1&gt;Installation&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.jonathan-jackson.net/assets/rvm-rbenv-install.png&quot; alt=&quot;rvm and rbenv side by side install&quot;/&gt;&lt;/p&gt;
+
+&lt;p&gt;In RVM you need to add this to your profile to load the RVM function.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# or ~/.zshrc
+$ echo '[[ -s &amp;quot;$HOME/.rvm/scripts/rvm&amp;quot; ]] &amp;amp;&amp;amp; . &amp;quot;$HOME/.rvm/scripts/rvm&amp;quot; # Load RVM function' &amp;gt;&amp;gt; ~/.bash_profile
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In rbenv you need to add this to your profile to load the rbenv command-line function.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# or ~/.zshrc
+$ echo 'export PATH=&amp;quot;$HOME/.rbenv/bin:$PATH&amp;quot;' &amp;gt;&amp;gt; ~/.bash_profile
+$ echo 'eval &amp;quot;$(rbenv init -)&amp;quot;' &amp;gt;&amp;gt; ~/.bash_profile #to enable shims and auto-complete
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once you've restarted your shell you now have access to RVM/rbenv.  It is important to note that RVM and rbenv cannot be installed at the same time because of the way RVM handles the 'gem' command.&lt;/p&gt;
+
+&lt;h1&gt;Get Rubies&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.jonathan-jackson.net/assets/rvm-rbenv-rubies.png&quot; alt=&quot;rvm and rbenv side by side ruby compile and install&quot;/&gt;&lt;/p&gt;
+
+&lt;p&gt;In RVM you install your rubies to &lt;strong&gt;/Users/$USER/.rvm/rubies/ruby-1.9.2-x&lt;/strong&gt; in rbenv your rubies are installed to &lt;strong&gt;~/.rbenv/versions&lt;/strong&gt;.  Sam Stephenson created a sister gem for rbenv called ruby-build which offers several convencience methods for installing/compiling your own rubies.&lt;/p&gt;
+
+&lt;p&gt;For instance, once you have ruby-build installed you can type this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ rbenv install ruby-1.9.2-x
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So now you have your rubies.  Best blog post EVAR! Wait, there's more...&lt;/p&gt;
+
+&lt;h1&gt;Gemsets&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.jonathan-jackson.net/assets/rvm-rbenv-gemsets.png&quot; alt=&quot;rvm and rbenv side by side gemset usage&quot;/&gt;&lt;/p&gt;
+
+&lt;p&gt;Gemsets are my favorite thing about RVM and I was happy to see rbenv has that functionality easily available &lt;a href=&quot;https://github.com/jamis/rbenv-gemset&quot;&gt;[1]&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h1&gt;But wait, what about cd and gem?&lt;/h1&gt;
+
+&lt;p&gt;RVM overrides cd and gem commands to enable some of its functionality.  &amp;quot;What about those commands?&amp;quot; you ask. To which I reply: if that is an issue then rbenv might be a better fit.  However, I doubt the majority of users will ever have a problem with the over-ride of these commands.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.jonathan-jackson.net/assets/move-along-trollface.png&quot; alt=&quot;rvm and rbenv should be used depending on need&quot;/&gt;&lt;/p&gt;
+
+&lt;h1&gt;Conclusions&lt;/h1&gt;
+
+&lt;p&gt;You saw the strips above, they offer &lt;strong&gt;a lot&lt;/strong&gt; of the same functionality.  In many ways rbenv and RVM are really just two sides of the same coin.  A different way to solve the same problem. I will say this article  is from a purely functional stance, I understand that under the hood rbenv and RVM are quite different.&lt;/p&gt;
+
+&lt;p&gt;There has been quite a bit of controversy surrounding the rbenv/rvm divide.  I think, after installing both back-to-back on my own system, that their similarities outweigh their differences.  One article I read about the subject compared RVM and rbenv to Rails and Sinatra &lt;a href=&quot;http://www.rubyinside.com/rbenv-a-simple-new-ruby-version-management-tool-5302.html&quot; alt=&quot;rbenv a simple ruby version management tool&quot;&gt;[2]&lt;/a&gt;.  I think that comparison really fits. Sinatra is a lightweight framework whereas Rails is much more robust. Sometimes sinatra just fits, and other times you'd be a fool to not go with Rails.  If you need the features in RVM then use it, if you want more control and a lighter feel then use rbenv.  It's all a matter of preference.&lt;/p&gt;
+
+&lt;p&gt;As a rubyist I'm just glad we have people like &lt;a href=&quot;https://github.com/wayneeseguin&quot; alt=&quot;wayne seguin's github&quot;&gt;Wayne Seguin&lt;/a&gt;, and &lt;a href=&quot;https://github.com/sstephenson&quot; alt=&quot;sam stephenson's github'&quot;&gt;Sam Stephenson&lt;/a&gt; contributing to the community the way they do.&lt;/p&gt;
+
+&lt;h4&gt;References&lt;/h4&gt;
+
+&lt;p&gt;&lt;span  style=&quot;font-size:12px;&quot;&gt;1.) &lt;a id=&quot;footnote_1&quot; href=&quot;https://github.com/jamis/rbenv-gemset&quot;&gt;rbenv gemset&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span  style=&quot;font-size:12px;&quot;&gt;2.) &lt;a id=&quot;footnote_2&quot; href=&quot;http://www.rubyinside.com/rbenv-a-simple-new-ruby-version-management-tool-5302.html&quot;&gt;Ruby Inside - rbenv article&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;&lt;/p&gt;
+
+&lt;h4&gt;Additional References (Reading)&lt;/h4&gt;
+
+&lt;p&gt;&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;http://beginrescueend.com/&quot;&gt;Begin Rescue End (RVM home page)&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;https://github.com/sstephenson/rbenv&quot;&gt;rbenv on github&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;
+&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;http://ragecomics.memebase.com/rage-builder/&quot;&gt;Rage-Builder&lt;/a&gt;&lt;/span&gt;&lt;br/&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Playin' with the Ruby GC</title>
+      <link>http://jonathan-jackson.net/playin-with-the-ruby-gc.html</link>
+      <pubDate>Tue, 27 Sep 2011 00:00:00 -0400</pubDate>
+      <author>Jonathan Jackson</author>
+      <guid>http://jonathan-jackson.net/playin-with-the-ruby-gc</guid>
+      <description>&lt;h1&gt;Playin' with the Ruby GC&lt;/h1&gt;
+
+&lt;p&gt;&lt;span&gt;&lt;a href=&quot;http://twitter.com/share&quot; class=&quot;twitter-share-button&quot;
+                                         data-count=&quot;horizontal&quot;
+                                         data-via=&quot;rondale_sc&quot;&gt;Tweet&lt;/a&gt;
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;So I, like many of you geeks out there heard about the changes to Ruby in 1.9.3-rc1.  Upon hearing the news, I hurriedly scanned the intra-webz to see if there were any cool features that would affect me or my production apps.  Some of the changes in the release candidate were pleasantly surprising, especially file loading (which saw a notable ~38% speed boost).  When I saw the garbage collector was being changed to something called &amp;quot;Lazy Sweeping&amp;quot; I had to figure out how much this was going to impact performance.  I mean c'mon &amp;quot;lazy sweeping&amp;quot;, sounds so interesting right?  So I started writing a script to tell me just that.&lt;/p&gt;
+
+&lt;p&gt;Let's start this in reverse order.&lt;/p&gt;
+
+&lt;h2&gt;The results&lt;/h2&gt;
+
+&lt;p&gt;I found that the the new &amp;quot;lazy sweeping&amp;quot; (still super cool name) was about &lt;em&gt;8%&lt;/em&gt; faster on average.  Here's the pretty graph I created from Excel.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.jonathan-jackson.net/assets/gc_graph.png&quot; alt=&quot;gc graph&quot; style=&quot;width:600px&quot;/&gt;&lt;/p&gt;
+
+&lt;p&gt;The vertical axis is the time in milliseconds, and the horizontal axis represents the GC cycle during the creation of ~10,000 objects.  Alright alright alright.  I'll explain the methodology so you can actually understand the graph.&lt;/p&gt;
+
+&lt;h2&gt;The Methodology&lt;/h2&gt;
+
+&lt;p&gt;While doing the research I came across a nifty little script by the Narihiro Nakamura &lt;a href=&quot;http://redmine.ruby-lang.org/attachments/959/bm_gc_fragmentation.rb&quot;&gt;here&lt;/a&gt;.  I modified it slightly, but kept the same idea of creating a number of objects to fill up the heap.&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156260.js?file=gist-1.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;# './gc_test.rb'
+
+@m = 1000000
+@b = 2 * 5 * (4**3) + 1
+@a = 100001
+
+def make_fragmentation(h, seed)
+  i = seed
+  10000.times {|m| h &amp;lt;&amp;lt; Object.new}
+  10000.times do |m|
+    i = ((@a * i) + @b) % @m
+    h[i % h.length] = nil
+ end
+end
+
+def run_test
+  GC::Profiler.enable
+  heaps = []
+  100.times{|i| make_fragmentation(heaps, i) }
+  GC::Profiler.result
+end
+
+puts run_test
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;This returns a result set from the GC profiler.  Which I call about a hundred times like so:&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156260.js?file=gist-2.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;require 'bigdecimal'
+require 'pp'
+
+output = Hash.new([])
+@totals = {}
+
+path = './gc_test.rb'
+
+100.times do |test_run|
+ result_set = `ruby #{path}` # this is where we get the result from the previous script
+ result_set.split(&amp;quot;\n&amp;quot;).each_with_index do |result, index|
+   next if [0,1].include?(index)
+   result = result.split(&amp;quot; &amp;quot;)
+   output[result[0]] += [result[5]]
+ end
+end
+
+# This is where we take the cumulative values of the previous 100 results sets by GC cycle
+# and grab the average.  Big decimal because we want to be precise and the numbers are already
+# strings.
+
+output.each do |k,v|
+  length = BigDecimal.new(v.length.to_s)
+  nv = v.map! {|i| BigDecimal.new(i)}
+  @totals[k] = (nv.inject(:+) / length).to_s(&amp;quot;F&amp;quot;)
+end
+puts @totals.map{|k,v| v + &amp;quot;\n&amp;quot;}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;I attempted to run this ten thousand times but it just took too long.  I wanted to get a large sample because the GC can run at off times and isn't at all guaranteed to be consistent. I ended up just going with a 100 run set for sake of speed.  Once I had the script all set I just used RVM to set my ruby and ran it.  As of writing this article RVM didn't offer 1.9.3-rc1 so I used 1.9.3-preview1 instead.&lt;/p&gt;
+
+&lt;h2&gt;The interpretation&lt;/h2&gt;
+
+&lt;p&gt;Well as I said before &amp;quot;lazy sweeping&amp;quot; is about 8% faster on average.  The largest increases in speed was when there were a small/medium number of objects in memory, the larger the number of objects the more 1.9.2 won out over 1.9.3. &lt;a href=&quot;http://www.infoq.com/&quot;&gt;InfoQ&lt;/a&gt; talked to Narihiro Nakamura &lt;a href=&quot;#footnote_2&quot;&gt;[2]&lt;/a&gt; where he explains why these results are likely accurate.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If the program creates many long-lived objects, lazy sweep may not be able to find a free object. In that case, lazy sweep spends a long time on a single object allocation. I think that in most cases, the performance of this should still be better than M&amp;amp;S GC.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This InfoQ article was especially enlightening so I recommend giving it a glance through (it's in the footnote).&lt;/p&gt;
+
+&lt;h2&gt;Try it yourself&lt;/h2&gt;
+
+&lt;p&gt;The GC module offers many ways to examine the garbage collector. If you want something more, then you should look into ruby-prof which has options that show you GC_TIME, GC_RUNS and a whole host of other useful profiling tools.  @wycats recently pushed a branch to ruby-prof that enables those GC operations, you can find it &lt;a href=&quot;https://github.com/wycats/ruby-prof&quot;&gt;here&lt;/a&gt;.  You'll note that it requires ruby to be patched.  So try ruby-prof out!&lt;/p&gt;
+
+&lt;p&gt;Anyways, I know this wasn't exactly scientific but it was certainly fun and helped me understand some things about ruby a little better. Hope it helps you too.&lt;/p&gt;
+
+&lt;p&gt;Have an improvement to the scripts above?  Think I'm doing something completely wrong? Maybe you have an entirely different approach.  Let me know in the comments below, and don't forget to subscribe to 'Run With It'.&lt;/p&gt;
+
+&lt;h4&gt;References&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;span  style=&quot;font-size:12px;&quot;&gt;1.) &lt;a id=&quot;footnote_1&quot; href=&quot;http://www.redmine.org/&quot;&gt;RedMine Script&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span  style=&quot;font-size:12px;&quot;&gt;2.) &lt;a id=&quot;footnote_2&quot; href=&quot;http://www.infoq.com/news/2011/08/ruby193-gc;jsessionid=AD723DB6898A9A0A368C5A1D9A5D2DAA&quot;&gt;InfoQ Interview with Narihiro Nakamura, 2011&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4&gt;Additional References (Reading)&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&quot;&quot;&gt;&lt;/a&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;http://blog.envylabs.com/2010/07/garbage-collection-the-ruby-heap/&quot;&gt;Joe Damato, 2010&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;http://ruby-prof.rubyforge.org/&quot;&gt;Ruby Prof&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Ruby Hough Hack</title>
+      <link>http://jonathan-jackson.net/ruby-hough-hack.html</link>
+      <pubDate>Wed, 21 Sep 2011 00:00:00 -0400</pubDate>
+      <author>Jonathan Jackson</author>
+      <guid>http://jonathan-jackson.net/ruby-hough-hack</guid>
+      <description>&lt;h1&gt;Ruby Hough Hack&lt;/h1&gt;
+
+&lt;p&gt;&lt;span&gt;&lt;a href=&quot;http://twitter.com/share&quot; class=&quot;twitter-share-button&quot;
+                                         data-count=&quot;horizontal&quot;
+                                         data-via=&quot;rondale_sc&quot;&gt;Tweet&lt;/a&gt;
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;The hough transform&lt;a href=&quot;#footnote_1&quot;&gt;[1]&lt;/a&gt; is an algorithm used to detect lines &lt;s&gt;detect edges/objects&lt;/s&gt; in an image. I recently needed to use it to straighten an image so that I could process it. Here is the solution me and my brother hacked out today using Chunky PNG&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156226.js?file=gist-1.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;# Authors: Robert Jackson, Jonathan Jackson
+# the formatting of this file has been altered in
+# order to fit on this website. Check out
+# https://gist.github.com/1233581 if you care
+
+require 'chunky_png' #or 'oily_png'
+class Hough
+  def initialize(image_path, options={})
+    @image = ChunkyPNG::Image.from_file(image_path)
+    @image_path = image_path
+    @angles ||= {}
+  end
+  def is_dark?(color)
+    ChunkyPNG::Color.r(color) +
+    ChunkyPNG::Color.g(color) +
+    ChunkyPNG::Color.b(color) &amp;lt; 40
+  end
+  def is_light?(color)
+    ChunkyPNG::Color.r(color) +
+    ChunkyPNG::Color.g(color) +
+    ChunkyPNG::Color.b(color) &amp;gt; 600
+  end
+  def angles(theta)
+    @angles[theta] ||= {
+      :cos =&amp;gt; Math.cos(theta),
+      :sin =&amp;gt; Math.sin(theta)
+    }
+  end
+  def get_hough_matrix
+    hough = Hash.new(0)
+
+    # iterate over every point of the image 'Hooray Chunky Png'
+    @image.height.times do |y|
+      @image.width.times do |x|
+
+        # run the point through hough transform only if the
+        # sum of the points' rgb values are less than 40 (are black)
+        # and the point directly below's( y+1 ) rgb values
+        # are greater than 600 (are white)
+        if is_dark?(@image[x,y]) &amp;amp;&amp;amp; is_light?(@image[x,y + 1])
+
+          # run r = xcos(theta) + ysin(theta) from 0 to 20
+          # stepping 0.2 at a time
+          (0..20).step(0.2).each do |theta|
+
+            # http://en.wikipedia.org/wiki/Hough_transform&amp;quot;
+            distance = (
+                        x * angles(theta)[:cos] +
+                        y * angles(theta)[:sin]
+                      ).to_i
+
+            # populate [theta, distance] as key to hough and increment
+            # the point's score
+            hough[[theta, distance]] += 1 if distance &amp;gt;= 0
+          end
+        end
+      end
+    end
+    return hough
+  end
+
+  def average_theta
+    # sort by score, grab top twenty, sum (inject) and divide by length to
+    # get the average. (after #sort_by hough looks like
+    # [[theta, distance] score]) so v[0][0] is just score
+    get_hough_matrix.sort_by {|k,v| v }.take(20).inject(0.0) { |sum,v|
+      sum + v[0][0]
+     } / 20
+  end
+end
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;Was fun to work on.  Hope someone finds a use for it.  Just remember that the important part here is how you define your restriction.  In my case I was looking for a straight black line.&lt;/p&gt;
+
+&lt;p&gt;The gist is &lt;a href=&quot;https://gist.github.com/1233581&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;***edit zzgwon pointed out that the hough algorithm is used for line detection not object detection.&lt;/p&gt;
+
+&lt;p&gt;*** edit RIP_Kashin pointed out a few errors in the initialize function, namely a stray 'a'.  Unfortunately I can't render strike through so you'll have to trust me.&lt;/p&gt;
+
+&lt;h4&gt;References&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;span  style=&quot;font-size:12px;&quot;&gt;1.) &lt;a id=&quot;footnote_1&quot; href=&quot;http://en.wikipedia.org/wiki/Hough_transform&quot;&gt;Wikipedia&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4&gt;Additional References&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;span  style=&quot;font-size:12px;&quot;&gt;&lt;a id=&quot;footnote_1&quot; href=&quot;http://www.codeproject.com/KB/graphics/Deskew_an_Image.aspx&quot;&gt;Code Project; How to Deskew an image&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;span  style=&quot;font-size:12px;&quot;&gt;&lt;a id=&quot;footnote_1&quot; href=&quot;http://www.seas.upenn.edu/~bensapp/opencvdocs/ref/opencvref_cv.htm&quot;&gt;Open CV&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Hippo: your friend in 5010</title>
+      <link>http://jonathan-jackson.net/hippo-your-friend-for-5010.html</link>
+      <pubDate>Tue, 20 Sep 2011 00:00:00 -0400</pubDate>
+      <author>Jonathan Jackson</author>
+      <guid>http://jonathan-jackson.net/hippo-your-friend</guid>
+      <description>&lt;h1&gt;Hippo: your friend in 5010&lt;/h1&gt;
+
+&lt;p&gt;&lt;span&gt;&lt;a href=&quot;http://twitter.com/share&quot; class=&quot;twitter-share-button&quot;
+                                         data-count=&quot;horizontal&quot;
+                                         data-via=&quot;rondale_sc&quot;&gt;Tweet&lt;/a&gt;
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://www.jonathan-jackson.net/assets/hippo.png&quot; alt=&quot;hippo&quot; class=&quot;span3&quot; style=&quot;float:left;&quot;/&gt;If you are unfamiliar with the Health Insurance Portability and Accountability Act (HIPAA) then you probably don't work in the medical field and can safely disregard this article.  HIPAA was enacted by congress in 1996 and governs the way electronic transmissions must take place in order to be legitimate. &lt;a href=&quot;footnote_1&quot;&gt;[1]&lt;/a&gt; The specific section that pertains to electronic transmissions is HIPAA/EDI, and was scheduled to take effect on October 16, 2003.  However, due to implementation problems Congress granted a one-year extension to make version 4010 the standard in 2004.  The standard by which transaction sets are accepted by HIPAA was created by the X12 organization  &lt;a href=&quot;footnote_2&quot;&gt;[2]&lt;/a&gt; (i.e. Claims, Remittances, Eligibility, Claim Status).&lt;/p&gt;
+
+&lt;p&gt;This article will walk you through installation of Hippo, the generation of a simple 835 transaction set, and hopefully illustrate how easy Hippo makes HIPAA&lt;/p&gt;
+
+&lt;h2&gt;5010 is around the corner&lt;/h2&gt;
+
+&lt;p&gt;HIPAA version 4010 is the current implementation of the transmission standard. The testing phase for 5010 has been underway since January 1, 2011 &lt;a href=&quot;footnote_3&quot;&gt;[3]&lt;/a&gt;. This means that all covered entities have had to allow the sending of test transaction sets in the 5010 standard &lt;strong&gt;already&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Version 5010 was created to allow ICD-10-CM &lt;a href=&quot;footnote_4&quot;&gt;[4]&lt;/a&gt; to be implemented, as well as other modifications that increase the effectiveness of the standard. The effective date for the 5010 implementation is January 1, 2012!&lt;/p&gt;
+
+&lt;p&gt;Enter &lt;strong&gt;Hippo&lt;/strong&gt;, your gateway into HIPAA 5010 compliance!  Hippo was created by &lt;a href=&quot;https://github.com/promedical&quot; alt=&quot;promedicalinc github page&quot;&gt;Pro Medical, Inc&lt;/a&gt;, the company I work for, and we decided to open source the project in order to rise all ships so to speak.&lt;/p&gt;
+
+&lt;p&gt;If you were to open up an X12 transaction set as a text file it would look like a large string with fields separated by tildes, colons, and asterisks. This is very confusing stuff, and that confusion is compounded by the fact that in these flat files there are sets of data that are represented hierarchically.  Hippo makes the process of turning these awkward strings into understandable transaction sets easy by offering structure and the power of Ruby.&lt;/p&gt;
+
+&lt;h2&gt;Installation&lt;/h2&gt;
+
+&lt;p&gt;Hippo is available as a gem so simply type the following command once you have ruby:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# gem install hippo
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once you have it installed all you have to do is require it like so to begin.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;require 'rubygems'
+require 'hippo'
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;Your first Transaction Set with Hippo&lt;/h2&gt;
+
+&lt;p&gt;Remember, a transaction set is that long string with fields separated by tildes, asterisks, colons, et al.  The structure of most Transaction Sets have been created as Ruby classes in Hippo. For example, the 835 class (Remittance) is in 'hippo/lib/transaction_sets/HIPAA_835.rb'.  If you take a look in that file you will notice that it auto loads the 835 base class as well as all the loops that are permissible within X12's 835 format. This fact is important because the structure was parsed directly from the X12 published table date (the official X12 implementation guide/CSV).&lt;/p&gt;
+
+&lt;p&gt;The classes per transaction set have all of the segments (fields) that are permissible by X12 standards. They provide the structure by which we will store, and print our data.&lt;/p&gt;
+
+&lt;p&gt;The following code illustrates how you would create an instance of an 835 transaction set and populate its ST(Transaction Set Header) segment in Hippo.&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156191.js?file=gist-1.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;require 'hippo'
+
+  ts = Hippo::TransactionSets::HIPAA_835::Base.new
+  ts.ST do |st|
+    st.TransactionSetControlNumber = '0021'
+    st.ImplementationConventionReference = '1234random1241'
+  end
+
+  puts ts.to_s
+
+  # =&amp;gt; ST*837*0021*005010X222A1~
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;h2&gt;To loop, or not to loop?&lt;/h2&gt;
+
+&lt;p&gt;One of the fundamental constructs found in the X12 transaction set standard is the loop. Loops repeat within a section of the final output, sometimes an arbitrary number of times. Creating this structure with Hippo is easy. Simply call the loop by name like so:&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2156191.js?file=gist-2.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;# These two forms are functionally equivalent.
+
+  ts.L1000A do |l1000a|
+    l1000a.NM1.EntityTypeQualifier        = '2'
+    l1000a.NM1.NameLastOrOrganizationName = 'PREMIER BILLING SERVICE'
+    l1000a.NM1.IdentificationCode         = 'TGJ23'
+  end
+
+  puts ts.to_s
+
+  # =&amp;gt; NM1*41*2*PREMIER BILLING SERVICE*****46*TGJ23~
+
+  # OR
+
+  ts.L1000A do |l1000a|
+     l1000a.NM1 do |nm1|
+       nm1.EntityTypeQualifier        = '2'
+       nm1.NameLastOrOrganizationName = 'PREMIER BILLING SERVICE'
+       nm1.IdentificationCode         = 'TGJ23'
+     end
+   end
+
+   puts ts.to_s
+
+   # =&amp;gt; NM1*41*2*PREMIER BILLING SERVICE*****46*TGJ23~
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;Here the loop is created by simply calling the L1000A loop directly on the transaction set. In the code above are two forms that are functionally equivalent and can be used according to preference. Each form will create a loop at that position within the transaction set.&lt;/p&gt;
+
+&lt;p&gt;These examples are definitely not valid transaction sets, they are designed to give you a feel for how the DSL operates.  If you would like to see how to generate a legitimate transaction set &lt;a href=&quot;https://github.com/rjackson&quot; alt=&quot;robert jackson's github page&quot;&gt;Robert Jackson&lt;/a&gt;, the author of Hippo, has provided an example &lt;a href=&quot;https://github.com/promedical/hippo/blob/master/test/test_hipaa_835.rb&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;The Hippo DSL allows you to use Ruby to quickly bring your company into compliance with HIPAA 5010.  The X12 organization has crammed a phenomenal amount of data into these transaction sets.  This data can be overwhelming at first, but with the structure provided by Hippo you can interact with it like a pro.  I hope you look into Hippo as the solution for your transition to the Hippo 5010 standard.&lt;/p&gt;
+
+&lt;p&gt;Hippo is open sourced under the Modified BSD license, and is readily available for forking on Github here &lt;a href=&quot;https://github.com/promedical/hippo&quot; alt=&quot;hippo github page&quot;&gt;Hippo&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4&gt;References&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;span  style=&quot;font-size:12px;&quot;&gt;1.) &lt;a id=&quot;footnote_1&quot; href=&quot;http://www.cms.gov/HIPAAGenInfo/02_TheHIPAALawandRelated%20Information.asp#TopOfPage&quot; alt=&quot;Centers for Medicare &amp; Medicaid Services&quot;&gt;Centers for Medicare &amp; Medicaid Services&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span  style=&quot;font-size:12px;&quot;&gt;2.) &lt;a id=&quot;footnote_2&quot; href=&quot;http://www.x12.org/consolidatedguides/&quot; alt=&quot;X12 organization&quot;&gt;X12 guides&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span  style=&quot;font-size:12px;&quot;&gt;3.) &lt;a id=&quot;footnote_3&quot; href=&quot;https://www.cms.gov/icd10/&quot; alt=&quot;ICD 10 information&quot;&gt;CMS ICD 10&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span  style=&quot;font-size:12px;&quot;&gt;4.) &lt;a id=&quot;footnote_4&quot; href=&quot;https://www.cms.gov/ElectronicBillingEDITrans/18_5010D0.asp&quot; alt=&quot;5010 Timeline&quot;&gt;CMS 5010 Timeline&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4&gt;Additional References (Reading)&lt;/h4&gt;
+
+&lt;p&gt;&lt;ui&gt;
+&lt;li&gt;&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/HIPAA&quot;&gt;Wikipedia HIPAA&lt;/a&gt;, 2011&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;http://www.hhs.gov/ocr/privacy/hipaa/understanding/index.html&quot;&gt;Health and Human Services&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span style=&quot;font-size:12px;&quot;&gt;Hippo image by &lt;a href=&quot;http://www.archigraphs.com/&quot;&gt;archigraphs&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>We're here to encapsulate</title>
+      <link>http://jonathan-jackson.net/encapsulation-in-javascript.html</link>
+      <pubDate>Mon, 12 Sep 2011 00:00:00 -0400</pubDate>
+      <author>Jonathan Jackson</author>
+      <guid>http://jonathan-jackson.net/encapsulation-in-javascript</guid>
+      <description>&lt;h1&gt;We're here to encapsulate&lt;/h1&gt;
+
+&lt;p&gt;&lt;span&gt;&lt;a href=&quot;http://twitter.com/share&quot; class=&quot;twitter-share-button&quot;
+                                         data-count=&quot;horizontal&quot;
+                                         data-via=&quot;rondale_sc&quot;&gt;Tweet&lt;/a&gt;
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;The concept of encapsulation is familiar to most programmers.  Put simply it is bringing data and the methods that operate on it together under a single namespace (or object)&lt;a href=&quot;#footnote_1&quot;&gt;[1]&lt;/a&gt;. This article will showcase a few ways to encapsulate data, which in Javascript is quite important as many scripts may be rendered on a single page with little or no knowledge of one another. We we will take a quick tour of the prototype/constructor pattern, then follow up with the popular (and my favorite) module pattern.&lt;/p&gt;
+
+&lt;h2&gt;Be a Builder&lt;/h2&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2155999.js?file=gist-1.js'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;function Mammal(species, defining_characteristic) {
+  this.species = species;
+  this.defining_characteristic = defining_characteristic;
+ }
+
+Mammal.prototype.print = function(){
+  return &amp;quot;Hello I'm a &amp;quot; + this.species + &amp;quot;. &amp;quot; +
+         &amp;quot;I have &amp;quot; + this.defining_characteristic + &amp;quot;.&amp;quot;
+}
+
+var cat = new Mammal(&amp;quot;Cat&amp;quot;, &amp;quot;claws&amp;quot;);
+var dog = new Mammal(&amp;quot;Dog&amp;quot;, &amp;quot;a wet nose&amp;quot;)
+
+console.log(cat.print());
+// &amp;quot;Hello I'm a Cat. I have claws.&amp;quot;
+
+console.log(dog.print());
+// &amp;quot;Hello I'm a Dog. I have a wet nose.&amp;quot;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;The above code creates an instance of Mammal for cat and dog.  Each instance is fully contained within itself.  You'll note that the prototype method is used to extend print() to Mammal without having to redefine it for each instance. Subsequently each Mammal has the prototype method print() defined.&lt;/p&gt;
+
+&lt;p&gt;Likely none of this is new to you, after all javascript has been around for well over a decade.  The important concept here is not the construction of an instance in javascript, its the encapsulation of your code.  With the &lt;strong&gt;constructor pattern&lt;/strong&gt; (as basic as it is) you can very easily create a namespace for sets of data that belong with one another without having to duplicate code needlessly.  The object &amp;quot;Cat&amp;quot; has claws, and &amp;quot;Dog&amp;quot; has a wet nose, yet I define both by setting &lt;span style=&quot;background:#2A2D33;font-size:0.8em;&quot;class=&quot;pre&quot;&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color:#F8F8F8&quot;&gt;.defining_characteristic&lt;/span&gt;&lt;/span&gt; and each object's data is scoped to its own namespace.&lt;/p&gt;
+
+&lt;h2&gt;Modules are where it's at.&lt;/h2&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2155999.js?file=gist-2.js'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;var Mammal = (function(){
+  // These are private
+  var species;
+  var defining_char;
+  return {
+  // These are public because of the explicit return
+        init: function (sp, dc) {
+          species = sp;
+          defining_char = dc;
+        },
+        print: function() {
+          return &amp;quot;Hello I'm a &amp;quot; + species + &amp;quot;. &amp;quot; +
+                 &amp;quot;I have &amp;quot; + defining_char + &amp;quot;.&amp;quot;;
+        }
+      };
+});
+
+// cat = Mammal(); cat.init(&amp;quot;Cat&amp;quot;, &amp;quot;claws&amp;quot;); cat.print();
+// &amp;quot;Hello I'm a Cat. I have claws.&amp;quot;
+
+// dog = Mammal(); dog.init(&amp;quot;Dog&amp;quot;, &amp;quot;a wet nose&amp;quot;); dog.print();
+// &amp;quot;Hello I'm a Dog. I have a wet nose.&amp;quot;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;The &lt;strong&gt;module pattern&lt;/strong&gt; is similar to constructor pattern in many ways.  It offers a way to create an instance of an object, and limits namespace exposure.  However, the &lt;strong&gt;module pattern&lt;/strong&gt; brings another useful feature to the table.  That is, it offers the ability to deliniate between public and private functions/variables.  The functions and methods you define inside the enclosure (the parenthesis surrounding the anonymous function) are only available publicly if they are explicitly returned.&lt;/p&gt;
+
+&lt;p&gt;The internal state of each instance of Mammal can only be accessed on init.  You would need to create a getter/setter function to modify it after it has been initialized.  This is similar to the way Ruby handles object visiblity.  &lt;s&gt;The other way it differs from the constructor pattern is that the prototype class is not instantiated.  Which reduces the memory consumption of the object (among other things)&lt;/s&gt;. Original &lt;a href=&quot;#footnote_3&quot;&gt;[3]edited&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;By using new to invoke the function, the object holds onto a worthless prototype object. That wastes memory with no offsetting advantage. -Douglas Crockford&lt;a href=&quot;#footnote_2&quot;&gt;[2]&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Personally I like the module pattern over the constructor pattern not just because of the reasons outlined in Douglas Crockford's post from 2006 when he formalized the technique&lt;a href=&quot;#footnote_2&quot;&gt;[2]&lt;/a&gt;, but because it is so logical. I define my module and initialize its internal state, if I want to further modify the internal state I have to create and explicitly call a function for that purpose.  Forcing yourself to be explicit will reduce the number of silly bugs hard to find bugs that occur when you forget about your scope.&lt;/p&gt;
+
+&lt;h2&gt;Conclusions&lt;/h2&gt;
+
+&lt;p&gt;Encapsulation is one of the main pillars upon which Object Orientated Programming is built.  Understanding how to do it, and what pattern is the best fit for your needs is critical to creating easy to maintain, solid programs.  I come from a Ruby background so even though these encapsulation concepts are familiar to me researching how to do these things in Javascript has been immensely helpful.  It has given me insight into Object Oriented Design patterns, and has helped me in other languages.&lt;/p&gt;
+
+&lt;p&gt;I hope you find this useful, don't forget to check the references below as many of these concepts have been fleshed out before. I'd especially like to note &lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;http://addyosmani.com/resources/essentialjsdesignpatterns/book/#creationalpatternjavascript&quot;&gt;Essential JavaScript Design Patterns For Beginners, 2011&lt;/a&gt;&lt;/span&gt; as I believe it is one of the better articles on the subject and will expose you to more than just constructor/module patterns.  Have fun!&lt;/p&gt;
+
+&lt;p&gt;**Edit fix typo in module pattern snippet, credit bruno-c&lt;/p&gt;
+
+&lt;p&gt;**Edit in Crockford's article he referred to using &amp;quot;new&amp;quot; directly on a function definition, and in that case the prototype is useless, credit &lt;a id=&quot;footnote_3&quot; href=&quot;http://news.ycombinator.com/item?id=2992502&quot;&gt;jugglinmike&lt;/a&gt;
+&lt;br/&gt;&lt;/p&gt;
+
+&lt;h4&gt;References&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;span  style=&quot;font-size:12px;&quot;&gt;1.) &lt;a id=&quot;footnote_1&quot; href=&quot;http://en.wikipedia.org/wiki/Encapsulation_(object-oriented_programming)&quot;&gt;Wikipedia&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;span  style=&quot;font-size:12px;&quot;&gt;2.) &lt;a id=&quot;footnote_2&quot; href=&quot;http://yuiblog.com/blog/2006/11/13/javascript-we-hardly-new-ya/&quot;&gt;YUI blog, 2006&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4&gt;Additional References (Reading)&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&quot;&quot;&gt;&lt;/a&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;http://addyosmani.com/resources/essentialjsdesignpatterns/book/#creationalpatternjavascript&quot;&gt;Essential JavaScript Design Patterns For Beginners, 2011&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth&quot;&gt;Adequately good, 2010&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;span style=&quot;font-size:12px;&quot;&gt;&lt;a href=&quot;http://www.codeproject.com/KB/scripting/jsoops.aspx&quot;&gt;Encapsulation in Javascript, 2010&lt;/a&gt;&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Ruby <3's Sass</title>
+      <link>http://jonathan-jackson.net/ruby-loves-sass.html</link>
+      <pubDate>Tue, 06 Sep 2011 00:00:00 -0400</pubDate>
+      <author>Jonathan Jackson</author>
+      <guid>http://jonathan-jackson.net/ruby-loves-sass</guid>
+      <description>&lt;h1&gt;Ruby &amp;lt;3's Sass&lt;/h1&gt;
+
+&lt;p&gt;&lt;span&gt;&lt;a href=&quot;http://twitter.com/share&quot; class=&quot;twitter-share-button&quot;
+                                         data-count=&quot;horizontal&quot;
+                                         data-via=&quot;rondale_sc&quot;&gt;Tweet&lt;/a&gt;
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;span class=&quot;small&quot;&gt;&lt;strong&gt;TL;DR&lt;/strong&gt; -- &lt;a href=&quot;#sass_implementation&quot;&gt;Grid in SCSS&lt;/a&gt;&lt;/span&gt;&lt;/p&gt;
+
+&lt;p&gt;I recently tweeted:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Rails 3.1 will now parse erb before scss. Good idea to write a small gem to allow creation of css grids in ruby? &amp;lt;%= grid(rows, width) %&amp;gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;Ruby in Sass&lt;/h2&gt;
+
+&lt;p&gt;So I decided to come up with something of my own with this quick gist. Most of this is directly from &lt;a href=&quot;http://sass-lang.com/docs/yardoc/Sass/Script/Functions.html&quot;&gt;Sass Docs&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2155905.js?file=gist-1.rb'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;module Sass::Script::Functions
+  def insert_grid(columns, width_string)
+    assert_type columns, :Number
+    assert_type width_string, :String
+
+    width = width_string.match(/\A(\d+)(\w+)\z/)[1]
+    type = width_string.match(/\A(\d+)(\w+)\z/)[2]
+    raise StandardError, &amp;quot;You must set width_string with unit ie '960px'. &amp;quot; unless [&amp;quot;px&amp;quot;,&amp;quot;em&amp;quot;, &amp;quot;pt&amp;quot;, &amp;quot;%&amp;quot;].include?(type)
+
+    grid, grid_segment_width = &amp;quot;&amp;quot;, 0
+    columns.times do |col|
+      grid += &amp;quot;grid_#{col + 1}: {width:#{grid_segment_width += (width.to_i / columns)}#{type}}\n&amp;quot;
+    end
+    grid += &amp;quot;.column {margin:0,10px;overflow:hidden;float:left;display:inline;}&amp;quot;
+
+    Sass::Script::String.new(grid)
+  end
+end
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;As you can see sass, being its awesome self, allows us to quickly add ruby to the functions module and call it directly in your SCSS files. The only caveat is that it expects arguments to be passed in as Sass::Script::Literal objects. Still, having to unwrap and rewrap objects coming in and out of the function is a small price to pay for ruby in your stylesheets.&lt;/p&gt;
+
+&lt;h2&gt;Pure SASS &amp;gt; Ruby in stylesheets&lt;/h2&gt;
+
+&lt;p&gt;After thinking I just solved something important.  &lt;a href=&quot;https://twitter.com/#!/chriseppstein&quot;&gt;Chris Eppstein&lt;/a&gt; responded to my gist with a much more sassy way to do the same thing in pure sass.  &lt;a id=&quot;sass_implementation&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;script src='https://gist.github.com/2155905.js?file=gist-2.sass'&gt;&lt;/script&gt;&lt;noscript&gt;&lt;/p&gt;
+
+&lt;pre lang=&quot;sh&quot;&gt;&lt;code&gt;$grid-width: 960px !default;
+    $grid-columns: 12 !default;
+    @function grid-width($column, $columns: $grid-columns, $width: $grid-width) {
+        @return $width / $columns * $column;
+    }
+    @mixin insert-grid($columns: $grid-columns, $width: $grid-width, $base-class: &amp;quot;column&amp;quot;) {
+      .#{$base-class} {
+        margin:   0 10px;
+        overflow: hidden;
+        float:    left;
+        display:  inline;
+      }
+    @for $c from 1 through $columns {
+      .grid_#{$c} {
+        width: grid-width($c, $columns, $width);
+        @extend .#{$base-class};
+        }
+      }
+    }
+    @include insert-grid;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;/noscript&gt;&lt;/p&gt;
+
+&lt;p&gt;It's pretty obvious to see that adding a function in ruby to create a grid doesn't make much sense when you can write in pure scss that concisely.  However, I'm very excited to see what is possible with as easy as it was to implement custom functions.&lt;/p&gt;
+</description>
+    </item>
+    
+
+  </channel>
+</rss>

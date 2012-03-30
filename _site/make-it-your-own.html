@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <title>Make it your own</title>
+
+  <!-- Twitter Bootstrap -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
+
+  <!-- My Custom CSS -->
+  <link rel="stylesheet" href="/css/custom.css" type="text/css" />
+
+  <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+
+  <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25565068-1']);
+  _gaq.push(['_setDomainName', 'jonathan-jackson.net']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+  <div id="header">
+    <h1>run<span class="kern">_</span>with_it <span style="font-size:12px;">Learning, sharing, coding.</span></h1>
+    <div class="row">
+      <div class="span1 offset8"><a href="/" alt="home">Home</a></div>
+      <div class="span1"><a href="/about-me.html" alt="about-me">About Me</a></div>
+      <div class="span2"><a href="/mail.html" alt="contact-me">Contact Me</a></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="content">
+     <div id="post">
+<h1>Make it your own</h1>
+
+<p><span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span></p>
+
+<p>So you've started using pry.  You've likely found this article from my previous article <a href="http://www.jonathan-jackson.net/give-it-a-pry">Give it a Pry</a>, and your digging Pry.  You've already found how quickly the Pry repl becomes second nature, how useful having easy shell access is, and how easily it slices to the heart of your code (I'm assuming).  If you're at that point you're probably looking around to see what else you can do.  I'll re-iterate a point made in &quot;Give it a Pry&quot;, go to the WIKI! There is a ton of documentation that will not only help you understand Pry better, but also help you to shed light on your own code.  In this article I'm going to quickly show you how to use commands, which are yet another cool feature provided by Pry.</p>
+
+<h2>Commands, a unique solution.</h2>
+
+<p>Pry lets you define commands which make the inclusion and execution of arbitrary bits of code trivial<a href="https://github.com/pry/pry/wiki/Command-system#wiki-Invoking_commands">[1]</a>.  The Pry command structure is unique in that the command methods are executed before normal Ruby code is executed. This is important for reasons you'll see below.</p>
+
+<p>If you are anything like me then your ~/.irbrc file had many top level methods(like below), well with pry these can be transformed into commands.</p>
+
+<p><script src='https://gist.github.com/2156369.js?file=gist-1.rb'></script><noscript></p>
+
+<pre lang="sh"><code># ~/.irbrc
+
+def clear
+  system 'clear'
+end
+
+</code></pre>
+
+<p></noscript></p>
+
+<p>This method is limited because if, while in the IRB session, I define something like so I'll over-ride my top-level method.</p>
+
+<pre><code>$-&gt; irb
+
+&gt;&gt; def clear
+&gt;&gt;   puts &quot;This is going to over-ride the irbrc #clear&quot;
+&gt;&gt; end
+=&gt; nil
+
+&gt;&gt; clear
+=&gt; &quot;This is going to over-ride the irbrc #clear&quot;
+</code></pre>
+
+<p>If instead we implemented the #clear method as a Pry command we would not over-ride the existing functionality.  Oh, and it's easy.</p>
+
+<p><script src='https://gist.github.com/2156369.js?file=gist-2.rb'></script><noscript></p>
+
+<pre lang="sh"><code># ~/.pryrc
+
+# Create a command_set which is the structure in which commands
+# are organized
+command_set = Pry::CommandSet.new do
+  command &quot;clear&quot;, &quot;Clear the screen.&quot; do
+    system 'clear'
+  end
+end
+
+# Import your command_set to the Pry session.
+Pry.config.commands.import command_set
+
+</code></pre>
+
+<p></noscript></p>
+
+<pre><code>$-&gt; pry
+
+pry(main)&gt; def clear
+pry(main)*   puts &quot;If there is a space before the #clear call I will be fired!&quot;
+pry(main)* end
+=&gt; nil
+
+pry(main)&gt;clear # Will clear screen.
+pry(main)&gt; clear
+=&gt; &quot;If there is a space before the #clear call I will be fired!&quot;
+</code></pre>
+
+<p>The first argument passed to command is the name of the command, the second is an optional description, the block passed in is what will be executed.  Simple.  Be creative.</p>
+
+<h2>Conclusions</h2>
+
+<p>Commands let you very easily customize your pry session.  I have a few methods that I really enjoy having any time I'm in Pry that I'll share in the references.  Thanks for reading this quick run-down.</p>
+
+<p>***edit You can modify the way you call commands by changing the Pry.config.command_prefix, which defaults to '' (tick tick).</p>
+
+<h4>References</h4>
+
+<p><span  style="font-size:12px;">1.) <a href="https://github.com/pry/pry/wiki/Command-system#wiki-Invoking_commands">Command Wiki Entry</a></span></p>
+
+<h4>Additional References</h4>
+
+<p><span style="font-size:12px;"><a href="https://github.com/pry/pry/wiki/Customization-and-configuration#wiki-Config_commands">Configure Wiki</a></span>
+<span style="font-size:12px;"><a href="https://gist.github.com/1297510">Example ~/.pryrc</a></span></p>
+
+<span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span> <span class="has_js"><g:plusone size="medium"></g:plusone></span>
+<!-- Place this render call where appropriate -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'run-with-it';
+    var disqus_identifier = '/make-it-your-own';
+    var disqus_url = 'http://www.jonathan-jackson.net/make-it-your-own';
+    var disqus_developer = 1;
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+    </div>
+
+    <div id="side-bar">
+     <div><a href="http://feeds.feedburner.com/jonathan-jackson/WZqA" title="Subscribe to my feed" rel="alternate" type="application/rss+xml"><img src="/images/feeds.png" alt="" style="border:0;width:100px;height:100px;"/></a></div>
+<div><a href="https://twitter.com/rondale_sc" class="twitter-follow-button" alt="follow me on twitter" data-width="150px" data-show-count="false">Follow @rondale_sc</a></div>
+<div><img src="/images/gravatar.png" width="167px;" height="167px;"/></div>
+<div>
+  <h3>Hi, I'm Jon.</h3>
+  <p>I love learning new things.  Here is where I'll share what I learn.  Typically code, sometimes my experience, sometimes just a neat trick.</p>
+</div>
+<div>
+  <h3>Projects</h3>
+  <ul>
+    <li><a href="https://github.com/rondale-sc/EspnRb" alt="espn_rb, a lightweight ruby wrapper around the ESPN api." title="EspnRb">EspnRb</a></li>
+    <li><a href="https://github.com/rondale-sc/image_viewer" alt="ImageViewer image browser w/controls" title="Image Viewer">ImageViewer</a></li>
+    <li><a href="https://github.com/rondale-sc/run_with_it_redux" alt="This blog's Github Repo" title="Run With It Repo">Run With It</a></li>
+  </ul>
+</div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>Site designed by Jonathan Jackson.  With help from <a href="http://twitter.github.com/bootstrap/" alt="twitter bootstrap">@twbootstrap</a>, <a href="https://github.com/mojombo/jekyll" alt="jekyll">Jekyll</a>, and <a href="https://github.com/" alt="github">github</a></p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <title>Ruby <3's Sass</title>
+
+  <!-- Twitter Bootstrap -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
+
+  <!-- My Custom CSS -->
+  <link rel="stylesheet" href="/css/custom.css" type="text/css" />
+
+  <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+
+  <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25565068-1']);
+  _gaq.push(['_setDomainName', 'jonathan-jackson.net']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+  <div id="header">
+    <h1>run<span class="kern">_</span>with_it <span style="font-size:12px;">Learning, sharing, coding.</span></h1>
+    <div class="row">
+      <div class="span1 offset8"><a href="/" alt="home">Home</a></div>
+      <div class="span1"><a href="/about-me.html" alt="about-me">About Me</a></div>
+      <div class="span2"><a href="/mail.html" alt="contact-me">Contact Me</a></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="content">
+     <div id="post">
+<h1>Ruby &lt;3's Sass</h1>
+
+<p><span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span></p>
+
+<p><span class="small"><strong>TL;DR</strong> -- <a href="#sass_implementation">Grid in SCSS</a></span></p>
+
+<p>I recently tweeted:</p>
+<blockquote>
+<p>Rails 3.1 will now parse erb before scss. Good idea to write a small gem to allow creation of css grids in ruby? &lt;%= grid(rows, width) %&gt;</p>
+</blockquote>
+<h2>Ruby in Sass</h2>
+
+<p>So I decided to come up with something of my own with this quick gist. Most of this is directly from <a href="http://sass-lang.com/docs/yardoc/Sass/Script/Functions.html">Sass Docs</a></p>
+
+<p><script src='https://gist.github.com/2155905.js?file=gist-1.rb'></script><noscript></p>
+
+<pre lang="sh"><code>module Sass::Script::Functions
+  def insert_grid(columns, width_string)
+    assert_type columns, :Number
+    assert_type width_string, :String
+
+    width = width_string.match(/\A(\d+)(\w+)\z/)[1]
+    type = width_string.match(/\A(\d+)(\w+)\z/)[2]
+    raise StandardError, &quot;You must set width_string with unit ie '960px'. &quot; unless [&quot;px&quot;,&quot;em&quot;, &quot;pt&quot;, &quot;%&quot;].include?(type)
+
+    grid, grid_segment_width = &quot;&quot;, 0
+    columns.times do |col|
+      grid += &quot;grid_#{col + 1}: {width:#{grid_segment_width += (width.to_i / columns)}#{type}}\n&quot;
+    end
+    grid += &quot;.column {margin:0,10px;overflow:hidden;float:left;display:inline;}&quot;
+
+    Sass::Script::String.new(grid)
+  end
+end
+
+</code></pre>
+
+<p></noscript></p>
+
+<p>As you can see sass, being its awesome self, allows us to quickly add ruby to the functions module and call it directly in your SCSS files. The only caveat is that it expects arguments to be passed in as Sass::Script::Literal objects. Still, having to unwrap and rewrap objects coming in and out of the function is a small price to pay for ruby in your stylesheets.</p>
+
+<h2>Pure SASS &gt; Ruby in stylesheets</h2>
+
+<p>After thinking I just solved something important.  <a href="https://twitter.com/#!/chriseppstein">Chris Eppstein</a> responded to my gist with a much more sassy way to do the same thing in pure sass.  <a id="sass_implementation"></a></p>
+
+<p><script src='https://gist.github.com/2155905.js?file=gist-2.sass'></script><noscript></p>
+
+<pre lang="sh"><code>$grid-width: 960px !default;
+    $grid-columns: 12 !default;
+    @function grid-width($column, $columns: $grid-columns, $width: $grid-width) {
+        @return $width / $columns * $column;
+    }
+    @mixin insert-grid($columns: $grid-columns, $width: $grid-width, $base-class: &quot;column&quot;) {
+      .#{$base-class} {
+        margin:   0 10px;
+        overflow: hidden;
+        float:    left;
+        display:  inline;
+      }
+    @for $c from 1 through $columns {
+      .grid_#{$c} {
+        width: grid-width($c, $columns, $width);
+        @extend .#{$base-class};
+        }
+      }
+    }
+    @include insert-grid;
+
+</code></pre>
+
+<p></noscript></p>
+
+<p>It's pretty obvious to see that adding a function in ruby to create a grid doesn't make much sense when you can write in pure scss that concisely.  However, I'm very excited to see what is possible with as easy as it was to implement custom functions.</p>
+
+<span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span> <span class="has_js"><g:plusone size="medium"></g:plusone></span>
+<!-- Place this render call where appropriate -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'run-with-it';
+    var disqus_identifier = '/ruby-loves-sass';
+    var disqus_url = 'http://www.jonathan-jackson.net/ruby-loves-sass';
+    var disqus_developer = 1;
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+    </div>
+
+    <div id="side-bar">
+     <div><a href="http://feeds.feedburner.com/jonathan-jackson/WZqA" title="Subscribe to my feed" rel="alternate" type="application/rss+xml"><img src="/images/feeds.png" alt="" style="border:0;width:100px;height:100px;"/></a></div>
+<div><a href="https://twitter.com/rondale_sc" class="twitter-follow-button" alt="follow me on twitter" data-width="150px" data-show-count="false">Follow @rondale_sc</a></div>
+<div><img src="/images/gravatar.png" width="167px;" height="167px;"/></div>
+<div>
+  <h3>Hi, I'm Jon.</h3>
+  <p>I love learning new things.  Here is where I'll share what I learn.  Typically code, sometimes my experience, sometimes just a neat trick.</p>
+</div>
+<div>
+  <h3>Projects</h3>
+  <ul>
+    <li><a href="https://github.com/rondale-sc/EspnRb" alt="espn_rb, a lightweight ruby wrapper around the ESPN api." title="EspnRb">EspnRb</a></li>
+    <li><a href="https://github.com/rondale-sc/image_viewer" alt="ImageViewer image browser w/controls" title="Image Viewer">ImageViewer</a></li>
+    <li><a href="https://github.com/rondale-sc/run_with_it_redux" alt="This blog's Github Repo" title="Run With It Repo">Run With It</a></li>
+  </ul>
+</div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>Site designed by Jonathan Jackson.  With help from <a href="http://twitter.github.com/bootstrap/" alt="twitter bootstrap">@twbootstrap</a>, <a href="https://github.com/mojombo/jekyll" alt="jekyll">Jekyll</a>, and <a href="https://github.com/" alt="github">github</a></p>
+  </div>
+</body>
+</html>

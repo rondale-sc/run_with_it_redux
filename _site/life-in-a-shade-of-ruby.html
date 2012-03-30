@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <title>Life in a shade of ruby</title>
+
+  <!-- Twitter Bootstrap -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
+
+  <!-- My Custom CSS -->
+  <link rel="stylesheet" href="/css/custom.css" type="text/css" />
+
+  <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+
+  <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25565068-1']);
+  _gaq.push(['_setDomainName', 'jonathan-jackson.net']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+  <div id="header">
+    <h1>run<span class="kern">_</span>with_it <span style="font-size:12px;">Learning, sharing, coding.</span></h1>
+    <div class="row">
+      <div class="span1 offset8"><a href="/" alt="home">Home</a></div>
+      <div class="span1"><a href="/about-me.html" alt="about-me">About Me</a></div>
+      <div class="span2"><a href="/mail.html" alt="contact-me">Contact Me</a></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="content">
+     <div id="post">
+<h1>Life in a shade of ruby</h1>
+
+<p><span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span></p>
+
+<p>Conway's Game of Life is a great way to practice your craft.  I recently created my own rendition in Ruby, and have plans to implement it in Javascript and Erlang.  If you haven't heard of Conway's Game of life (CGOL), it is a cellular automaton <a href="http://en.wikipedia.org/wiki/Cellular_automaton">[1]</a>, essentially a mathematical model, consisting of a two dimensional grid where each x and y coordinate are either alive or dead.  Whether a cell is alive or dead is governed by a simple set of rules, and the game advances/evolves by applying the rules to each cell based on the previous generation's configuration and then repeating.  Wow, that was seriously a mouthful.  I would go into why this game has kept programmers interested in it despite being ~forty years old, but as soon as you start with CGOL you'll see how fascinating it is to see an entire world of complexity arise from low level constructs. Let's go through the rules and then meet back up to discuss the code.</p>
+
+<h1>Rules</h1>
+
+<p>Each cell has eight neighbors, three above, one on either side, and three below.  The rules of CGOL simply govern the state of the cell in question as it relates to the state of its neighbor cells.</p>
+
+<p><img src="http://www.jonathan-jackson.net/assets/game_of_life_rules.png" alt="game_of_life_rules"/></p>
+
+<p>That's it.  For real.  The entire list of rules can be summarized in Ruby like so.</p>
+
+<p><script src='https://gist.github.com/2156522.js?file=gist-1.rb'></script><noscript></p>
+
+<pre lang="sh"><code># If cell is alive then it continues to stay alive if it has
+# 2 or 3 alive neighbors.  If the cell is dead then it comes
+# back to life only if it has exactly 3 alive neighbors.
+
+@alive ? [2,3].include?(alive_neighbors) : alive_neighbors == 3
+
+</code></pre>
+
+<p></noscript></p>
+
+<p>After seeing that, you get an idea of why this CGOL is so interesting.  Its set of rules create extreme complexity from little input. Take a look at the pattern, acorn. It is a methuselah that takes 5206 generations to generate 633 cells including 13 escaped gliders <a href="http://en.wikipedia.org/wiki/Methuselah_(cellular_automaton">[2]</a>).  (It won't mature fully in the video because it's on a 50x50 grid)</p>
+
+<iframe src="http://player.vimeo.com/video/37406843" width="488" height="274" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+<h1>The Code</h1>
+
+<p>Now that you understand Conway's Game of Life, we can start talking about how to implement it.  The examples found here are from my first attempt at creating CGOL.  It's not perfect, but it'll serve to illustrate why this is such a fun problem.  <a href="https://github.com/radar">Ryan Bigg</a> did a screencast in which he creates CGOL through a test driven approach <a href="http://www.rubyinside.com/screencast-coding-conways-game-of-life-in-ruby-the-tdd-way-with-rspec-5564.html">[3]</a>.  It's well worth your time and probably a better implementation.  For now, we'll just go off my version.</p>
+
+<h1>The Cell</h1>
+
+<p><script src='https://gist.github.com/2156522.js?file=gist-2.rb'></script><noscript></p>
+
+<pre lang="sh"><code>class Cell
+  attr_accessor :y, :x, :alive, :future_alive
+
+  def initialize(x,y,alive=false)
+    @x = x
+    @y = y
+    @alive = alive
+  end
+
+  def is_alive?(sum)
+    self.future_alive = if @alive
+                          [2,3].include?(sum)
+                        else
+                          sum == 3
+                        end
+  end
+
+  def set_next_generation
+    self.alive        = self.future_alive
+    self.future_alive = nil
+  end
+
+  def to_s; @alive ? ' O ' : &quot;   &quot; end
+end
+
+</code></pre>
+
+<p></noscript></p>
+
+<p>This is your basic cell.  It stores its own coordinates and whether it is alive or not.  The Cell#is_alive? sets a variable called future_alive which dictates its state in the next generation.  The reason we need to store its future state in its own variable is because if we change its alive status (while iterating over each celll) it will alter its neighbors calculations.  Each new generation must be computed using the previous generation's information.  To avoid violating this principle, we need to store the calculated value while operating on the original state.</p>
+
+<p>It might be better not to save the coordinates within the cell itself, but it makes working with the object much, much easier.  Basically, with the Cell class we have a mini state machine.</p>
+
+<p>After that, creating the grid of cells is as easy as:</p>
+
+<p><script src='https://gist.github.com/2156522.js?file=gist-3.rb'></script><noscript></p>
+
+<pre lang="sh"><code># Array#new accepts a block....radical!
+@cells = Array.new(@height) { |y| Array.new(@width) { |x| Cell.new(x,y) }}
+
+</code></pre>
+
+<p></noscript></p>
+
+<h1>The Game</h1>
+
+<p>To tie all the cells together, I created the Game class.  It creates the playing board and processes each generation.  We initialize it with the dimensions of the board and how many generations we'd like to process, and tell it to #play.</p>
+
+<p><script src='https://gist.github.com/2156522.js?file=gist-4.rb'></script><noscript></p>
+
+<pre lang="sh"><code>class Game
+  def initialize(w,h,steps)
+    @width,@height,@steps = w,h,steps
+    @cells   = Array.new(@height) { |y| Array.new(@width) { |x| Cell.new(x,y) }}
+    @neighbors = [[-1, 0],[1, 0],[-1, 1],[0, 1],[1, 1],[-1, -1],[0, -1], [1, -1]]
+  end
+
+  def play
+    (1..@steps).each_with_index do |i|
+      system('clear')
+      puts self.to_s
+      step
+      sleep 0.1
+    end
+  end
+
+  def step
+    @cells.reverse.each do |row|
+      row.each do |cell|
+        cell.is_alive? alive_neighbors(cell.x, cell.y)
+      end
+    end
+    @cells.each {|r| r.each {|c| c.set_next_generation }}
+  end
+
+  def alive_neighbors(x,y)
+    @neighbors.inject(0) do |sum, (neighbor_x, neighbor_y)|
+      sum += 1 if @cells[y + neighbor_y][x + neighbor_x].alive; sum
+    end
+  end
+
+  def to_s
+    @cells.reverse.map { |row| row.join }.join(&quot;\n&quot;)
+  end
+end
+
+</code></pre>
+
+<p></noscript></p>
+
+<p>The cool part is Game#alive_neighbors it's here where we determine how many neighbors are alive.  I've said before that when you have Ennumerable#inject everything looks like a nail.  It's definitely my favorite ennumerable method, and here I use it to get a count of neighboring cells with their internal state set to alive.  We just take the point we are testing and add the points from the @neighbors array and add to sum if that cell is alive.  Super simple.</p>
+
+<p><img src="http://www.jonathan-jackson.net/assets/alive_neighbors.png" width="630" alt="skitch outline of #alive_neighbors"/></p>
+
+<h1>The Pattern</h1>
+
+<p>Alright, that's all well and good, but we don't actually have any cells alive in the initial state so our entire program (though perfectly functional) does exactly nothing.  So I created a pattern Class:</p>
+
+<p><script src='https://gist.github.com/2156522.js?file=gist-5.rb'></script><noscript></p>
+
+<pre lang="sh"><code>class Pattern
+  def initialize(x, y, pattern=nil)
+    @origin_x, @origin_y = origin_x, origin_y
+    @default_patterns = {:acorn =&gt; [[-3,0],[-2,0],[-2,2],[0,1],[1,0],[2,0],[3,0]]}
+    @pattern = @default_patterns[pattern].nil? ? @default_patterns[:acorn] : @default_patterns[pattern]
+  end
+
+  def set_cells(cells)
+    @pattern.each  do |(x,y)|
+      unless cells[@origin_x + x].nil? || cells[@origin_x + x][@origin_y + y].nil?
+        cells[@origin_y + y][@origin_x + x].alive = true;
+      end
+    end
+  end
+end
+
+</code></pre>
+
+<p></noscript></p>
+
+<p>You'll notice that the Pattern#set_cells method looks a lot like the alive_neighbors method and it is.  This allows you to trigger certain cells alive by calculating their points relative to an origin point.  It sounds complicated, but it's actually quite simple, assuming you have a pattern you just call:</p>
+
+<p><script src='https://gist.github.com/2156522.js?file=gist-6.rb'></script><noscript></p>
+
+<pre lang="sh"><code>Pattern.new(somepoint_x, somepoint_y, :acorn).set_cells(@cells)
+
+</code></pre>
+
+<p></noscript></p>
+
+<p>Call that directly before you begin iterating over @steps in Game#Play and you'll create your origin points.  Once you've gotten familiar with that, you can create any pattern you like (there are many great patterns online).  Here is the famous gospers-glider-gun:</p>
+
+<iframe src="http://player.vimeo.com/video/37540376" width="488" height="274" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+<p>Defined like so:</p>
+
+<p><script src='https://gist.github.com/2156522.js?file=gist-7.rb'></script><noscript></p>
+
+<pre lang="sh"><code>:glider_gun =&gt; [[0,0],[-1,0],[-1,1],[-1,-1],[-2,2],[-2,-2],[-3,0],
+                      [-4,3],[-5,3],[-4,-3],[-5,-3],[-6, 2],[-6,-2],
+                      [-7,1],[-7,0],[-7,-1],[-16,0],[-17,0],[-16,1],
+                      [-17,1],[3,3],[3,2],[3,1],[4,3],[4,2],[4,1],[5,4],
+                      [5,0],[7,4],[7,5],[7,0],[7,-1],[17,2],[17,3],[18,2],
+                      [18,3]]
+
+</code></pre>
+
+<p></noscript></p>
+
+<h1>Conclusions</h1>
+
+<p>In Ruby, I completed my first working prototype CGOL in an hour or two.  It was a lot of fun. It's a great problem and has probably been written in every language ever created. The reasons for that are clear; it's a fun problem that forces you to use many different aspects of the language.  In Ruby, this was pretty simple, but I've been writing in Ruby for years.  I'm going to try writing this in a language I don't know well and use it for what it is: a fun learning tool.  Some of the patterns I've seen around the web have truly impressed me.  While rules of the game are simple, the resulting complexity is truly amazing.  Take some time and try coding this in your language of choice, or improve this one.  Either way, have fun with it.  ^_^</p>
+
+<h4>References</h4>
+
+<p><span  style="font-size:12px;">1.) <a href="http://en.wikipedia.org/wiki/Cellular_automaton">Wiki Entry on Cellular Automaton</a></span><br/>
+<span  style="font-size:12px;">2.) <a href="http://en.wikipedia.org/wiki/Methuselah_(cellular_automaton)">Methuselah Definition</a></span><br/>
+<span  style="font-size:12px;">3.) <a href="http://www.rubyinside.com/screencast-coding-conways-game-of-life-in-ruby-the-tdd-way-with-rspec-5564.html">Ryan Bigg's Solution TDD</a></span><br/></p>
+
+<h4>Additional References</h4>
+
+<p><span style="font-size:12px;"><a href="http://pentadecathlon.com/lifeNews/">Awesome Life News Site</a></span><br/>
+<span style="font-size:12px;"><a href="http://www.youtube.com/watch?v=XcuBvj0pw-E">Game of Life Demo on YouTube</a></span><br/></p>
+
+<span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span> <span class="has_js"><g:plusone size="medium"></g:plusone></span>
+<!-- Place this render call where appropriate -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'run-with-it';
+    var disqus_identifier = '/life-in-a-shade-of-ruby';
+    var disqus_url = 'http://www.jonathan-jackson.net/life-in-a-shade-of-ruby';
+    var disqus_developer = 1;
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+    </div>
+
+    <div id="side-bar">
+     <div><a href="http://feeds.feedburner.com/jonathan-jackson/WZqA" title="Subscribe to my feed" rel="alternate" type="application/rss+xml"><img src="/images/feeds.png" alt="" style="border:0;width:100px;height:100px;"/></a></div>
+<div><a href="https://twitter.com/rondale_sc" class="twitter-follow-button" alt="follow me on twitter" data-width="150px" data-show-count="false">Follow @rondale_sc</a></div>
+<div><img src="/images/gravatar.png" width="167px;" height="167px;"/></div>
+<div>
+  <h3>Hi, I'm Jon.</h3>
+  <p>I love learning new things.  Here is where I'll share what I learn.  Typically code, sometimes my experience, sometimes just a neat trick.</p>
+</div>
+<div>
+  <h3>Projects</h3>
+  <ul>
+    <li><a href="https://github.com/rondale-sc/EspnRb" alt="espn_rb, a lightweight ruby wrapper around the ESPN api." title="EspnRb">EspnRb</a></li>
+    <li><a href="https://github.com/rondale-sc/image_viewer" alt="ImageViewer image browser w/controls" title="Image Viewer">ImageViewer</a></li>
+    <li><a href="https://github.com/rondale-sc/run_with_it_redux" alt="This blog's Github Repo" title="Run With It Repo">Run With It</a></li>
+  </ul>
+</div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>Site designed by Jonathan Jackson.  With help from <a href="http://twitter.github.com/bootstrap/" alt="twitter bootstrap">@twbootstrap</a>, <a href="https://github.com/mojombo/jekyll" alt="jekyll">Jekyll</a>, and <a href="https://github.com/" alt="github">github</a></p>
+  </div>
+</body>
+</html>

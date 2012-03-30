@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <title>Man and Ruby</title>
+
+  <!-- Twitter Bootstrap -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
+
+  <!-- My Custom CSS -->
+  <link rel="stylesheet" href="/css/custom.css" type="text/css" />
+
+  <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+
+  <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25565068-1']);
+  _gaq.push(['_setDomainName', 'jonathan-jackson.net']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+  <div id="header">
+    <h1>run<span class="kern">_</span>with_it <span style="font-size:12px;">Learning, sharing, coding.</span></h1>
+    <div class="row">
+      <div class="span1 offset8"><a href="/" alt="home">Home</a></div>
+      <div class="span1"><a href="/about-me.html" alt="about-me">About Me</a></div>
+      <div class="span2"><a href="/mail.html" alt="contact-me">Contact Me</a></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="content">
+     <div id="post">
+<h1>Man and Ruby</h1>
+
+<p><span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span></p>
+
+<p>If you've found this blog it's likely that you are at least somewhat familiar with Unix and Unix-like operating systems.  If so you undoubtedly know about Man pages.  For those of you who don't; the man page is the unix system for documenting command-line applications.  They are succinct and clear guides to how you can interact with an application.  If you are on a *nix system you can pop open your terminal right now and type <code>man man</code> and see what I'm talking about.  As developers, we often baulk at documenting our code.  We enjoy creating new things, not tediously writing about our last project.  Here I'll give a brief overview of how you can incorporate man pages into your workflow, then show you how easy it can be to create this basic documentation. Trust me, you'll make a lot of friends if you do it, and probably find that its not as tedious as you think.</p>
+
+<h2>WorkFlow</h2>
+
+<p>Using man is easy as typing '<code>man &lt; command_name &gt;</code>'.  If you want to view a specific secition of a man page you can type '<code>man &lt; section_number &gt; &lt; command_name &gt;</code>'. The beauty of man pages and Unix is that it really is that simple.</p>
+
+<p><a href="http://carboni.ca/blog">Michael Edgar</a> submitted a patch <a href="http://rubyforge.org/tracker/index.php?func=detail&aid=27691&group_id=126&atid=577">[1]</a> to rubygems to allow for explicit inclusion of man pages in the gemspec or implicit inclusion in the /man directory.  Unfortunately this patch has not been included despite being projected for inclusion in 1.4.  All is not lost, @defunkt, of GitHub fame and huge proponent of man page usage, wrote a nice little plugin called gem-man <a href="https://github.com/defunkt/gem-man">[2]</a>.</p>
+
+<p>Gem-man checks to see if any man pages exist and displays it accordingly.  If multiple man sections are found it will provide you with an option to select one. It can be installed like so.</p>
+
+<pre><code>gem install gem-man
+gem man gem-man
+</code></pre>
+
+<p>If you pass gem-man the <code>-s</code> argument it will fall back to searching system files for your man page.  With that in mind you can create an easy alias which will let you use <code>man</code> to search both your systems man pages and any man pages found in your gems:</p>
+
+<p><script src='https://gist.github.com/2156493.js?file=gist-1.sh'></script><noscript></p>
+
+<pre lang="sh"><code># for zsh
+  # echo 'alias man=&quot;gem man -s&quot;' &gt;&gt; ~/.zshrc
+  # source ~/.zshrc
+
+  echo 'alias man=&quot;gem man -s&quot;' &gt;&gt; ~/.bashrc
+  source ~/.bashrc
+  man gem-man
+
+</code></pre>
+
+<p></noscript></p>
+
+<h2>Authoring Your Own</h2>
+
+<p>Man pages must be written in an unfortunate format called roff <a href="http://en.wikipedia.org/wiki/Roff">[3]</a>. Roff is a format originally created in the 1970's with a limited set of formatting options.  Fortunately there is an alternative to writing in roff.  You can write in ronn!</p>
+
+<p><img src="http://www.jonathan-jackson.net/images/Ron.jpg" width="200px"/></p>
+
+<h2>Ronn</h2>
+
+<p>Ronn is a little command-line application for constructing valid roff from <a href="http://daringfireball.net/projects/markdown/">markdown</a> by <a href="https://github.com/rtomayko">Ryan Tomayko</a>.  Ronn can also generate the familiar html renditions of your man page from markdown <a href="https://github.com/rtomayko/ronn">[4]</a>.  Markdown is easy to learn so I won't go into that for now, instead we'll talk about the content of a man page.</p>
+
+<p>Man pages are broken into sections.  Let's build a general man page <a href="http://rtomayko.github.com/ronn/ronn-format.7">[5]</a>, which incidentally would be the first section.</p>
+
+<ol>
+<li><p>The first thing we need to do is create a title, which should be the the name of your application then the number one in parenthesis to indicate that this is section one of your man page.</p></li>
+<li><p>Next is to create a synopsis of the application by putting code tags around comands, then doing the same for any flags.  Should look something like this once its compiled to roff:
+<img src="/images/man_synopsis.png" width="630px"/></p></li>
+<li><p>After that is a description.  Briefly describe what your application does.  This should be concise and strike at the heart of what you are trying to accomplish.  Don't be flowery, just get to the point.</p></li>
+<li><p>Then onto options where you'll list your flags and give a one line description of what each does.</p></li>
+<li><p>Once you've done the above steps you can write whatever you like.  Keep it on point, things like examples, basic usage, and any otherwise pertinent information that a user will need to use your app.</p></li>
+<li><p>Finally, write your bug &amp; author sections where you tell people where to file issues and who is responsible for the amazing application.</p></li>
+</ol>
+
+<p>That's it.  Now all is left is to compile to roff and add to your project.</p>
+
+<pre><code>$ ronn path/to/your/amazing/man.1.ronn
+  -&gt; roff: path/to/your/amazing/man.1
+  -&gt; html: path/to/your/amazing/man.1.html
+</code></pre>
+
+<h2>Conclusions</h2>
+
+<p>You've just created a man-page to the absolute delight of programmers world-wide.  Alright so maybe that's a little grandiose, but man-pages are an amazing asset to any program.  If you craft a well made application a man page should be the first step you take to increase its accessibility.  Also as we've learned it's easy!  Creating a man page is so easy that it's really a matter of why not.  I've found from writing a few for my own projects that it has helped me flesh out some behavior as well.  Though I believe that could be the act of documenting and not specific to man pages.  Either way man pages.  Do it.</p>
+
+<p>Thanks for reading!</p>
+
+<h4>References</h4>
+
+<p><span  style="font-size:12px;">1.) <a href="http://rubyforge.org/tracker/index.php?func=detail&aid=27691&group_id=126&atid=577">Michael  Edgar's Rubygems Patch</a></span><br/>
+<span  style="font-size:12px;">2.) <a href="https://github.com/defunkt/gem-man">gem-man GitHub page</a></span><br/>
+<span  style="font-size:12px;">3.) <a href="http://en.wikipedia.org/wiki/Roff">Wikipedia: Roff</a></span><br/>
+<span  style="font-size:12px;">4.) <a href="https://github.com/rtomayko/ronn">Ronn Github page</a></span><br/>
+<span  style="font-size:12px;">5.) <a href="http://rtomayko.github.com/ronn/ronn-format.7">Ronn-Format man 7</a></span><br/></p>
+
+<h4>Additional References</h4>
+
+<p><span style="font-size:12px;"><a href="http://ozmm.org/posts/man_what.html">Chris Wanstrath on Man</a></span><br/>
+<span style="font-size:12px;"><a href="http://tldp.org/HOWTO/Man-Page/">Jens Schweikhardt's Man Page tutorial</a></span><br/></p>
+
+<span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span> <span class="has_js"><g:plusone size="medium"></g:plusone></span>
+<!-- Place this render call where appropriate -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'run-with-it';
+    var disqus_identifier = '/man-and-ruby';
+    var disqus_url = 'http://www.jonathan-jackson.net/man-and-ruby';
+    var disqus_developer = 1;
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+    </div>
+
+    <div id="side-bar">
+     <div><a href="http://feeds.feedburner.com/jonathan-jackson/WZqA" title="Subscribe to my feed" rel="alternate" type="application/rss+xml"><img src="/images/feeds.png" alt="" style="border:0;width:100px;height:100px;"/></a></div>
+<div><a href="https://twitter.com/rondale_sc" class="twitter-follow-button" alt="follow me on twitter" data-width="150px" data-show-count="false">Follow @rondale_sc</a></div>
+<div><img src="/images/gravatar.png" width="167px;" height="167px;"/></div>
+<div>
+  <h3>Hi, I'm Jon.</h3>
+  <p>I love learning new things.  Here is where I'll share what I learn.  Typically code, sometimes my experience, sometimes just a neat trick.</p>
+</div>
+<div>
+  <h3>Projects</h3>
+  <ul>
+    <li><a href="https://github.com/rondale-sc/EspnRb" alt="espn_rb, a lightweight ruby wrapper around the ESPN api." title="EspnRb">EspnRb</a></li>
+    <li><a href="https://github.com/rondale-sc/image_viewer" alt="ImageViewer image browser w/controls" title="Image Viewer">ImageViewer</a></li>
+    <li><a href="https://github.com/rondale-sc/run_with_it_redux" alt="This blog's Github Repo" title="Run With It Repo">Run With It</a></li>
+  </ul>
+</div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>Site designed by Jonathan Jackson.  With help from <a href="http://twitter.github.com/bootstrap/" alt="twitter bootstrap">@twbootstrap</a>, <a href="https://github.com/mojombo/jekyll" alt="jekyll">Jekyll</a>, and <a href="https://github.com/" alt="github">github</a></p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <title>Make the most of your tweet</title>
+
+  <!-- Twitter Bootstrap -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
+
+  <!-- My Custom CSS -->
+  <link rel="stylesheet" href="/css/custom.css" type="text/css" />
+
+  <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+
+  <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25565068-1']);
+  _gaq.push(['_setDomainName', 'jonathan-jackson.net']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+  <div id="header">
+    <h1>run<span class="kern">_</span>with_it <span style="font-size:12px;">Learning, sharing, coding.</span></h1>
+    <div class="row">
+      <div class="span1 offset8"><a href="/" alt="home">Home</a></div>
+      <div class="span1"><a href="/about-me.html" alt="about-me">About Me</a></div>
+      <div class="span2"><a href="/mail.html" alt="contact-me">Contact Me</a></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="content">
+     <div id="post">
+<h1>Make the most of your tweet</h1>
+
+<p><span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span></p>
+
+<p>Twitter's 'Tweet Button' has become the standard for websites and blogs around the internet. Yeah, it's that little button to the right of this paragraph. <img alt="twitter bird" src="http://www.jonathan-jackson.net/assets/single_bird.png" style="vertical-align:bottom;float:left"/> Run with it (this blog) has had that implemented since day one thanks in large part to the fact that Twitter makes including the button really simple.  Just grab the snippet of code and throw it into your html.  It took me a little while to realize that the default settings, while great for getting you up and running, do not result in the prettiest of tweets.  Here I'll walk you through how to utilize google's url shortener, and get the basic Tweet Button functionality down.</p>
+
+<p><br/><br/></p>
+
+<h2>Fundamentals</h2>
+
+<p>Twitter allows you to include the button with an iframe or via a snippet of javascript.  I'm going to walk through the javascript setup because it's the most convenient and it's also what Twitter recommends.  If you go to the <a href="https://twitter.com/about/resources/tweetbutton">Twitter Button</a> resource page you'll be given a set of options to configure your Tweet Button.  Once you've figure out how you want it laid out you should have something that looks like this.</p>
+
+<script src='https://gist.github.com/2156432.js?file=gist-1.html'></script><noscript>
+
+```sh
+<a href="https://twitter.com/share" class="twitter-share-button"
+                                    data-count="vertical"
+                                    data-via="rondale_sc">Tweet</a>
+
+<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+
+<pre><code>&lt;/noscript&gt;
+
+This is the basic outline for a tweet button.  The _data_ attributes allow you to customize the behavior of your button.  We'll focus on these [[1]](https://dev.twitter.com/docs/tweet-button):
+
+* _via_ - Screen name of the user to attribute the Tweet to
+* _count_ - Count box position
+* _counturl_ - The URL to which your shared URL resolves to
+* _url_ - URL of the page to share
+
+But before we get to that we need to get set up.
+
+## Shortening
+
+
+First things first, generate a migration to add a short_url field to your Article/Post table (I'm going to assume a blog style app).
+
+
+    bundle exec rails g migration add_short_url_to_articles short_url:string
+    bundle exec rake db:migrate
+
+
+Once that's done we can go into the Article model and get to the important stuff.
+
+&lt;script src='https://gist.github.com/2156432.js?file=gist-2.rb'&gt;&lt;/script&gt;&lt;noscript&gt;
+
+```sh
+class Article &lt; ActiveRecord::Base
+  before_save :populate_short_url
+
+  def populate_short_url
+    self.short_url = get_shortened_url
+  end
+
+  def get_shortened_url
+    http = Net::HTTP.new(&quot;www.googleapis.com&quot;, 443)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_PEER
+    http.ca_file = File.join(Rails.root, &quot;lib&quot;, &quot;cacert.pem&quot;)
+    key = File.read(File.join(Rails.root, &quot;lib&quot;, &quot;google_api.txt&quot;)).strip
+    params = {'longUrl' =&gt; get_article_url }.to_json # self.url is your article slug
+    resp = http.post(&quot;/urlshortener/v1/url?key=#{key}&quot;, params, {'Content-Type' =&gt; 'application/json'})
+    body = JSON.parse(resp.body)
+
+    if resp.code.to_i == 200
+      @short_url = body[&quot;id&quot;]
+    else
+      error = body[&quot;error&quot;]
+      raise &quot;Error: #{error[&quot;code&quot;]} : #{error[&quot;message&quot;]}&quot;
+    end
+  end
+
+  def get_article_url
+    &quot;YOUR_ROOT_URL&quot; + self.url
+  end
+end
+
+</code></pre>
+
+<p></noscript></p>
+
+<p>Now you'll immediately notice a few things about the above code.  First is the use of ssl.  Do it <a href="http://www.rubyinside.com/how-to-cure-nethttps-risky-default-https-behavior-4010.html">[2]</a>. I've snagged the curl PEM <a href="http://curl.haxx.se/ca/cacert.pem">[3]</a> which is a reliable authority and stored it in /lib/cacert.pem. Also set the <code>verify_mode</code> to OpenSSL::SSL::VERIFY_PEER.  The rest is pretty <a href="https://github.com/augustl/net-http-cheat-sheet">vanilla net/http stuff</a>.</p>
+
+<p>The next thing you'll notice is the line directly under that, which is where I read in my google api key to keep it out of source control.  It makes sense to add an after hook on your cap-deploy script to link to a share location on your production server and then add the file to your ./gitignore. Strictly speaking <a href="http://goo.gl/">goo.gl</a> does not require that you submit an api key for url shortening, but it lets you track the urls if you do.</p>
+
+<h2>Bringing it back around</h2>
+
+<p>Alright so now you have the short url for your site we'll come back to our Tweet Button.  Only now we'll set the <em>data-url</em> to our short url.  Not so fast!  We also have to set the <em>data-counturl</em> to the original url so that your count bubble will be accurate.</p>
+
+<p><script src='https://gist.github.com/2156432.js?file=gist-3.erb'></script><noscript></p>
+
+<pre lang="sh"><code># app/views/_tweet_button.html.erb
+
+&lt;a href=&quot;https://twitter.com/share&quot; class=&quot;twitter-share-button&quot;
+                                    data-url=&quot;&lt;%= @article.short_url %&gt;&quot;
+                                    data-counturl=&quot;&lt;%= request.url %&gt;&quot;
+                                    data-count=&quot;vertical&quot;
+                                    data-via=&quot;rondale_sc&quot;&gt;Tweet&lt;/a&gt;
+
+</code></pre>
+
+<p></noscript></p>
+
+<p>Now we have a decent looking tweet.  It's going to use your &lt;title&gt; for your text by default.  I think this is a great default as it encourages you to use the &lt;title&gt; properly.  I think the easiest way of setting your title tag is to set '&lt;%= yield :head %&gt;' in your layout's &lt;head&gt; tag then:</p>
+
+<p><script src='https://gist.github.com/2156432.js?file=gist-4.erb'></script><noscript></p>
+
+<pre lang="sh"><code># in app/view/articles/show
+&lt;% content_for :head do %&gt;
+  &lt;%= content_tag(&quot;title&quot;, @article.title) %&gt;
+&lt;% end %&gt;
+
+</code></pre>
+
+<p></noscript></p>
+
+<p>And there you have it a nice looking tweet.</p>
+
+<p><img src="http://www.jonathan-jackson.net/assets/share_tweet_screen_shot.png"/></p>
+
+<h2>Wrap up</h2>
+
+<p>Alright, so there you have it a quick and relatively painless way to spruce up your website.  There are a number of additional things you can do to further customize your Tweet Button so I encourage you to take a look at the api page which is linked below.  If you have you have any questions or ideas let me know in the comments below, or tweet me.  Thanks for reading.</p>
+
+<h4>References</h4>
+
+<p><span  style="font-size:12px;">1.) <a href="https://dev.twitter.com/docs/tweet-button">Tweet Button Docs</a></span><br/>
+<span  style="font-size:12px;">2.) <a href="http://www.rubyinside.com/how-to-cure-nethttps-risky-default-https-behavior-4010.html">Use HTTPS, 2010</a></span><br/>
+<span  style="font-size:12px;">3.) <a href="http://curl.haxx.se/ca/cacert.pem">Curl PEM</a></span><br/></p>
+
+<h4>Additional References</h4>
+
+<p><span style="font-size:12px;"><a href="https://github.com/augustl/net-http-cheat-sheet">Net HTTP cheat sheet</a></span><br/>
+<span style="font-size:12px;"><a href="http://code.google.com/apis/urlshortener/v1/getting_started.html">Google Shortener Getting Started</a></span><br/></p>
+
+<span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span> <span class="has_js"><g:plusone size="medium"></g:plusone></span>
+<!-- Place this render call where appropriate -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'run-with-it';
+    var disqus_identifier = '/make-the-most-of-your-tweet';
+    var disqus_url = 'http://www.jonathan-jackson.net/make-the-most-of-your-tweet';
+    var disqus_developer = 1;
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+    </div>
+
+    <div id="side-bar">
+     <div><a href="http://feeds.feedburner.com/jonathan-jackson/WZqA" title="Subscribe to my feed" rel="alternate" type="application/rss+xml"><img src="/images/feeds.png" alt="" style="border:0;width:100px;height:100px;"/></a></div>
+<div><a href="https://twitter.com/rondale_sc" class="twitter-follow-button" alt="follow me on twitter" data-width="150px" data-show-count="false">Follow @rondale_sc</a></div>
+<div><img src="/images/gravatar.png" width="167px;" height="167px;"/></div>
+<div>
+  <h3>Hi, I'm Jon.</h3>
+  <p>I love learning new things.  Here is where I'll share what I learn.  Typically code, sometimes my experience, sometimes just a neat trick.</p>
+</div>
+<div>
+  <h3>Projects</h3>
+  <ul>
+    <li><a href="https://github.com/rondale-sc/EspnRb" alt="espn_rb, a lightweight ruby wrapper around the ESPN api." title="EspnRb">EspnRb</a></li>
+    <li><a href="https://github.com/rondale-sc/image_viewer" alt="ImageViewer image browser w/controls" title="Image Viewer">ImageViewer</a></li>
+    <li><a href="https://github.com/rondale-sc/run_with_it_redux" alt="This blog's Github Repo" title="Run With It Repo">Run With It</a></li>
+  </ul>
+</div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>Site designed by Jonathan Jackson.  With help from <a href="http://twitter.github.com/bootstrap/" alt="twitter bootstrap">@twbootstrap</a>, <a href="https://github.com/mojombo/jekyll" alt="jekyll">Jekyll</a>, and <a href="https://github.com/" alt="github">github</a></p>
+  </div>
+</body>
+</html>

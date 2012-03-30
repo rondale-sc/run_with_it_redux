@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <title>Give it a Pry</title>
+
+  <!-- Twitter Bootstrap -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
+
+  <!-- My Custom CSS -->
+  <link rel="stylesheet" href="/css/custom.css" type="text/css" />
+
+  <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+
+  <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25565068-1']);
+  _gaq.push(['_setDomainName', 'jonathan-jackson.net']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+  <div id="header">
+    <h1>run<span class="kern">_</span>with_it <span style="font-size:12px;">Learning, sharing, coding.</span></h1>
+    <div class="row">
+      <div class="span1 offset8"><a href="/" alt="home">Home</a></div>
+      <div class="span1"><a href="/about-me.html" alt="about-me">About Me</a></div>
+      <div class="span2"><a href="/mail.html" alt="contact-me">Contact Me</a></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="content">
+     <div id="post">
+<h1>Give it a Pry</h1>
+
+<p><span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span></p>
+
+<p>If you are familiar with the Ruby programming language you've almost assuredly had some experience with IRB. Pry expands upon the functionality of IRB.  It offers some interesting features that allow you to really dive in and explore your code.  I've been using it for a little while now and already it has proven to be one of my favorite tools. Here are a few of my favorite things about Pry.  Sprinkled throughout will be links to the wiki, where the Pry folks have put together some really solid documentation behind all this.</p>
+
+<p><img style="margin:auto;" src='http://www.jonathan-jackson.net/assets/pry_image.png'/></p>
+
+<p>Here are the top five reasons why I switched to pry.</p>
+
+<h3>1.) Easy shell access</h3>
+
+<p>Using the shell from inside an pry session is simple, convenient, and practical.  You simply prepend the command you would like to run in your shell with a period <a href="https://github.com/pry/pry/wiki/Shell-Integration">[1]</a>.</p>
+
+<p><script src='https://gist.github.com/2156313.js?file=gist-1.sh'></script><noscript></p>
+
+<pre lang="sh"><code># In a rails app
+
+ pry(main)&gt;.ls
+  Capfile Gemfile.lock  Rakefile  config     db     lib    public    test    vendor
+  Gemfile README.md     app       config.ru  doc    log    script    tmp
+
+</code></pre>
+
+<p></noscript></p>
+
+<p>This becomes a really convenient way to launch Vi or Textmate, run Git commands, interact with ImageMagick, et al.  What's more is you can also shunt ruby output directly into your command with  '#{}' like this.</p>
+
+<p><script src='https://gist.github.com/2156313.js?file=gist-2.sh'></script><noscript></p>
+
+<pre lang="sh"><code>pry(main)&gt; file_path = '~/.pryrc'
+    =&gt; &quot;~/.pryrc&quot;
+
+  pry(main)&gt; .ls #{file_path}
+   # /Users/jjackson/.pryrc
+
+</code></pre>
+
+<p></noscript></p>
+
+<h3>2.) Object transparency</h3>
+
+<p>With Pry you get some real syntactic sugar for interacting with your objects.  You can use the 'cd' command to change self to whatever you pass to it as args <a href="https://github.com/pry/pry/wiki/State-navigation">[2]</a>.  Once you get into the object you can use 'ls' to snoop around.  If you've spent some time in the linux shell you'll be surprised at how quickly you begin to feel at home with these commands.</p>
+
+<p>Don't forget you can further filter what you are searching for with 'ls' by passing a regex to the --grep flag.</p>
+
+<p><script src='https://gist.github.com/2156313.js?file=gist-3.sh'></script><noscript></p>
+
+<pre lang="sh"><code>pry(main)&gt; cd Article
+  pry(Article)&gt;ls -mj --grep validate #many options here (--help to learn more), this one will list all singleton methods and search for validate methods
+  #=&gt;   _validate_callbacks
+
+  ### at any point call 'nesting' to get an overview of where you are at.
+
+  pry(main)&gt; nesting
+
+  # =&gt;
+  # Nesting status:
+  # --
+  # 0. main (Pry top level)
+  # 1. Article
+
+</code></pre>
+
+<p></noscript></p>
+
+<h3>3.) View Source</h3>
+
+<p>Once you've got your mind wrapped around contexts and found out how easy it is to navigate your code you're ready to really pop the hood on your code.  Pry offers a way to look at your source code directly via #show-method <a href="https://github.com/pry/pry/wiki/Source-browsing">[3]</a>. If you install pry-doc with Pry you'll find that the show-method allows you to view Ruby's C source code also.  (Great tool for comparing Rubinius/MRI for example)</p>
+
+<p><script src='https://gist.github.com/2156313.js?file=gist-4.sh'></script><noscript></p>
+
+<pre lang="sh"><code>pry(main)&gt;cd Pry
+  pry(Pry)&gt;show-method run_command
+
+  # =&gt;
+  # Number of lines: 4
+  #
+  # def run_command(val, target = binding_stack.last)
+  #   process_line(val, &quot;&quot;, target)
+  #   Pry::CommandContext::VOID_VALUE
+  # end
+
+</code></pre>
+
+<p></noscript></p>
+
+<h3>4.) Editor Integration</h3>
+
+<p>Now here is my favorite feature.  I've been using interactive_editor for a long time, which is a gem by <a href="https://github.com/jberkel">jberkel</a> inspired by Giles Bowkett.  It offered a nice little convenience for opening a tempfile in your favorite editor, allowed you to edit it, and executed it when you closed the editor pane.  Pry offers similar functionality <a href="https://github.com/pry/pry/wiki/Editor-integration">[4]</a>.</p>
+
+<p><script src='https://gist.github.com/2156313.js?file=gist-5.sh'></script><noscript></p>
+
+<pre lang="sh"><code># in ~/.pryrc
+  Pry.config.editor = &quot;mate&quot;
+
+  # then you can simply type
+  pry(main)&gt; edit -t # opens temp-file in TextMate
+
+</code></pre>
+
+<p></noscript></p>
+
+<p>The difference between this and interactive_editor(ie) is that ie will save the buffer so that the next time you invoke the command it will return you to your previous state.  Interactive Editor is compatible with Pry and can simply be required in your ~/.pryrc file to load it into your pry session if you want that particular functionality (Highly recommend).</p>
+
+<p>That's not all!</p>
+
+<p>edit-method will open the file that contains the method passed to it as its args, and place your cursor exactly where it is defined.</p>
+
+<p><script src='https://gist.github.com/2156313.js?file=gist-6.sh'></script><noscript></p>
+
+<pre lang="sh"><code>pry(main)&gt;cd Pry
+  pry(Pry)&gt;edit-method -m run_command
+
+  # File will open in your editor to line 156 of pry_class.rb ^_^
+
+</code></pre>
+
+<p></noscript></p>
+
+<h3>5.) Gists!!!</h3>
+
+<p>Push your current buffer directly to a gist.</p>
+
+<p><script src='https://gist.github.com/2156313.js?file=gist-7.sh'></script><noscript></p>
+
+<pre lang="sh"><code># gist-method options
+# -m, --method       Gist a method's source.
+# -d, --doc          Gist a method's documentation.
+# -p, --private      Create a private gist (default: true)
+# -h, --help         This message
+
+pry(Pry):1&gt; gist-method run_command
+ #=&gt; Gist created at https://gist.github.com/1277098
+
+</code></pre>
+
+<p></noscript></p>
+
+<p>That just happened!</p>
+
+<h2>Conclusions</h2>
+
+<p>Believe me when I tell you that I haven't even begun to scratch the surface of Pry with this blog post.  The features outlined above are just a few methods that most naturally became part of my workflow.  <a href="https://github.com/banister">John Mair</a> and the contributors to Pry have put together extensive documentation for the Pry repl and I recommend you take a look.  <a href="https://github.com/ryanb">Ryan Bates</a> has done a railscasts that shows how you can easily incorporate pry into your Rails apps, and <a href="https://github.com/joshcheek">Josh Cheek</a> put together an awesome cast that gives you a crash course in Pry.  Links to both casts and wiki can be found below.</p>
+
+<p>I hope that the brief examples above have sparked your curiosity about Pry.  I have used it now for a little while and it has proven to be an indispensable tool. Thanks for reading.</p>
+
+<p>***edit If you got this far you may want to check out <a href="http://www.jonathan-jackson.net/make-it-your-own">'Make it your own'</a>.  My follow up post which expands upon this post by giving a brief overview of Pry commands.</p>
+
+<p>***edit John Mair is searching for a sponsor for Pry.  Contact him at his Github page <a href="https://github.com/banister">here</a> if you know someone who might be interested.  Any funds would be used to improve the website and create new casts/documentation.</p>
+
+<p><span style="font-size:12px;">(An unofficial item six would be the documentation. Everywhere I looked I found great resources for exploring Pry.)</span></p>
+
+<h4>References</h4>
+
+<p><span  style="font-size:12px;">1.) <a href="https://github.com/pry/pry/wiki/Shell-Integration">Shell Access</a></span><br/>
+<span  style="font-size:12px;">2.) <a href="https://github.com/pry/pry/wiki/State-navigation">Object Transparency</a></span><br/>
+<span  style="font-size:12px;">3.) <a href="https://github.com/pry/pry/wiki/Source-browsing">View Source</a></span><br/>
+<span  style="font-size:12px;">4.) <a href="https://github.com/pry/pry/wiki/Editor-integration">Editor Integration</a></span><br/></p>
+
+<h4>Additional References</h4>
+
+<p><span style="font-size:12px;"><a href="http://railscasts.com/episodes/280-pry-with-rails">Pry RailsCast, 2011</a></span><br/>
+<span style="font-size:12px;"><a href="http://vimeo.com/26391171">Josh Cheek Introduction to Pry, 2011</a></span><br/>
+<span style="font-size:12px;"><a href="http://news.ycombinator.com/item?id=2478724">Hacker News Pry comments, 2011</a></span><br/>
+<span style="font-size:12px;"><a href="https://github.com/jberkel/interactive_editor">Interactive Editor</a></span><br/></p>
+
+<span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span> <span class="has_js"><g:plusone size="medium"></g:plusone></span>
+<!-- Place this render call where appropriate -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'run-with-it';
+    var disqus_identifier = '/give-it-a-pry';
+    var disqus_url = 'http://www.jonathan-jackson.net/give-it-a-pry';
+    var disqus_developer = 1;
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+    </div>
+
+    <div id="side-bar">
+     <div><a href="http://feeds.feedburner.com/jonathan-jackson/WZqA" title="Subscribe to my feed" rel="alternate" type="application/rss+xml"><img src="/images/feeds.png" alt="" style="border:0;width:100px;height:100px;"/></a></div>
+<div><a href="https://twitter.com/rondale_sc" class="twitter-follow-button" alt="follow me on twitter" data-width="150px" data-show-count="false">Follow @rondale_sc</a></div>
+<div><img src="/images/gravatar.png" width="167px;" height="167px;"/></div>
+<div>
+  <h3>Hi, I'm Jon.</h3>
+  <p>I love learning new things.  Here is where I'll share what I learn.  Typically code, sometimes my experience, sometimes just a neat trick.</p>
+</div>
+<div>
+  <h3>Projects</h3>
+  <ul>
+    <li><a href="https://github.com/rondale-sc/EspnRb" alt="espn_rb, a lightweight ruby wrapper around the ESPN api." title="EspnRb">EspnRb</a></li>
+    <li><a href="https://github.com/rondale-sc/image_viewer" alt="ImageViewer image browser w/controls" title="Image Viewer">ImageViewer</a></li>
+    <li><a href="https://github.com/rondale-sc/run_with_it_redux" alt="This blog's Github Repo" title="Run With It Repo">Run With It</a></li>
+  </ul>
+</div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>Site designed by Jonathan Jackson.  With help from <a href="http://twitter.github.com/bootstrap/" alt="twitter bootstrap">@twbootstrap</a>, <a href="https://github.com/mojombo/jekyll" alt="jekyll">Jekyll</a>, and <a href="https://github.com/" alt="github">github</a></p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <title>An Introduction to Logging</title>
+
+  <!-- Twitter Bootstrap -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
+
+  <!-- My Custom CSS -->
+  <link rel="stylesheet" href="/css/custom.css" type="text/css" />
+
+  <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+
+  <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25565068-1']);
+  _gaq.push(['_setDomainName', 'jonathan-jackson.net']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+  <div id="header">
+    <h1>run<span class="kern">_</span>with_it <span style="font-size:12px;">Learning, sharing, coding.</span></h1>
+    <div class="row">
+      <div class="span1 offset8"><a href="/" alt="home">Home</a></div>
+      <div class="span1"><a href="/about-me.html" alt="about-me">About Me</a></div>
+      <div class="span2"><a href="/mail.html" alt="contact-me">Contact Me</a></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="content">
+     <div id="post">
+<h1>An Introduction to Logging</h1>
+
+<p><span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span></p>
+
+<iframe src="http://player.vimeo.com/video/31431112?title=0&amp;byline=0&amp;portrait=0" width="630" height="394" frameborder="0" webkitAllowFullScreen allowFullScreen></iframe>
+
+<h3>Installation</h3>
+
+<p><script src='https://gist.github.com/2156472.js?file=gist-1.sh'></script><noscript></p>
+
+<pre lang="sh"><code>$ gem install logging
+#  Successfully installed logging-1.6.1
+#  1 gem installed
+#  Building YARD (yri) index for logging-1.6.1...
+
+</code></pre>
+
+<p></noscript></p>
+
+<h3>Features</h3>
+
+<p>Here we create individual logging objects rather than one monstrous global logger <a href="https://github.com/TwP/logging/blob/master/examples/loggers.rb">[1]</a>.  Once they have been individually created you can customize the behavior of each.</p>
+
+<p><script src='https://gist.github.com/2156472.js?file=gist-2.rb'></script><noscript></p>
+
+<pre lang="sh"><code>require 'logging'
+
+ Logging.logger.root.level = :warn
+
+ Logging.logger.root.appenders = Logging.appenders.stdout
+
+ log1 = Logging.logger['log1']
+ log2 = Logging.logger['log2']
+
+ log2.level = :debug
+
+ log1.info &quot;This will not be shown.&quot;
+ log2.info &quot;This will be shown.&quot;
+
+</code></pre>
+
+<p></noscript></p>
+
+<p>Here we use multiple appenders <a href="https://github.com/TwP/logging/blob/master/examples/appenders.rb">[2]</a>. Appenders allow you to shunt your logging messages to different output media.  Here we set our messages to log to standard out and to a file.</p>
+
+<p><script src='https://gist.github.com/2156472.js?file=gist-3.rb'></script><noscript></p>
+
+<pre lang="sh"><code>require 'logging'
+
+log1 = Logging.logger['log1']
+
+log1.add_appenders(
+    Logging.appenders.stdout,
+    Logging.appenders.file('example.log')
+)
+log1.level = :info
+
+log1.debug &quot;this debug message will not be output by the logger&quot;
+log1.info &quot;just some friendly advice&quot;
+
+</code></pre>
+
+<p></noscript></p>
+
+<p>Here we create log objects at initialization of class Foo and Foo::Bar <a href="https://github.com/TwP/logging/blob/master/examples/classes.rb">[3]</a>.  Once we've done that we can refine our logging parameters to reveal behavior specific to each class.</p>
+
+<p><script src='https://gist.github.com/2156472.js?file=gist-4.rb'></script><noscript></p>
+
+<pre lang="sh"><code>require 'logging'
+
+Logging.logger.root.appenders = Logging.appenders.stdout
+Logging.logger.root.level = :info
+
+class Foo
+  attr_reader :log
+  def initialize; @log = Logging.logger[self]; end
+end
+
+class Foo::Bar
+  attr_reader :log
+  def initialize; @log = Logging.logger[self]; end
+end
+
+foo = Foo.new.log
+bar = Foo::Bar.new.log
+
+# you'll notice in these log messages that the logger names were taken
+# from the class names of the Foo and Foo::Bar instances
+foo.info 'this message came from Foo'
+bar.warn 'this is a warning from Foo::Bar'
+
+</code></pre>
+
+<p></noscript></p>
+
+<h3>Incorporating Rails</h3>
+
+<p>Incorporate rails easily with the logging-rails gem <a href="https://github.com/TwP/logging-rails">[4]</a>.</p>
+
+<p><script src='https://gist.github.com/2156472.js?file=gist-5.rb'></script><noscript></p>
+
+<pre lang="sh"><code>gem 'logging-rails', :require =&gt; 'logging/rails'
+rails generate logging:install
+
+</code></pre>
+
+<p></noscript></p>
+
+<h3>Thanks for Watching</h3>
+
+<p>This was my first screen-cast so thank you for bearing with me.  The production quality on my next cast should be markedly increased as I have learned much by making this one.  The Logging framework has a lot to offer and I hope that you've found this helpful.  Thanks.</p>
+
+<h4>References</h4>
+
+<p><span  style="font-size:12px;">1.) <a href="https://github.com/TwP/logging/blob/master/examples/loggers.rb">Custom Loggers</a></span><br/>
+<span  style="font-size:12px;">2.) <a href="https://github.com/TwP/logging/blob/master/examples/appenders.rb">Appenders</a></span><br/>
+<span  style="font-size:12px;">3.) <a href="https://github.com/TwP/logging/blob/master/examples/classes.rb">Class Loggers</a></span><br/>
+<span  style="font-size:12px;">4.) <a href="https://github.com/TwP/logging-rails">logging-rails</a></span><br/></p>
+
+<h4>Additional References</h4>
+
+<p><span style="font-size:12px;"><a href="https://github.com/TwP/logging">TWP Logging GitHub</a></span><br/>
+<span style="font-size:12px;"><a href="http://rubyrogues.com/025-rr-logging-i-do-not-think-it-means-what-you-think-it-means/">Ruby Rogues episode 025</a></span><br/>
+<span style="font-size:12px;"><a href="http://c2.com/cgi/wiki?ScrollBlindness">Scroll Blindness</a></span><br/>
+<span style="font-size:12px;"><a href="http://pry.github.com/">Pry an alternative to IRB</a></span><br/>
+<span style="font-size:12px;"><a href="http://www.engineyard.com/blog/2010/extending-rails-3-with-railties/">Extending Rails 3 with Railties, 2010</a></span><br/></p>
+
+<span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span> <span class="has_js"><g:plusone size="medium"></g:plusone></span>
+<!-- Place this render call where appropriate -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'run-with-it';
+    var disqus_identifier = '/an-introduction-to-logging';
+    var disqus_url = 'http://www.jonathan-jackson.net/an-introduction-to-logging';
+    var disqus_developer = 1;
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+    </div>
+
+    <div id="side-bar">
+     <div><a href="http://feeds.feedburner.com/jonathan-jackson/WZqA" title="Subscribe to my feed" rel="alternate" type="application/rss+xml"><img src="/images/feeds.png" alt="" style="border:0;width:100px;height:100px;"/></a></div>
+<div><a href="https://twitter.com/rondale_sc" class="twitter-follow-button" alt="follow me on twitter" data-width="150px" data-show-count="false">Follow @rondale_sc</a></div>
+<div><img src="/images/gravatar.png" width="167px;" height="167px;"/></div>
+<div>
+  <h3>Hi, I'm Jon.</h3>
+  <p>I love learning new things.  Here is where I'll share what I learn.  Typically code, sometimes my experience, sometimes just a neat trick.</p>
+</div>
+<div>
+  <h3>Projects</h3>
+  <ul>
+    <li><a href="https://github.com/rondale-sc/EspnRb" alt="espn_rb, a lightweight ruby wrapper around the ESPN api." title="EspnRb">EspnRb</a></li>
+    <li><a href="https://github.com/rondale-sc/image_viewer" alt="ImageViewer image browser w/controls" title="Image Viewer">ImageViewer</a></li>
+    <li><a href="https://github.com/rondale-sc/run_with_it_redux" alt="This blog's Github Repo" title="Run With It Repo">Run With It</a></li>
+  </ul>
+</div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>Site designed by Jonathan Jackson.  With help from <a href="http://twitter.github.com/bootstrap/" alt="twitter bootstrap">@twbootstrap</a>, <a href="https://github.com/mojombo/jekyll" alt="jekyll">Jekyll</a>, and <a href="https://github.com/" alt="github">github</a></p>
+  </div>
+</body>
+</html>

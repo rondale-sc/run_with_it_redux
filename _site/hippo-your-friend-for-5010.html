@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <title>Hippo: your friend in 5010</title>
+
+  <!-- Twitter Bootstrap -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
+
+  <!-- My Custom CSS -->
+  <link rel="stylesheet" href="/css/custom.css" type="text/css" />
+
+  <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+
+  <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25565068-1']);
+  _gaq.push(['_setDomainName', 'jonathan-jackson.net']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+  <div id="header">
+    <h1>run<span class="kern">_</span>with_it <span style="font-size:12px;">Learning, sharing, coding.</span></h1>
+    <div class="row">
+      <div class="span1 offset8"><a href="/" alt="home">Home</a></div>
+      <div class="span1"><a href="/about-me.html" alt="about-me">About Me</a></div>
+      <div class="span2"><a href="/mail.html" alt="contact-me">Contact Me</a></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="content">
+     <div id="post">
+<h1>Hippo: your friend in 5010</h1>
+
+<p><span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span></p>
+
+<p><img src="http://www.jonathan-jackson.net/assets/hippo.png" alt="hippo" class="span3" style="float:left;"/>If you are unfamiliar with the Health Insurance Portability and Accountability Act (HIPAA) then you probably don't work in the medical field and can safely disregard this article.  HIPAA was enacted by congress in 1996 and governs the way electronic transmissions must take place in order to be legitimate. <a href="footnote_1">[1]</a> The specific section that pertains to electronic transmissions is HIPAA/EDI, and was scheduled to take effect on October 16, 2003.  However, due to implementation problems Congress granted a one-year extension to make version 4010 the standard in 2004.  The standard by which transaction sets are accepted by HIPAA was created by the X12 organization  <a href="footnote_2">[2]</a> (i.e. Claims, Remittances, Eligibility, Claim Status).</p>
+
+<p>This article will walk you through installation of Hippo, the generation of a simple 835 transaction set, and hopefully illustrate how easy Hippo makes HIPAA</p>
+
+<h2>5010 is around the corner</h2>
+
+<p>HIPAA version 4010 is the current implementation of the transmission standard. The testing phase for 5010 has been underway since January 1, 2011 <a href="footnote_3">[3]</a>. This means that all covered entities have had to allow the sending of test transaction sets in the 5010 standard <strong>already</strong>.</p>
+
+<p>Version 5010 was created to allow ICD-10-CM <a href="footnote_4">[4]</a> to be implemented, as well as other modifications that increase the effectiveness of the standard. The effective date for the 5010 implementation is January 1, 2012!</p>
+
+<p>Enter <strong>Hippo</strong>, your gateway into HIPAA 5010 compliance!  Hippo was created by <a href="https://github.com/promedical" alt="promedicalinc github page">Pro Medical, Inc</a>, the company I work for, and we decided to open source the project in order to rise all ships so to speak.</p>
+
+<p>If you were to open up an X12 transaction set as a text file it would look like a large string with fields separated by tildes, colons, and asterisks. This is very confusing stuff, and that confusion is compounded by the fact that in these flat files there are sets of data that are represented hierarchically.  Hippo makes the process of turning these awkward strings into understandable transaction sets easy by offering structure and the power of Ruby.</p>
+
+<h2>Installation</h2>
+
+<p>Hippo is available as a gem so simply type the following command once you have ruby:</p>
+
+<pre><code># gem install hippo
+</code></pre>
+
+<p>Once you have it installed all you have to do is require it like so to begin.</p>
+
+<pre><code>require 'rubygems'
+require 'hippo'
+</code></pre>
+
+<h2>Your first Transaction Set with Hippo</h2>
+
+<p>Remember, a transaction set is that long string with fields separated by tildes, asterisks, colons, et al.  The structure of most Transaction Sets have been created as Ruby classes in Hippo. For example, the 835 class (Remittance) is in 'hippo/lib/transaction_sets/HIPAA_835.rb'.  If you take a look in that file you will notice that it auto loads the 835 base class as well as all the loops that are permissible within X12's 835 format. This fact is important because the structure was parsed directly from the X12 published table date (the official X12 implementation guide/CSV).</p>
+
+<p>The classes per transaction set have all of the segments (fields) that are permissible by X12 standards. They provide the structure by which we will store, and print our data.</p>
+
+<p>The following code illustrates how you would create an instance of an 835 transaction set and populate its ST(Transaction Set Header) segment in Hippo.</p>
+
+<p><script src='https://gist.github.com/2156191.js?file=gist-1.rb'></script><noscript></p>
+
+<pre lang="sh"><code>require 'hippo'
+
+  ts = Hippo::TransactionSets::HIPAA_835::Base.new
+  ts.ST do |st|
+    st.TransactionSetControlNumber = '0021'
+    st.ImplementationConventionReference = '1234random1241'
+  end
+
+  puts ts.to_s
+
+  # =&gt; ST*837*0021*005010X222A1~
+
+</code></pre>
+
+<p></noscript></p>
+
+<h2>To loop, or not to loop?</h2>
+
+<p>One of the fundamental constructs found in the X12 transaction set standard is the loop. Loops repeat within a section of the final output, sometimes an arbitrary number of times. Creating this structure with Hippo is easy. Simply call the loop by name like so:</p>
+
+<p><script src='https://gist.github.com/2156191.js?file=gist-2.rb'></script><noscript></p>
+
+<pre lang="sh"><code># These two forms are functionally equivalent.
+
+  ts.L1000A do |l1000a|
+    l1000a.NM1.EntityTypeQualifier        = '2'
+    l1000a.NM1.NameLastOrOrganizationName = 'PREMIER BILLING SERVICE'
+    l1000a.NM1.IdentificationCode         = 'TGJ23'
+  end
+
+  puts ts.to_s
+
+  # =&gt; NM1*41*2*PREMIER BILLING SERVICE*****46*TGJ23~
+
+  # OR
+
+  ts.L1000A do |l1000a|
+     l1000a.NM1 do |nm1|
+       nm1.EntityTypeQualifier        = '2'
+       nm1.NameLastOrOrganizationName = 'PREMIER BILLING SERVICE'
+       nm1.IdentificationCode         = 'TGJ23'
+     end
+   end
+
+   puts ts.to_s
+
+   # =&gt; NM1*41*2*PREMIER BILLING SERVICE*****46*TGJ23~
+
+</code></pre>
+
+<p></noscript></p>
+
+<p>Here the loop is created by simply calling the L1000A loop directly on the transaction set. In the code above are two forms that are functionally equivalent and can be used according to preference. Each form will create a loop at that position within the transaction set.</p>
+
+<p>These examples are definitely not valid transaction sets, they are designed to give you a feel for how the DSL operates.  If you would like to see how to generate a legitimate transaction set <a href="https://github.com/rjackson" alt="robert jackson's github page">Robert Jackson</a>, the author of Hippo, has provided an example <a href="https://github.com/promedical/hippo/blob/master/test/test_hipaa_835.rb">here</a>.</p>
+
+<h2>Summary</h2>
+
+<p>The Hippo DSL allows you to use Ruby to quickly bring your company into compliance with HIPAA 5010.  The X12 organization has crammed a phenomenal amount of data into these transaction sets.  This data can be overwhelming at first, but with the structure provided by Hippo you can interact with it like a pro.  I hope you look into Hippo as the solution for your transition to the Hippo 5010 standard.</p>
+
+<p>Hippo is open sourced under the Modified BSD license, and is readily available for forking on Github here <a href="https://github.com/promedical/hippo" alt="hippo github page">Hippo</a></p>
+
+<h4>References</h4>
+
+<ul>
+<li><span  style="font-size:12px;">1.) <a id="footnote_1" href="http://www.cms.gov/HIPAAGenInfo/02_TheHIPAALawandRelated%20Information.asp#TopOfPage" alt="Centers for Medicare & Medicaid Services">Centers for Medicare & Medicaid Services</a></span></li>
+<li><span  style="font-size:12px;">2.) <a id="footnote_2" href="http://www.x12.org/consolidatedguides/" alt="X12 organization">X12 guides</a></span></li>
+<li><span  style="font-size:12px;">3.) <a id="footnote_3" href="https://www.cms.gov/icd10/" alt="ICD 10 information">CMS ICD 10</a></span></li>
+<li><span  style="font-size:12px;">4.) <a id="footnote_4" href="https://www.cms.gov/ElectronicBillingEDITrans/18_5010D0.asp" alt="5010 Timeline">CMS 5010 Timeline</a></span></li>
+</ul>
+
+<h4>Additional References (Reading)</h4>
+
+<p><ui>
+<li><span style="font-size:12px;"><a href="http://en.wikipedia.org/wiki/HIPAA">Wikipedia HIPAA</a>, 2011</span></li>
+<li><span style="font-size:12px;"><a href="http://www.hhs.gov/ocr/privacy/hipaa/understanding/index.html">Health and Human Services</a></span></li>
+<li><span style="font-size:12px;">Hippo image by <a href="http://www.archigraphs.com/">archigraphs</a></span></li>
+</ul></p>
+
+<span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span> <span class="has_js"><g:plusone size="medium"></g:plusone></span>
+<!-- Place this render call where appropriate -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'run-with-it';
+    var disqus_identifier = '/hippo-your-friend-for-5010';
+    var disqus_url = 'http://www.jonathan-jackson.net/hippo-your-friend-for-5010';
+    var disqus_developer = 1;
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+    </div>
+
+    <div id="side-bar">
+     <div><a href="http://feeds.feedburner.com/jonathan-jackson/WZqA" title="Subscribe to my feed" rel="alternate" type="application/rss+xml"><img src="/images/feeds.png" alt="" style="border:0;width:100px;height:100px;"/></a></div>
+<div><a href="https://twitter.com/rondale_sc" class="twitter-follow-button" alt="follow me on twitter" data-width="150px" data-show-count="false">Follow @rondale_sc</a></div>
+<div><img src="/images/gravatar.png" width="167px;" height="167px;"/></div>
+<div>
+  <h3>Hi, I'm Jon.</h3>
+  <p>I love learning new things.  Here is where I'll share what I learn.  Typically code, sometimes my experience, sometimes just a neat trick.</p>
+</div>
+<div>
+  <h3>Projects</h3>
+  <ul>
+    <li><a href="https://github.com/rondale-sc/EspnRb" alt="espn_rb, a lightweight ruby wrapper around the ESPN api." title="EspnRb">EspnRb</a></li>
+    <li><a href="https://github.com/rondale-sc/image_viewer" alt="ImageViewer image browser w/controls" title="Image Viewer">ImageViewer</a></li>
+    <li><a href="https://github.com/rondale-sc/run_with_it_redux" alt="This blog's Github Repo" title="Run With It Repo">Run With It</a></li>
+  </ul>
+</div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>Site designed by Jonathan Jackson.  With help from <a href="http://twitter.github.com/bootstrap/" alt="twitter bootstrap">@twbootstrap</a>, <a href="https://github.com/mojombo/jekyll" alt="jekyll">Jekyll</a>, and <a href="https://github.com/" alt="github">github</a></p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <title>Introducing EspnRb</title>
+
+  <!-- Twitter Bootstrap -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
+
+  <!-- My Custom CSS -->
+  <link rel="stylesheet" href="/css/custom.css" type="text/css" />
+
+  <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+
+  <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25565068-1']);
+  _gaq.push(['_setDomainName', 'jonathan-jackson.net']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+  <div id="header">
+    <h1>run<span class="kern">_</span>with_it <span style="font-size:12px;">Learning, sharing, coding.</span></h1>
+    <div class="row">
+      <div class="span1 offset8"><a href="/" alt="home">Home</a></div>
+      <div class="span1"><a href="/about-me.html" alt="about-me">About Me</a></div>
+      <div class="span2"><a href="/mail.html" alt="contact-me">Contact Me</a></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="content">
+     <div id="post">
+<h1>Introducing EspnRb</h1>
+
+<p><span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span></p>
+
+<p><span  style="font-size:12px;">For those who found this via Reddit here is a <a href="https://github.com/rondale-sc/EspnRb">link to the repository</a>.</span></p>
+
+<h3>EspnRb ('ESPN-ar-bee')</h3>
+
+<p>Since its release I've been working on creating a Ruby wrapper for the ESPN api.  I began because it sounded fun to fiddle around with sports data for a change.  And.. It was, I've had a blast building EspnRb.  EspnRb allows you to use the Espn API with all that Ruby goodness we all know and love.  Here I'll very briefly walk you through installation and getting the espn credentials, then we'll dive straight into some EspnRb examples.</p>
+
+<p><img src="http://a.espncdn.com/i/apis/attribution/espn-api-black_200.png" alt="ESPN api logo" title="See more branding options at developer.espn.com/branding">
+</p>
+
+<h3>ESPN api</h3>
+
+<p>In order to use the espn api you must have an api key.  Your api key can be requested at the ESPN developer center website <a href="http://developer.espn.com/member/register">[1]</a>.  Just fill out the form and they'll assign you a key.  Important note: the use of ESPN's api requires an attribution link (like above) which can be found <a href="http://developer.espn.com/branding">here</a>.  The attribution links look pretty good and range from 50 by 14px to 200 by 75px, so finding one that fits your use shouldn't be too hard. Once you have the key you can begin working with EspnRb.</p>
+
+<h3>Installation</h3>
+
+<p><script src='https://gist.github.com/2156594.js?file=gist-1.rb'></script><noscript></p>
+
+<pre lang="sh"><code># On the command line.
+# ~$ gem install espn_rb
+
+# Or in a Gemfile
+gem &quot;espn_rb&quot;, &quot;~&gt; 0.0.4&quot;
+# ~$ bundle
+# That's it.
+
+</code></pre>
+
+<p></noscript></p>
+
+<h3>Use it</h3>
+
+<p>The easiest way to set your api key for use with espn_rb is to export it as an environment variable. Do that like so:</p>
+
+<p><script src='https://gist.github.com/2156594.js?file=gist-2.sh'></script><noscript></p>
+
+<pre lang="sh"><code># If you want to pass it in to your objects you may do so explicitly like so:
+# espn = EspnRb.headlines(:api_key =&gt; YOUR_SUPER_SECRET_API_KEY)
+
+$ export espn_api_key=YOUR_SUPER_SECRET_API_KEY
+
+</code></pre>
+
+<p></noscript></p>
+
+<h3>Get the headlines</h3>
+
+<p><script src='https://gist.github.com/2156594.js?file=gist-3.rb'></script><noscript></p>
+
+<pre lang="sh"><code>require 'espn_rb'
+espn = Espn.headlines
+
+#   Each sport available via the API can be called on the Espn.headlines
+# [ :all, :golf, :boxing, :mma, :racing, :soccer, :tennis, :mlb
+#   :nba, :nfl, :nhl, :nascar, :wnba, :ncaa_basketball, :ncaa_football
+#   :ncaa_womens_basketball]
+
+espn.all #=&gt; HeadlineResponse
+
+espn.nba(:news) #=&gt; HeadlineResponse
+espn.nfl(:top)  #=&gt; HeadlineResponse
+espn.ncaa_football({:for_date =&gt; &quot;2012-03-09&quot;}) #=&gt; HeadlineResponse # Will include all stories for that date
+espn.nba({:for_athlete =&gt; &quot;1234&quot; #=&gt; HeadlineResponse # Will include all stories for that athleteId
+
+espn.all.response
+#=&gt; ESPN's response string as JSON
+
+</code></pre>
+
+<p></noscript></p>
+
+<h3>HeadlineResponse</h3>
+
+<p><script src='https://gist.github.com/2156594.js?file=gist-4.rb'></script><noscript></p>
+
+<pre lang="sh"><code># HeadlineResponse includes Enum so you can do things like this:
+espn.all.map(&amp;:title)
+
+#=&gt; [&quot;Celtics-Clippers Preview&quot;,
+#    &quot;Warriors 97, Clippers 93&quot;,
+#    &quot;Hawks 106, Kings 99&quot;,
+#    &quot;Warriors-Clippers, Box&quot;,
+#    &quot;Warriors 97, Clippers 93&quot;,
+#    &quot;Hawks 106, Kings 99&quot;,
+#    &quot;Bucks-Nets Preview&quot;,
+#    &quot;Hawks-Kings, Box&quot;,
+#    &quot;Grizzlies 94, Nuggets 91&quot;,
+#    &quot;Grizzlies-Nuggets, Box&quot;]
+
+# Some methods like titles, descriptions etc are available directly.
+
+espn.all.titles
+#=&gt; Same as above.
+
+</code></pre>
+
+<p></noscript></p>
+
+<h3>HeadlineItem</h3>
+
+<p>The HeadlineResponse Object holds in it the contens of the ESPN JSON response  split into HeadlineItems.  Here is where you can get Specific information about each story.  Some of the options are:</p>
+
+<p><script src='https://gist.github.com/2156594.js?file=gist-5.rb'></script><noscript></p>
+
+<pre lang="sh"><code>espn = EspnRb.headlines
+headline_response = espn.nba[2] #=&gt; HeadlineItem
+
+headline_response.web_url #=&gt; &quot;http://sports.espn.go.com/espn/wire?section=nba&amp;id=7664408&amp;ex_cid=espnapi_public&quot;
+headline_response.id #=&gt; 7664408
+headline_response.title #=&gt; &quot;Mavericks-Kings Preview&quot;
+headline_response.athletes #=&gt; [&quot;Johnny B&quot;, &quot;Freddie Flintstone&quot;, &quot;Etc&quot;]
+headline_response.leagues #=&gt; [&quot;46&quot;]
+headline_response.athlete_ids #=&gt; [&quot;123&quot;, &quot;132&quot;, &quot;123&quot;]
+
+# More to come in future versions.
+headline_response.headline #=&gt; JSON hash from original response.
+
+</code></pre>
+
+<p></noscript></p>
+
+<p>There is a lot more inside the gem, be sure to check out the source.  ^_^</p>
+
+<h3>Documentation</h3>
+
+<p>So far I've built up a decent little readme <a href="https://github.com/rondale-sc/EspnRb">[2]</a> and there are YARD docs <a href="http://rubydoc.info/gems/espn_rb">[3]</a>. I'm also available if you need any help just ping me on <a href="https://github.com/rondale-sc">github</a>.</p>
+
+<h3>Conclusions</h3>
+
+<p>An example of espn_rb can be found <a href="http://espn-api-samples.heroku.com/headlines">here</a>.  It was created by Brian Jackson, a developer at ESPN.com (<a href="http://about.me/jaxzin">@jaxzin</a>), and he plans to expand the examples over the next little while, so be sure to check back.</p>
+
+<p>This is just a start. I hope to expand this gem to encompass more and more of the ESPN functionality.  The folks at ESPN have done a good job of making their data available. I've had a lot of fun working on this project so far, and I hope you guys find some use for it.  ^_^</p>
+
+<h4>References</h4>
+
+<p><span  style="font-size:12px;">1.<a href="http://developer.espn.com/member/register">Register for ESPN api key</a></span><br/>
+<span  style="font-size:12px;">2.<a href="https://github.com/rondale-sc/EspnRb">Main EspnRb Repository</a></span><br/>
+<span  style="font-size:12px;">3.<a href="http://rubydoc.info/gems/espn_rb">Yard for EspnRb</a></span><br/></p>
+
+<h4>Additional References</h4>
+
+<p><span style="font-size:12px;"><a href="http://espn-api-samples.heroku.com/headlines">@jaxzin's example page</a></span></p>
+
+<span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span> <span class="has_js"><g:plusone size="medium"></g:plusone></span>
+<!-- Place this render call where appropriate -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'run-with-it';
+    var disqus_identifier = '/introducing-espn-rb';
+    var disqus_url = 'http://www.jonathan-jackson.net/introducing-espn-rb';
+    var disqus_developer = 1;
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+    </div>
+
+    <div id="side-bar">
+     <div><a href="http://feeds.feedburner.com/jonathan-jackson/WZqA" title="Subscribe to my feed" rel="alternate" type="application/rss+xml"><img src="/images/feeds.png" alt="" style="border:0;width:100px;height:100px;"/></a></div>
+<div><a href="https://twitter.com/rondale_sc" class="twitter-follow-button" alt="follow me on twitter" data-width="150px" data-show-count="false">Follow @rondale_sc</a></div>
+<div><img src="/images/gravatar.png" width="167px;" height="167px;"/></div>
+<div>
+  <h3>Hi, I'm Jon.</h3>
+  <p>I love learning new things.  Here is where I'll share what I learn.  Typically code, sometimes my experience, sometimes just a neat trick.</p>
+</div>
+<div>
+  <h3>Projects</h3>
+  <ul>
+    <li><a href="https://github.com/rondale-sc/EspnRb" alt="espn_rb, a lightweight ruby wrapper around the ESPN api." title="EspnRb">EspnRb</a></li>
+    <li><a href="https://github.com/rondale-sc/image_viewer" alt="ImageViewer image browser w/controls" title="Image Viewer">ImageViewer</a></li>
+    <li><a href="https://github.com/rondale-sc/run_with_it_redux" alt="This blog's Github Repo" title="Run With It Repo">Run With It</a></li>
+  </ul>
+</div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>Site designed by Jonathan Jackson.  With help from <a href="http://twitter.github.com/bootstrap/" alt="twitter bootstrap">@twbootstrap</a>, <a href="https://github.com/mojombo/jekyll" alt="jekyll">Jekyll</a>, and <a href="https://github.com/" alt="github">github</a></p>
+  </div>
+</body>
+</html>

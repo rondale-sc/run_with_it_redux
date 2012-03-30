@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <title>Setting Up a Remote Environment</title>
+
+  <!-- Twitter Bootstrap -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
+
+  <!-- My Custom CSS -->
+  <link rel="stylesheet" href="/css/custom.css" type="text/css" />
+
+  <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+
+  <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25565068-1']);
+  _gaq.push(['_setDomainName', 'jonathan-jackson.net']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+  <div id="header">
+    <h1>run<span class="kern">_</span>with_it <span style="font-size:12px;">Learning, sharing, coding.</span></h1>
+    <div class="row">
+      <div class="span1 offset8"><a href="/" alt="home">Home</a></div>
+      <div class="span1"><a href="/about-me.html" alt="about-me">About Me</a></div>
+      <div class="span2"><a href="/mail.html" alt="contact-me">Contact Me</a></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="content">
+     <div id="post">
+<h1>Setting Up a Remote Environment</h1>
+
+<p><span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span></p>
+
+<p>Let's create a development_remote environment to tunnel our traffic through an ssh tunnel so we can work with your development environment from home.</p>
+
+<h2>Set up your SSH forward</h2>
+
+<p>I'll assume that you are running a MySQL server on 192.168.0.1:3306 and you have a box with an external IP that has local access to it.</p>
+
+<p><script src='https://gist.github.com/2156604.js?file=gist-1.sh'></script><noscript></p>
+
+<pre lang="sh"><code>$ vi ~/.ssh/config
+
+# Add the following information
+
+Host rails_blog_db
+HostName 0.0.0.0 # your remote's public facing IP
+Port 3122
+User jjackson # your username
+LocalForward 3307 192.168.100.1:3306
+
+</code></pre>
+
+<p></noscript></p>
+
+<p>Forward 3307 192.168.100.1:3306</p>
+
+<p>You'll want to copy your public key into the ~/.ssh/authorized_keys file to prevent those pesky password prompts.  With that done you simply ssh into the rails_blog_db box like so:</p>
+
+<pre><code>$ ssh rails_blog_db
+# Leave this running...
+</code></pre>
+
+<p>Alright that part was easy let's move on to the Rails stuff.</p>
+
+<h2>Create your environment file</h2>
+
+<p><script src='https://gist.github.com/2156604.js?file=gist-2.rb'></script><noscript></p>
+
+<pre lang="sh"><code># ~$ touch rails_blog/config/environments/development_remote.rb
+# ~$ vi config/environments/development_remote.rb
+
+# Add this and save!
+require File.join(File.expand_path(File.dirname(__FILE__)),'development')
+
+</code></pre>
+
+<p></noscript></p>
+
+<p>This will load your development configuration file when you load your development_remote environment.</p>
+
+<h2>Edit your database YAML</h2>
+
+<p>Once you've done that you need to add another entry to your database.yml file.</p>
+
+<p><script src='https://gist.github.com/2156604.js?file=gist-3.yml'></script><noscript></p>
+
+<pre lang="sh"><code># rails_blog/config/database.yml
+
+default: &amp;default
+  adapter: mysql
+  username: rails_blog_user
+  password: ENV['your_super_secret_password']
+  host: 192.168.100.1
+
+development:
+  database: rails_blog_development
+  &lt;&lt;: *default
+
+production:
+  database: rails_blog
+  &lt;&lt;: *default
+
+# set the database option to your development db and the host to your
+# ssh forward
+
+development_remote:
+  database: rails_blog_development
+  host: 127.0.0.1
+  port: 3307  # This is where the ssh is forwarding your DB traffic
+  &lt;&lt;: *default
+
+</code></pre>
+
+<p></noscript></p>
+
+<p>Some of the fancy YML syntax aside, it's pretty straightforward.  You are assigning the default attributes to development_remote, assigning the database attribute to the dev db, and assiging the host and port to your remote's forward.</p>
+
+<h2>Update your application.rb</h2>
+
+<p>In order to render the pages the environment needs to know how to serve assets.  To do that you'll need to edit your application.rb file.</p>
+
+<p><script src='https://gist.github.com/2156604.js?file=gist-4.rb'></script><noscript></p>
+
+<pre lang="sh"><code># rails_blog/config/application.rb
+
+require File.expand_path('../boot', __FILE__)
+
+require 'rails/all'
+
+if defined?(Bundler)
+  # Add your new development_remote environment to the assets hash below
+  Bundler.require(*Rails.groups(:assets =&gt; %w(development development_remote test)))
+end
+
+# Rest of file...
+
+</code></pre>
+
+<p></noscript></p>
+
+<p>Find the line for the bundler require and add development_remote to the assets array.  Once that's done you can simply run your server and everything will work as you expect:</p>
+
+<pre><code>$ rails s -e development_remote
+</code></pre>
+
+<h2>Conclusions</h2>
+
+<p>Alright so now you are cruising and working from home.  Hopefully, this is a technique that will help you better interact with your code.  Don't think that you can only use this to tunnel to your dev setup, you can also use it to create a staging environment, run tests remotely, and a whole host of other things.  So by all means, go, be creative!</p>
+
+<span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span> <span class="has_js"><g:plusone size="medium"></g:plusone></span>
+<!-- Place this render call where appropriate -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'run-with-it';
+    var disqus_identifier = '/setting-up-a-remote-environment';
+    var disqus_url = 'http://www.jonathan-jackson.net/setting-up-a-remote-environment';
+    var disqus_developer = 1;
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+    </div>
+
+    <div id="side-bar">
+     <div><a href="http://feeds.feedburner.com/jonathan-jackson/WZqA" title="Subscribe to my feed" rel="alternate" type="application/rss+xml"><img src="/images/feeds.png" alt="" style="border:0;width:100px;height:100px;"/></a></div>
+<div><a href="https://twitter.com/rondale_sc" class="twitter-follow-button" alt="follow me on twitter" data-width="150px" data-show-count="false">Follow @rondale_sc</a></div>
+<div><img src="/images/gravatar.png" width="167px;" height="167px;"/></div>
+<div>
+  <h3>Hi, I'm Jon.</h3>
+  <p>I love learning new things.  Here is where I'll share what I learn.  Typically code, sometimes my experience, sometimes just a neat trick.</p>
+</div>
+<div>
+  <h3>Projects</h3>
+  <ul>
+    <li><a href="https://github.com/rondale-sc/EspnRb" alt="espn_rb, a lightweight ruby wrapper around the ESPN api." title="EspnRb">EspnRb</a></li>
+    <li><a href="https://github.com/rondale-sc/image_viewer" alt="ImageViewer image browser w/controls" title="Image Viewer">ImageViewer</a></li>
+    <li><a href="https://github.com/rondale-sc/run_with_it_redux" alt="This blog's Github Repo" title="Run With It Repo">Run With It</a></li>
+  </ul>
+</div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>Site designed by Jonathan Jackson.  With help from <a href="http://twitter.github.com/bootstrap/" alt="twitter bootstrap">@twbootstrap</a>, <a href="https://github.com/mojombo/jekyll" alt="jekyll">Jekyll</a>, and <a href="https://github.com/" alt="github">github</a></p>
+  </div>
+</body>
+</html>

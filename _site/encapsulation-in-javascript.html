@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <title>We're here to encapsulate</title>
+
+  <!-- Twitter Bootstrap -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
+
+  <!-- My Custom CSS -->
+  <link rel="stylesheet" href="/css/custom.css" type="text/css" />
+
+  <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+
+  <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25565068-1']);
+  _gaq.push(['_setDomainName', 'jonathan-jackson.net']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+  <div id="header">
+    <h1>run<span class="kern">_</span>with_it <span style="font-size:12px;">Learning, sharing, coding.</span></h1>
+    <div class="row">
+      <div class="span1 offset8"><a href="/" alt="home">Home</a></div>
+      <div class="span1"><a href="/about-me.html" alt="about-me">About Me</a></div>
+      <div class="span2"><a href="/mail.html" alt="contact-me">Contact Me</a></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="content">
+     <div id="post">
+<h1>We're here to encapsulate</h1>
+
+<p><span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span></p>
+
+<p>The concept of encapsulation is familiar to most programmers.  Put simply it is bringing data and the methods that operate on it together under a single namespace (or object)<a href="#footnote_1">[1]</a>. This article will showcase a few ways to encapsulate data, which in Javascript is quite important as many scripts may be rendered on a single page with little or no knowledge of one another. We we will take a quick tour of the prototype/constructor pattern, then follow up with the popular (and my favorite) module pattern.</p>
+
+<h2>Be a Builder</h2>
+
+<p><script src='https://gist.github.com/2155999.js?file=gist-1.js'></script><noscript></p>
+
+<pre lang="sh"><code>function Mammal(species, defining_characteristic) {
+  this.species = species;
+  this.defining_characteristic = defining_characteristic;
+ }
+
+Mammal.prototype.print = function(){
+  return &quot;Hello I'm a &quot; + this.species + &quot;. &quot; +
+         &quot;I have &quot; + this.defining_characteristic + &quot;.&quot;
+}
+
+var cat = new Mammal(&quot;Cat&quot;, &quot;claws&quot;);
+var dog = new Mammal(&quot;Dog&quot;, &quot;a wet nose&quot;)
+
+console.log(cat.print());
+// &quot;Hello I'm a Cat. I have claws.&quot;
+
+console.log(dog.print());
+// &quot;Hello I'm a Dog. I have a wet nose.&quot;
+
+</code></pre>
+
+<p></noscript></p>
+
+<p>The above code creates an instance of Mammal for cat and dog.  Each instance is fully contained within itself.  You'll note that the prototype method is used to extend print() to Mammal without having to redefine it for each instance. Subsequently each Mammal has the prototype method print() defined.</p>
+
+<p>Likely none of this is new to you, after all javascript has been around for well over a decade.  The important concept here is not the construction of an instance in javascript, its the encapsulation of your code.  With the <strong>constructor pattern</strong> (as basic as it is) you can very easily create a namespace for sets of data that belong with one another without having to duplicate code needlessly.  The object &quot;Cat&quot; has claws, and &quot;Dog&quot; has a wet nose, yet I define both by setting <span style="background:#2A2D33;font-size:0.8em;"class="pre"><span class="k">this</span><span style="color:#F8F8F8">.defining_characteristic</span></span> and each object's data is scoped to its own namespace.</p>
+
+<h2>Modules are where it's at.</h2>
+
+<p><script src='https://gist.github.com/2155999.js?file=gist-2.js'></script><noscript></p>
+
+<pre lang="sh"><code>var Mammal = (function(){
+  // These are private
+  var species;
+  var defining_char;
+  return {
+  // These are public because of the explicit return
+        init: function (sp, dc) {
+          species = sp;
+          defining_char = dc;
+        },
+        print: function() {
+          return &quot;Hello I'm a &quot; + species + &quot;. &quot; +
+                 &quot;I have &quot; + defining_char + &quot;.&quot;;
+        }
+      };
+});
+
+// cat = Mammal(); cat.init(&quot;Cat&quot;, &quot;claws&quot;); cat.print();
+// &quot;Hello I'm a Cat. I have claws.&quot;
+
+// dog = Mammal(); dog.init(&quot;Dog&quot;, &quot;a wet nose&quot;); dog.print();
+// &quot;Hello I'm a Dog. I have a wet nose.&quot;
+
+</code></pre>
+
+<p></noscript></p>
+
+<p>The <strong>module pattern</strong> is similar to constructor pattern in many ways.  It offers a way to create an instance of an object, and limits namespace exposure.  However, the <strong>module pattern</strong> brings another useful feature to the table.  That is, it offers the ability to deliniate between public and private functions/variables.  The functions and methods you define inside the enclosure (the parenthesis surrounding the anonymous function) are only available publicly if they are explicitly returned.</p>
+
+<p>The internal state of each instance of Mammal can only be accessed on init.  You would need to create a getter/setter function to modify it after it has been initialized.  This is similar to the way Ruby handles object visiblity.  <s>The other way it differs from the constructor pattern is that the prototype class is not instantiated.  Which reduces the memory consumption of the object (among other things)</s>. Original <a href="#footnote_3">[3]edited</a></p>
+<blockquote>
+<p>By using new to invoke the function, the object holds onto a worthless prototype object. That wastes memory with no offsetting advantage. -Douglas Crockford<a href="#footnote_2">[2]</a></p>
+</blockquote>
+<p>Personally I like the module pattern over the constructor pattern not just because of the reasons outlined in Douglas Crockford's post from 2006 when he formalized the technique<a href="#footnote_2">[2]</a>, but because it is so logical. I define my module and initialize its internal state, if I want to further modify the internal state I have to create and explicitly call a function for that purpose.  Forcing yourself to be explicit will reduce the number of silly bugs hard to find bugs that occur when you forget about your scope.</p>
+
+<h2>Conclusions</h2>
+
+<p>Encapsulation is one of the main pillars upon which Object Orientated Programming is built.  Understanding how to do it, and what pattern is the best fit for your needs is critical to creating easy to maintain, solid programs.  I come from a Ruby background so even though these encapsulation concepts are familiar to me researching how to do these things in Javascript has been immensely helpful.  It has given me insight into Object Oriented Design patterns, and has helped me in other languages.</p>
+
+<p>I hope you find this useful, don't forget to check the references below as many of these concepts have been fleshed out before. I'd especially like to note <span style="font-size:12px;"><a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#creationalpatternjavascript">Essential JavaScript Design Patterns For Beginners, 2011</a></span> as I believe it is one of the better articles on the subject and will expose you to more than just constructor/module patterns.  Have fun!</p>
+
+<p>**Edit fix typo in module pattern snippet, credit bruno-c</p>
+
+<p>**Edit in Crockford's article he referred to using &quot;new&quot; directly on a function definition, and in that case the prototype is useless, credit <a id="footnote_3" href="http://news.ycombinator.com/item?id=2992502">jugglinmike</a>
+<br/></p>
+
+<h4>References</h4>
+
+<ul>
+  <li><span  style="font-size:12px;">1.) <a id="footnote_1" href="http://en.wikipedia.org/wiki/Encapsulation_(object-oriented_programming)">Wikipedia</a></span></li>
+  <li><span  style="font-size:12px;">2.) <a id="footnote_2" href="http://yuiblog.com/blog/2006/11/13/javascript-we-hardly-new-ya/">YUI blog, 2006</a></span></li>
+</ul>
+
+<h4>Additional References (Reading)</h4>
+
+<p><a href=""></a>
+<ul>
+  <li><span style="font-size:12px;"><a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#creationalpatternjavascript">Essential JavaScript Design Patterns For Beginners, 2011</a></span></li>
+  <li><span style="font-size:12px;"><a href="http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth">Adequately good, 2010</a></span></li>
+  <li><span style="font-size:12px;"><a href="http://www.codeproject.com/KB/scripting/jsoops.aspx">Encapsulation in Javascript, 2010</a></span></li>
+</ul></p>
+
+<span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span> <span class="has_js"><g:plusone size="medium"></g:plusone></span>
+<!-- Place this render call where appropriate -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'run-with-it';
+    var disqus_identifier = '/encapsulation-in-javascript';
+    var disqus_url = 'http://www.jonathan-jackson.net/encapsulation-in-javascript';
+    var disqus_developer = 1;
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+    </div>
+
+    <div id="side-bar">
+     <div><a href="http://feeds.feedburner.com/jonathan-jackson/WZqA" title="Subscribe to my feed" rel="alternate" type="application/rss+xml"><img src="/images/feeds.png" alt="" style="border:0;width:100px;height:100px;"/></a></div>
+<div><a href="https://twitter.com/rondale_sc" class="twitter-follow-button" alt="follow me on twitter" data-width="150px" data-show-count="false">Follow @rondale_sc</a></div>
+<div><img src="/images/gravatar.png" width="167px;" height="167px;"/></div>
+<div>
+  <h3>Hi, I'm Jon.</h3>
+  <p>I love learning new things.  Here is where I'll share what I learn.  Typically code, sometimes my experience, sometimes just a neat trick.</p>
+</div>
+<div>
+  <h3>Projects</h3>
+  <ul>
+    <li><a href="https://github.com/rondale-sc/EspnRb" alt="espn_rb, a lightweight ruby wrapper around the ESPN api." title="EspnRb">EspnRb</a></li>
+    <li><a href="https://github.com/rondale-sc/image_viewer" alt="ImageViewer image browser w/controls" title="Image Viewer">ImageViewer</a></li>
+    <li><a href="https://github.com/rondale-sc/run_with_it_redux" alt="This blog's Github Repo" title="Run With It Repo">Run With It</a></li>
+  </ul>
+</div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>Site designed by Jonathan Jackson.  With help from <a href="http://twitter.github.com/bootstrap/" alt="twitter bootstrap">@twbootstrap</a>, <a href="https://github.com/mojombo/jekyll" alt="jekyll">Jekyll</a>, and <a href="https://github.com/" alt="github">github</a></p>
+  </div>
+</body>
+</html>

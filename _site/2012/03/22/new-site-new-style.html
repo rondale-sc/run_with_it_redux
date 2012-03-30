@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <title>New Site, New Style</title>
+
+  <!-- Twitter Bootstrap -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
+
+  <!-- My Custom CSS -->
+  <link rel="stylesheet" href="/css/custom.css" type="text/css" />
+
+  <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+
+  <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25565068-1']);
+  _gaq.push(['_setDomainName', 'jonathan-jackson.net']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+  <div id="header">
+    <h1>run<span class="kern">_</span>with_it <span style="font-size:12px;">Learning, sharing, coding.</span></h1>
+    <div class="row">
+      <div class="span1 offset8"><a href="/" alt="home">Home</a></div>
+      <div class="span1"><a href="/about-me.html" alt="about-me">About Me</a></div>
+      <div class="span2"><a href="/mail.html" alt="contact-me">Contact Me</a></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="content">
+     <div id="post">
+<h1>New Site, New Style</h1>
+
+<p><span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span></p>
+
+<p><small>TL:DR Migrated from Rails to Jekyll and here is why:</small></p>
+
+<p>I know everyone hates getting on their RSS in the morning, seeing a new post from an author who you are (hopefully) excited about, and it being a trivial post about changes to the site.  But in this case I think you'll find that it's worth it.  I've migrated this blog to jekyll!  Here's why I switched.</p>
+
+<p>I think you know by now how much I care for Rails.  It was my first experience with the ruby language and still allows for extremely speedy development.  With that said, I don't think it fits for this blog.  I originally wanted to create my own commenting system, allow for rich user interaction, and integrate with other forms of social media.  I believe I hit some of those markers right out of the gate, but quickly realized I wasn't using the additional features.  Here are a few of the reasons why:</p>
+
+<ol>
+<li><p>Users don't and shouldn't implicitly trust your website.</p>
+
+<ul>
+<li>Use Disqus for comments.</li>
+</ul></li>
+<li><p>Don't roll your own authentication (or any authentication) if you don't need it.</p>
+
+<ul>
+<li>Bad form to require your users to provide information about themselves to use basic functionality (like comments)</li>
+</ul></li>
+<li><p>You must reduce friction between yourself creating the content and that content being available.</p>
+
+<ul>
+<li>Web-UI's can be polished and awesome, but as a person who spends most of my time in robust text editors I'm a little spoiled.  Let me write where I feel comfortable and then git push to deploy.</li>
+</ul></li>
+</ol>
+
+<p>Enter Jekyll.  Jekyll is a static site generator that basically just pre-processes your site so that they can be served statically through nginx/apache.  It helps solve all of the problems above.  Allowing you to include disqus comments and other social widgets easily.  It's configurable; you can write in textile, html, markdown, or plain text.  Also you can extend Jekyll with plugins written in <em>Ruby</em>!</p>
+
+<p>I've also felt that I wasn't able to spend enough time on the Rails codebase for Run With It.  This basically turned my repo into a junk drawer, with inline styles, little testing, etc...</p>
+
+<p>With Jekyll I front-loaded all the dev time.  I used Twitter bootstrap to help keep my layout clean, and use github Gists to embed my code.</p>
+
+<p>Along the way I learned a lot about Jekyll.  I'll leave a few of the links that really helped  me below in the references section.  I hope you all like the new look.  Please let me know what you think!  ^_^</p>
+
+<p><span style="font-size:10px">PS: The RSS feed is slightly different than before so your reader might mark them all as unread.  I'm sorry for any inconvenience</span></p>
+
+<h4>Additional References</h4>
+
+<p><span style="font-size:12px;"><a href="https://github.com/mojombo/jekyll/wiki">Jekyll Wiki, Great Info Here</a></span><br/>
+<span style="font-size:12px;"><a href="https://gist.github.com/2158360">BinaryMuse's gist liquid tag extension, for rendering gists and raw code in noscript tags for RSS</a></span><br/>
+<span style="font-size:12px;"><a href="http://www.ph-lee.com/2011/07/05/nginx-rewrite-rules-for-html-extensions.html">Rewrite urls without .html extension in Nginx</a></span><br/>
+<span style="font-size:12px;"><a href="https://github.com/mojombo/mojombo.github.com">Tom Preston Werner's Jekyll site for basic idea of jekyll tree</a></span><br/></p>
+
+<span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span> <span class="has_js"><g:plusone size="medium"></g:plusone></span>
+<!-- Place this render call where appropriate -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'run-with-it';
+    var disqus_identifier = '/2012/03/22/new-site-new-style';
+    var disqus_url = 'http://www.jonathan-jackson.net/2012/03/22/new-site-new-style';
+    var disqus_developer = 1;
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+    </div>
+
+    <div id="side-bar">
+     <div><a href="http://feeds.feedburner.com/jonathan-jackson/WZqA" title="Subscribe to my feed" rel="alternate" type="application/rss+xml"><img src="/images/feeds.png" alt="" style="border:0;width:100px;height:100px;"/></a></div>
+<div><a href="https://twitter.com/rondale_sc" class="twitter-follow-button" alt="follow me on twitter" data-width="150px" data-show-count="false">Follow @rondale_sc</a></div>
+<div><img src="/images/gravatar.png" width="167px;" height="167px;"/></div>
+<div>
+  <h3>Hi, I'm Jon.</h3>
+  <p>I love learning new things.  Here is where I'll share what I learn.  Typically code, sometimes my experience, sometimes just a neat trick.</p>
+</div>
+<div>
+  <h3>Projects</h3>
+  <ul>
+    <li><a href="https://github.com/rondale-sc/EspnRb" alt="espn_rb, a lightweight ruby wrapper around the ESPN api." title="EspnRb">EspnRb</a></li>
+    <li><a href="https://github.com/rondale-sc/image_viewer" alt="ImageViewer image browser w/controls" title="Image Viewer">ImageViewer</a></li>
+    <li><a href="https://github.com/rondale-sc/run_with_it_redux" alt="This blog's Github Repo" title="Run With It Repo">Run With It</a></li>
+  </ul>
+</div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>Site designed by Jonathan Jackson.  With help from <a href="http://twitter.github.com/bootstrap/" alt="twitter bootstrap">@twbootstrap</a>, <a href="https://github.com/mojombo/jekyll" alt="jekyll">Jekyll</a>, and <a href="https://github.com/" alt="github">github</a></p>
+  </div>
+</body>
+</html>

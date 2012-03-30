@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <title>RVM and rbenv</title>
+
+  <!-- Twitter Bootstrap -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
+
+  <!-- My Custom CSS -->
+  <link rel="stylesheet" href="/css/custom.css" type="text/css" />
+
+  <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+
+  <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25565068-1']);
+  _gaq.push(['_setDomainName', 'jonathan-jackson.net']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+  <div id="header">
+    <h1>run<span class="kern">_</span>with_it <span style="font-size:12px;">Learning, sharing, coding.</span></h1>
+    <div class="row">
+      <div class="span1 offset8"><a href="/" alt="home">Home</a></div>
+      <div class="span1"><a href="/about-me.html" alt="about-me">About Me</a></div>
+      <div class="span2"><a href="/mail.html" alt="contact-me">Contact Me</a></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="content">
+     <div id="post">
+<h1>RVM and rbenv</h1>
+
+<p><span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span></p>
+
+<p>Many of you are familiar with rbenv and some of the controversy surrounding it. I love RVM and will more than likely continue to use it, but one of the things I truly value in the ruby community is always having more than one option.  I was delightfully surprised with the simplicity of rbenv, how easy it was, and how familiar it felt right out of the box. This article will provide a (humorous) side-by-side comparison of the basic usage and installation of rbenv and RVM.</p>
+
+<h1>Installation</h1>
+
+<p><img src="http://www.jonathan-jackson.net/assets/rvm-rbenv-install.png" alt="rvm and rbenv side by side install"/></p>
+
+<p>In RVM you need to add this to your profile to load the RVM function.</p>
+
+<pre><code># or ~/.zshrc
+$ echo '[[ -s &quot;$HOME/.rvm/scripts/rvm&quot; ]] &amp;&amp; . &quot;$HOME/.rvm/scripts/rvm&quot; # Load RVM function' &gt;&gt; ~/.bash_profile
+</code></pre>
+
+<p>In rbenv you need to add this to your profile to load the rbenv command-line function.</p>
+
+<pre><code># or ~/.zshrc
+$ echo 'export PATH=&quot;$HOME/.rbenv/bin:$PATH&quot;' &gt;&gt; ~/.bash_profile
+$ echo 'eval &quot;$(rbenv init -)&quot;' &gt;&gt; ~/.bash_profile #to enable shims and auto-complete
+</code></pre>
+
+<p>Once you've restarted your shell you now have access to RVM/rbenv.  It is important to note that RVM and rbenv cannot be installed at the same time because of the way RVM handles the 'gem' command.</p>
+
+<h1>Get Rubies</h1>
+
+<p><img src="http://www.jonathan-jackson.net/assets/rvm-rbenv-rubies.png" alt="rvm and rbenv side by side ruby compile and install"/></p>
+
+<p>In RVM you install your rubies to <strong>/Users/$USER/.rvm/rubies/ruby-1.9.2-x</strong> in rbenv your rubies are installed to <strong>~/.rbenv/versions</strong>.  Sam Stephenson created a sister gem for rbenv called ruby-build which offers several convencience methods for installing/compiling your own rubies.</p>
+
+<p>For instance, once you have ruby-build installed you can type this:</p>
+
+<pre><code>$ rbenv install ruby-1.9.2-x
+</code></pre>
+
+<p>So now you have your rubies.  Best blog post EVAR! Wait, there's more...</p>
+
+<h1>Gemsets</h1>
+
+<p><img src="http://www.jonathan-jackson.net/assets/rvm-rbenv-gemsets.png" alt="rvm and rbenv side by side gemset usage"/></p>
+
+<p>Gemsets are my favorite thing about RVM and I was happy to see rbenv has that functionality easily available <a href="https://github.com/jamis/rbenv-gemset">[1]</a>.</p>
+
+<h1>But wait, what about cd and gem?</h1>
+
+<p>RVM overrides cd and gem commands to enable some of its functionality.  &quot;What about those commands?&quot; you ask. To which I reply: if that is an issue then rbenv might be a better fit.  However, I doubt the majority of users will ever have a problem with the over-ride of these commands.</p>
+
+<p><img src="http://www.jonathan-jackson.net/assets/move-along-trollface.png" alt="rvm and rbenv should be used depending on need"/></p>
+
+<h1>Conclusions</h1>
+
+<p>You saw the strips above, they offer <strong>a lot</strong> of the same functionality.  In many ways rbenv and RVM are really just two sides of the same coin.  A different way to solve the same problem. I will say this article  is from a purely functional stance, I understand that under the hood rbenv and RVM are quite different.</p>
+
+<p>There has been quite a bit of controversy surrounding the rbenv/rvm divide.  I think, after installing both back-to-back on my own system, that their similarities outweigh their differences.  One article I read about the subject compared RVM and rbenv to Rails and Sinatra <a href="http://www.rubyinside.com/rbenv-a-simple-new-ruby-version-management-tool-5302.html" alt="rbenv a simple ruby version management tool">[2]</a>.  I think that comparison really fits. Sinatra is a lightweight framework whereas Rails is much more robust. Sometimes sinatra just fits, and other times you'd be a fool to not go with Rails.  If you need the features in RVM then use it, if you want more control and a lighter feel then use rbenv.  It's all a matter of preference.</p>
+
+<p>As a rubyist I'm just glad we have people like <a href="https://github.com/wayneeseguin" alt="wayne seguin's github">Wayne Seguin</a>, and <a href="https://github.com/sstephenson" alt="sam stephenson's github'">Sam Stephenson</a> contributing to the community the way they do.</p>
+
+<h4>References</h4>
+
+<p><span  style="font-size:12px;">1.) <a id="footnote_1" href="https://github.com/jamis/rbenv-gemset">rbenv gemset</a></span><br/>
+<span  style="font-size:12px;">2.) <a id="footnote_2" href="http://www.rubyinside.com/rbenv-a-simple-new-ruby-version-management-tool-5302.html">Ruby Inside - rbenv article</a></span><br/></p>
+
+<h4>Additional References (Reading)</h4>
+
+<p><span style="font-size:12px;"><a href="http://beginrescueend.com/">Begin Rescue End (RVM home page)</a></span><br/>
+<span style="font-size:12px;"><a href="https://github.com/sstephenson/rbenv">rbenv on github</a></span><br/>
+<span style="font-size:12px;"><a href="http://ragecomics.memebase.com/rage-builder/">Rage-Builder</a></span><br/></p>
+
+<span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span> <span class="has_js"><g:plusone size="medium"></g:plusone></span>
+<!-- Place this render call where appropriate -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'run-with-it';
+    var disqus_identifier = '/rvm-and-rbenv';
+    var disqus_url = 'http://www.jonathan-jackson.net/rvm-and-rbenv';
+    var disqus_developer = 1;
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+    </div>
+
+    <div id="side-bar">
+     <div><a href="http://feeds.feedburner.com/jonathan-jackson/WZqA" title="Subscribe to my feed" rel="alternate" type="application/rss+xml"><img src="/images/feeds.png" alt="" style="border:0;width:100px;height:100px;"/></a></div>
+<div><a href="https://twitter.com/rondale_sc" class="twitter-follow-button" alt="follow me on twitter" data-width="150px" data-show-count="false">Follow @rondale_sc</a></div>
+<div><img src="/images/gravatar.png" width="167px;" height="167px;"/></div>
+<div>
+  <h3>Hi, I'm Jon.</h3>
+  <p>I love learning new things.  Here is where I'll share what I learn.  Typically code, sometimes my experience, sometimes just a neat trick.</p>
+</div>
+<div>
+  <h3>Projects</h3>
+  <ul>
+    <li><a href="https://github.com/rondale-sc/EspnRb" alt="espn_rb, a lightweight ruby wrapper around the ESPN api." title="EspnRb">EspnRb</a></li>
+    <li><a href="https://github.com/rondale-sc/image_viewer" alt="ImageViewer image browser w/controls" title="Image Viewer">ImageViewer</a></li>
+    <li><a href="https://github.com/rondale-sc/run_with_it_redux" alt="This blog's Github Repo" title="Run With It Repo">Run With It</a></li>
+  </ul>
+</div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>Site designed by Jonathan Jackson.  With help from <a href="http://twitter.github.com/bootstrap/" alt="twitter bootstrap">@twbootstrap</a>, <a href="https://github.com/mojombo/jekyll" alt="jekyll">Jekyll</a>, and <a href="https://github.com/" alt="github">github</a></p>
+  </div>
+</body>
+</html>

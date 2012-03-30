@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <title>String Theory</title>
+
+  <!-- Twitter Bootstrap -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
+
+  <!-- My Custom CSS -->
+  <link rel="stylesheet" href="/css/custom.css" type="text/css" />
+
+  <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+
+  <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25565068-1']);
+  _gaq.push(['_setDomainName', 'jonathan-jackson.net']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+  <div id="header">
+    <h1>run<span class="kern">_</span>with_it <span style="font-size:12px;">Learning, sharing, coding.</span></h1>
+    <div class="row">
+      <div class="span1 offset8"><a href="/" alt="home">Home</a></div>
+      <div class="span1"><a href="/about-me.html" alt="about-me">About Me</a></div>
+      <div class="span2"><a href="/mail.html" alt="contact-me">Contact Me</a></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="content">
+     <div id="post">
+<h1>String Theory</h1>
+
+<p><span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span></p>
+
+<p>The other day I found myself in an argument about whether or not a single quoted string was faster than a double quoted string. I know that there are conventions that dictate the use of one over the other for clarity, but I was curious to see if there was actually a performance component.  I being on the side of the single quoted string(SQ) thought surely since SQ strings aren't interpolated they'd be loads faster.  Unfortunately, proving myself right was not as easy as I had initially thought.</p>
+
+<h2>Define the parameters</h2>
+
+<p>The first thing I needed to do to prove my point was to define how we would measure and quantify success of one string over the other.  We came up with these criteria:</p>
+
+<ol>
+<li>The positive difference must be statistically significant.</li>
+<li>The test must be consistent.</li>
+<li>The sample size must be ample enough to account for any external factors.</li>
+</ol>
+
+<h2>The results</h2>
+
+<p><img src="http://www.jonathan-jackson.net/assets/ruby_1.9.3.png" width="630"/></p>
+
+<p>Right out of the shoots you can see that there is actually very little difference.  I found that single quoted strings were about ~0.19% faster than double quoted strings. This is hardly the victory I was hoping for.  The difference was more pronounced in jruby, but the test was significantly more erratic.</p>
+
+<p>Anyways, I won right?  Wrong! Let's move onto the methodology and dig into why it might still be too early to bust out the ticker tape.</p>
+
+<h2>Methodology</h2>
+
+<p><script src='https://gist.github.com/2156488.js?file=gist-1.rb'></script><noscript></p>
+
+<pre lang="sh"><code># ./test_single_or_double.rb
+
+require './stats.rb'
+
+test_strings = {:double =&gt; 'ruby -e &quot;start_time = Time.now; 100_000.times { \&quot;a\&quot; }; puts Time.now - start_time&quot;',
+                :single =&gt; &quot;ruby -e \&quot;start_time = Time.now; 100_000.times { 'a' }; puts Time.now - start_time\&quot;&quot;}
+
+sr =  1000.times.inject([]) {|memo, result| memo &lt;&lt; `#{test_strings[:single]}`.strip }
+dr = 1000.times.inject([]) {|memo, result| memo &lt;&lt; `#{test_strings[:double]}`.strip }
+
+single_quotes = Stats.new(sr)
+double_quotes = Stats.new(dr)
+
+single_quotes.to_csv(&quot;/path/to/file/single_quote_#{RUBY_VERSION}.csv&quot;)
+double_quotes.to_csv(&quot;/path/to/file/double_quote_#{RUBY_VERSION}.csv&quot;)
+
+</code></pre>
+
+<p></noscript></p>
+
+<p>In the above code I'm requiring './stats.rb' which is just a down and dirty stats class that I created <a href="https://gist.github.com/1346872">[1]</a>. All it does is let me calculate standard deviation and export the results to a csv file.  So here I ran each test string a thousand times calculating and storing the result(seconds) for each.  The test string simply instantiates a hundred thousand <em>a</em>'s and returns the time it took.  Sure enough we get that ~0.19% increase.  Nothing too fancy here.</p>
+
+<p>Not so fast.</p>
+
+<p>Remember that we specified criteria for this argument.  The test is mostly consistent so we satisfy rule 2.  Rule 3 also as 1000 results is probably an ample enough size.  However not so lucky when we run into rule 1.  The standard deviation for the single quoted string was larger than the SQ string speed increase(at ~.003s). This discrepancy means, at least to me, that the difference in speed between a sinqle quoted string and double quoted string is not statistically significant.</p>
+
+<p>If I had more time I would increase the result set and attempt to account for outliers, but I think that this is probably a fairly typical outcome.</p>
+
+<h2>Conclusions</h2>
+
+<p>At first I thought that this entire endeavor was a waste.  But, I think this was actually quite good for me.  It made me think scientifically and outside the box.  Also, the pestering question about whether it's better to use a single quoted string vs a double quoted string can once again be relegated to a semantic/style argument and not a practical one.  Anyways I had fun writing this one for sure, hope you found it useful.</p>
+
+<p>If you like this sort of thing you should subscribe to this blog, thanks for reading.</p>
+
+<h4>References</h4>
+
+<p><span  style="font-size:12px;">1.) <a href="https://gist.github.com/1346872">Down and Dirty Stats</a></span></p>
+
+<h4>Additional References</h4>
+
+<p><span style="font-size:12px;"><a href="http://xkcd.com/171/">XKCD 171</a></span></p>
+
+<span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span> <span class="has_js"><g:plusone size="medium"></g:plusone></span>
+<!-- Place this render call where appropriate -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'run-with-it';
+    var disqus_identifier = '/string-theory';
+    var disqus_url = 'http://www.jonathan-jackson.net/string-theory';
+    var disqus_developer = 1;
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+    </div>
+
+    <div id="side-bar">
+     <div><a href="http://feeds.feedburner.com/jonathan-jackson/WZqA" title="Subscribe to my feed" rel="alternate" type="application/rss+xml"><img src="/images/feeds.png" alt="" style="border:0;width:100px;height:100px;"/></a></div>
+<div><a href="https://twitter.com/rondale_sc" class="twitter-follow-button" alt="follow me on twitter" data-width="150px" data-show-count="false">Follow @rondale_sc</a></div>
+<div><img src="/images/gravatar.png" width="167px;" height="167px;"/></div>
+<div>
+  <h3>Hi, I'm Jon.</h3>
+  <p>I love learning new things.  Here is where I'll share what I learn.  Typically code, sometimes my experience, sometimes just a neat trick.</p>
+</div>
+<div>
+  <h3>Projects</h3>
+  <ul>
+    <li><a href="https://github.com/rondale-sc/EspnRb" alt="espn_rb, a lightweight ruby wrapper around the ESPN api." title="EspnRb">EspnRb</a></li>
+    <li><a href="https://github.com/rondale-sc/image_viewer" alt="ImageViewer image browser w/controls" title="Image Viewer">ImageViewer</a></li>
+    <li><a href="https://github.com/rondale-sc/run_with_it_redux" alt="This blog's Github Repo" title="Run With It Repo">Run With It</a></li>
+  </ul>
+</div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>Site designed by Jonathan Jackson.  With help from <a href="http://twitter.github.com/bootstrap/" alt="twitter bootstrap">@twbootstrap</a>, <a href="https://github.com/mojombo/jekyll" alt="jekyll">Jekyll</a>, and <a href="https://github.com/" alt="github">github</a></p>
+  </div>
+</body>
+</html>

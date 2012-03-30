@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <title>Playin' with the Ruby GC</title>
+
+  <!-- Twitter Bootstrap -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
+
+  <!-- My Custom CSS -->
+  <link rel="stylesheet" href="/css/custom.css" type="text/css" />
+
+  <link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+
+  <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25565068-1']);
+  _gaq.push(['_setDomainName', 'jonathan-jackson.net']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+  <div id="header">
+    <h1>run<span class="kern">_</span>with_it <span style="font-size:12px;">Learning, sharing, coding.</span></h1>
+    <div class="row">
+      <div class="span1 offset8"><a href="/" alt="home">Home</a></div>
+      <div class="span1"><a href="/about-me.html" alt="about-me">About Me</a></div>
+      <div class="span2"><a href="/mail.html" alt="contact-me">Contact Me</a></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="content">
+     <div id="post">
+<h1>Playin' with the Ruby GC</h1>
+
+<p><span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span></p>
+
+<p>So I, like many of you geeks out there heard about the changes to Ruby in 1.9.3-rc1.  Upon hearing the news, I hurriedly scanned the intra-webz to see if there were any cool features that would affect me or my production apps.  Some of the changes in the release candidate were pleasantly surprising, especially file loading (which saw a notable ~38% speed boost).  When I saw the garbage collector was being changed to something called &quot;Lazy Sweeping&quot; I had to figure out how much this was going to impact performance.  I mean c'mon &quot;lazy sweeping&quot;, sounds so interesting right?  So I started writing a script to tell me just that.</p>
+
+<p>Let's start this in reverse order.</p>
+
+<h2>The results</h2>
+
+<p>I found that the the new &quot;lazy sweeping&quot; (still super cool name) was about <em>8%</em> faster on average.  Here's the pretty graph I created from Excel.</p>
+
+<p><img src="http://www.jonathan-jackson.net/assets/gc_graph.png" alt="gc graph" style="width:600px"/></p>
+
+<p>The vertical axis is the time in milliseconds, and the horizontal axis represents the GC cycle during the creation of ~10,000 objects.  Alright alright alright.  I'll explain the methodology so you can actually understand the graph.</p>
+
+<h2>The Methodology</h2>
+
+<p>While doing the research I came across a nifty little script by the Narihiro Nakamura <a href="http://redmine.ruby-lang.org/attachments/959/bm_gc_fragmentation.rb">here</a>.  I modified it slightly, but kept the same idea of creating a number of objects to fill up the heap.</p>
+
+<p><script src='https://gist.github.com/2156260.js?file=gist-1.rb'></script><noscript></p>
+
+<pre lang="sh"><code># './gc_test.rb'
+
+@m = 1000000
+@b = 2 * 5 * (4**3) + 1
+@a = 100001
+
+def make_fragmentation(h, seed)
+  i = seed
+  10000.times {|m| h &lt;&lt; Object.new}
+  10000.times do |m|
+    i = ((@a * i) + @b) % @m
+    h[i % h.length] = nil
+ end
+end
+
+def run_test
+  GC::Profiler.enable
+  heaps = []
+  100.times{|i| make_fragmentation(heaps, i) }
+  GC::Profiler.result
+end
+
+puts run_test
+
+</code></pre>
+
+<p></noscript></p>
+
+<p>This returns a result set from the GC profiler.  Which I call about a hundred times like so:</p>
+
+<p><script src='https://gist.github.com/2156260.js?file=gist-2.rb'></script><noscript></p>
+
+<pre lang="sh"><code>require 'bigdecimal'
+require 'pp'
+
+output = Hash.new([])
+@totals = {}
+
+path = './gc_test.rb'
+
+100.times do |test_run|
+ result_set = `ruby #{path}` # this is where we get the result from the previous script
+ result_set.split(&quot;\n&quot;).each_with_index do |result, index|
+   next if [0,1].include?(index)
+   result = result.split(&quot; &quot;)
+   output[result[0]] += [result[5]]
+ end
+end
+
+# This is where we take the cumulative values of the previous 100 results sets by GC cycle
+# and grab the average.  Big decimal because we want to be precise and the numbers are already
+# strings.
+
+output.each do |k,v|
+  length = BigDecimal.new(v.length.to_s)
+  nv = v.map! {|i| BigDecimal.new(i)}
+  @totals[k] = (nv.inject(:+) / length).to_s(&quot;F&quot;)
+end
+puts @totals.map{|k,v| v + &quot;\n&quot;}
+
+</code></pre>
+
+<p></noscript></p>
+
+<p>I attempted to run this ten thousand times but it just took too long.  I wanted to get a large sample because the GC can run at off times and isn't at all guaranteed to be consistent. I ended up just going with a 100 run set for sake of speed.  Once I had the script all set I just used RVM to set my ruby and ran it.  As of writing this article RVM didn't offer 1.9.3-rc1 so I used 1.9.3-preview1 instead.</p>
+
+<h2>The interpretation</h2>
+
+<p>Well as I said before &quot;lazy sweeping&quot; is about 8% faster on average.  The largest increases in speed was when there were a small/medium number of objects in memory, the larger the number of objects the more 1.9.2 won out over 1.9.3. <a href="http://www.infoq.com/">InfoQ</a> talked to Narihiro Nakamura <a href="#footnote_2">[2]</a> where he explains why these results are likely accurate.</p>
+<blockquote>
+<p>If the program creates many long-lived objects, lazy sweep may not be able to find a free object. In that case, lazy sweep spends a long time on a single object allocation. I think that in most cases, the performance of this should still be better than M&amp;S GC.</p>
+</blockquote>
+<p>This InfoQ article was especially enlightening so I recommend giving it a glance through (it's in the footnote).</p>
+
+<h2>Try it yourself</h2>
+
+<p>The GC module offers many ways to examine the garbage collector. If you want something more, then you should look into ruby-prof which has options that show you GC_TIME, GC_RUNS and a whole host of other useful profiling tools.  @wycats recently pushed a branch to ruby-prof that enables those GC operations, you can find it <a href="https://github.com/wycats/ruby-prof">here</a>.  You'll note that it requires ruby to be patched.  So try ruby-prof out!</p>
+
+<p>Anyways, I know this wasn't exactly scientific but it was certainly fun and helped me understand some things about ruby a little better. Hope it helps you too.</p>
+
+<p>Have an improvement to the scripts above?  Think I'm doing something completely wrong? Maybe you have an entirely different approach.  Let me know in the comments below, and don't forget to subscribe to 'Run With It'.</p>
+
+<h4>References</h4>
+
+<ul>
+<li><span  style="font-size:12px;">1.) <a id="footnote_1" href="http://www.redmine.org/">RedMine Script</a></span></li>
+<li><span  style="font-size:12px;">2.) <a id="footnote_2" href="http://www.infoq.com/news/2011/08/ruby193-gc;jsessionid=AD723DB6898A9A0A368C5A1D9A5D2DAA">InfoQ Interview with Narihiro Nakamura, 2011</a></span></li>
+</ul>
+
+<h4>Additional References (Reading)</h4>
+
+<p><a href=""></a>
+<ul>
+  <li><span style="font-size:12px;"><a href="http://blog.envylabs.com/2010/07/garbage-collection-the-ruby-heap/">Joe Damato, 2010</a></span></li>
+  <li><span style="font-size:12px;"><a href="http://ruby-prof.rubyforge.org/">Ruby Prof</a></span></li>
+</ul></p>
+
+<span><a href="http://twitter.com/share" class="twitter-share-button"
+                                         data-count="horizontal"
+                                         data-via="rondale_sc">Tweet</a>
+</span> <span class="has_js"><g:plusone size="medium"></g:plusone></span>
+<!-- Place this render call where appropriate -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'run-with-it';
+    var disqus_identifier = '/playin-with-the-ruby-gc';
+    var disqus_url = 'http://www.jonathan-jackson.net/playin-with-the-ruby-gc';
+    var disqus_developer = 1;
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+    </div>
+
+    <div id="side-bar">
+     <div><a href="http://feeds.feedburner.com/jonathan-jackson/WZqA" title="Subscribe to my feed" rel="alternate" type="application/rss+xml"><img src="/images/feeds.png" alt="" style="border:0;width:100px;height:100px;"/></a></div>
+<div><a href="https://twitter.com/rondale_sc" class="twitter-follow-button" alt="follow me on twitter" data-width="150px" data-show-count="false">Follow @rondale_sc</a></div>
+<div><img src="/images/gravatar.png" width="167px;" height="167px;"/></div>
+<div>
+  <h3>Hi, I'm Jon.</h3>
+  <p>I love learning new things.  Here is where I'll share what I learn.  Typically code, sometimes my experience, sometimes just a neat trick.</p>
+</div>
+<div>
+  <h3>Projects</h3>
+  <ul>
+    <li><a href="https://github.com/rondale-sc/EspnRb" alt="espn_rb, a lightweight ruby wrapper around the ESPN api." title="EspnRb">EspnRb</a></li>
+    <li><a href="https://github.com/rondale-sc/image_viewer" alt="ImageViewer image browser w/controls" title="Image Viewer">ImageViewer</a></li>
+    <li><a href="https://github.com/rondale-sc/run_with_it_redux" alt="This blog's Github Repo" title="Run With It Repo">Run With It</a></li>
+  </ul>
+</div>
+    </div>
+  </div>
+
+  <div id="footer">
+    <p>Site designed by Jonathan Jackson.  With help from <a href="http://twitter.github.com/bootstrap/" alt="twitter bootstrap">@twbootstrap</a>, <a href="https://github.com/mojombo/jekyll" alt="jekyll">Jekyll</a>, and <a href="https://github.com/" alt="github">github</a></p>
+  </div>
+</body>
+</html>

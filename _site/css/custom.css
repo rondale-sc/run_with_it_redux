@@ -1,0 +1,16 @@
+#articles    {margin:auto;}
+#articles li {padding:6px;}
+
+#header h1 {font-size:72px;margin-left:10%;}
+#header    {border-bottom:solid 5px #3067A5;margin-top:20px;}
+
+#content   {width:670px;margin-right:20px;margin-top:15px;float:left;padding: 0px 10px 10px 0px;}
+
+#side-bar  {width:220px;margin-right:10px;margin-top:15px;float:left;}
+
+#footer    {margin:auto;clear:both;border-top:1px solid black;margin-top:25px;}
+#footer p  {text-align:center; padding-top:10px; font-size:11px;}
+
+.header-nav {width:68px;}
+
+.kern {letter-spacing: -0.15em;}
