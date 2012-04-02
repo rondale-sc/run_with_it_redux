@@ -15,4 +15,4 @@ I just want to reassure you that I've not forgotten about this blog.  I'm eager 
 Warmest regards,
 Jonathan Jackson
 
-<img src="http://www.jonathan-jackson.net/assets/be_back_soon.png" width="630"/>
+<img src="http://www.jonathan-jackson.net/images/be_back_soon.png" width="630"/>

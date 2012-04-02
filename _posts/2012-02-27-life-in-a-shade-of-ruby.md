@@ -15,7 +15,7 @@ Conway's Game of Life is a great way to practice your craft.  I recently created
 
 Each cell has eight neighbors, three above, one on either side, and three below.  The rules of CGOL simply govern the state of the cell in question as it relates to the state of its neighbor cells.
 
-<img src="http://www.jonathan-jackson.net/assets/game_of_life_rules.png" alt="game_of_life_rules"/>
+<img src="http://www.jonathan-jackson.net/images/game_of_life_rules.png" alt="game_of_life_rules"/>
 
 That's it.  For real.  The entire list of rules can be summarized in Ruby like so.
 
@@ -49,7 +49,7 @@ To tie all the cells together, I created the Game class.  It creates the playing
 
 The cool part is Game#alive_neighbors it's here where we determine how many neighbors are alive.  I've said before that when you have Ennumerable#inject everything looks like a nail.  It's definitely my favorite ennumerable method, and here I use it to get a count of neighboring cells with their internal state set to alive.  We just take the point we are testing and add the points from the @neighbors array and add to sum if that cell is alive.  Super simple.
 
-<img src="http://www.jonathan-jackson.net/assets/alive_neighbors.png" width="630" alt="skitch outline of #alive_neighbors"/>
+<img src="http://www.jonathan-jackson.net/images/alive_neighbors.png" width="630" alt="skitch outline of #alive_neighbors"/>
 
 # The Pattern
 

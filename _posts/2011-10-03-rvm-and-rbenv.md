@@ -12,7 +12,7 @@ permalink: /rvm-and-rbenv.html
 Many of you are familiar with rbenv and some of the controversy surrounding it. I love RVM and will more than likely continue to use it, but one of the things I truly value in the ruby community is always having more than one option.  I was delightfully surprised with the simplicity of rbenv, how easy it was, and how familiar it felt right out of the box. This article will provide a (humorous) side-by-side comparison of the basic usage and installation of rbenv and RVM.
 
 # Installation
-<img src="http://www.jonathan-jackson.net/assets/rvm-rbenv-install.png" alt="rvm and rbenv side by side install"/>
+<img src="http://www.jonathan-jackson.net/images/rvm-rbenv-install.png" alt="rvm and rbenv side by side install"/>
 
 In RVM you need to add this to your profile to load the RVM function.
 
@@ -30,7 +30,7 @@ In rbenv you need to add this to your profile to load the rbenv command-line fun
 Once you've restarted your shell you now have access to RVM/rbenv.  It is important to note that RVM and rbenv cannot be installed at the same time because of the way RVM handles the 'gem' command.
 
 # Get Rubies
-<img src="http://www.jonathan-jackson.net/assets/rvm-rbenv-rubies.png" alt="rvm and rbenv side by side ruby compile and install"/>
+<img src="http://www.jonathan-jackson.net/images/rvm-rbenv-rubies.png" alt="rvm and rbenv side by side ruby compile and install"/>
 
 In RVM you install your rubies to **/Users/$USER/.rvm/rubies/ruby-1.9.2-x** in rbenv your rubies are installed to **~/.rbenv/versions**.  Sam Stephenson created a sister gem for rbenv called ruby-build which offers several convencience methods for installing/compiling your own rubies.
 
@@ -42,7 +42,7 @@ For instance, once you have ruby-build installed you can type this:
 So now you have your rubies.  Best blog post EVAR! Wait, there's more...
 
 # Gemsets
-<img src="http://www.jonathan-jackson.net/assets/rvm-rbenv-gemsets.png" alt="rvm and rbenv side by side gemset usage"/>
+<img src="http://www.jonathan-jackson.net/images/rvm-rbenv-gemsets.png" alt="rvm and rbenv side by side gemset usage"/>
 
 Gemsets are my favorite thing about RVM and I was happy to see rbenv has that functionality easily available <a href="https://github.com/jamis/rbenv-gemset">[1]</a>.
 
@@ -50,7 +50,7 @@ Gemsets are my favorite thing about RVM and I was happy to see rbenv has that fu
 
 RVM overrides cd and gem commands to enable some of its functionality.  "What about those commands?" you ask. To which I reply: if that is an issue then rbenv might be a better fit.  However, I doubt the majority of users will ever have a problem with the over-ride of these commands.
 
-<img src="http://www.jonathan-jackson.net/assets/move-along-trollface.png" alt="rvm and rbenv should be used depending on need"/>
+<img src="http://www.jonathan-jackson.net/images/move-along-trollface.png" alt="rvm and rbenv should be used depending on need"/>
 
 
 # Conclusions

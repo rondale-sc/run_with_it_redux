@@ -21,7 +21,7 @@ The first thing I needed to do to prove my point was to define how we would meas
 
 ## The results
 
-<img src="http://www.jonathan-jackson.net/assets/ruby_1.9.3.png" width="630"/>
+<img src="http://www.jonathan-jackson.net/images/ruby_1.9.3.png" width="630"/>
 
 Right out of the shoots you can see that there is actually very little difference.  I found that single quoted strings were about ~0.19% faster than double quoted strings. This is hardly the victory I was hoping for.  The difference was more pronounced in jruby, but the test was significantly more erratic.
 

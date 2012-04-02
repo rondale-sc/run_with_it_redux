@@ -17,7 +17,7 @@ Let's start this in reverse order.
 
 I found that the the new "lazy sweeping" (still super cool name) was about *8%* faster on average.  Here's the pretty graph I created from Excel.
 
-<img src="http://www.jonathan-jackson.net/assets/gc_graph.png" alt="gc graph" style="width:600px"/>
+<img src="http://www.jonathan-jackson.net/images/gc_graph.png" alt="gc graph" style="width:600px"/>
 
 The vertical axis is the time in milliseconds, and the horizontal axis represents the GC cycle during the creation of ~10,000 objects.  Alright alright alright.  I'll explain the methodology so you can actually understand the graph.
 
