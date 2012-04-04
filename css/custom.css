@@ -8,8 +8,8 @@
 
 #side-bar  {width:220px;margin-right:10px;margin-top:15px;float:left;}
 
-#footer    {clear:both;border-top:1px solid black;height:45px;}
-#footer p  {text-align:center;padding-top:10px;font-size:11px;}
+.footer    {border-top:1px solid lightgray;padding-top:10px;width:100%;}
+.footer p  {text-align:center;}
 
 .header-nav {width:68px;}
 .site-nav {text-align:center;width:75px;margin-left:10px;float:left;}
