@@ -17,27 +17,29 @@
 </head>
 
 <body>
-  <div id="header">
-    <h1>run<span class="kern">_</span>with_it <span style="font-size:12px;">Learning, sharing, coding.</span></h1>
-    <div class="row">
-      <div class="span1 offset8"><a href="/" alt="home">Home</a></div>
-      <div class="span1"><a href="/about-me.html" alt="about-me">About Me</a></div>
-      <div class="span2"><a href="/mail.html" alt="contact-me">Contact Me</a></div>
-    </div>
-  </div>
-
-  <div class="container">
-    <div id="content">
-     {{ content }}
+  <div class="wrapper">
+    <div id="header">
+      <h1>run<span class="kern">_</span>with_it <span style="font-size:12px;">Learning, sharing, coding.</span></h1>
+      <div class="row">
+        <div class="span1 offset8"><a href="/" alt="home">Home</a></div>
+        <div class="span1"><a href="/about-me.html" alt="about-me">About Me</a></div>
+        <div class="span2"><a href="/mail.html" alt="contact-me">Contact Me</a></div>
+      </div>
     </div>
 
-    <div id="side-bar">
-     {% include _side-bar.html %}
-    </div>
-  </div>
+    <div class="container">
+      <div id="content">
+       {{ content }}
+      </div>
 
-  <div id="footer">
-    <p>Site designed by Jonathan Jackson.  With help from <a href="http://twitter.github.com/bootstrap/" alt="twitter bootstrap">@twbootstrap</a>, <a href="https://github.com/mojombo/jekyll" alt="jekyll">Jekyll</a>, and <a href="https://github.com/" alt="github">github</a></p>
+      <div id="side-bar">
+       {% include _side-bar.html %}
+      </div>
+    </div>
+    <div class="push"></div>
+    <div id="footer">
+      <p>Site designed by Jonathan Jackson.  With help from <a href="http://twitter.github.com/bootstrap/" alt="twitter bootstrap">@twbootstrap</a>, <a href="https://github.com/mojombo/jekyll" alt="jekyll">Jekyll</a>, and <a href="https://github.com/" alt="github">github</a></p>
+    </div>
   </div>
 </body>
 </html>

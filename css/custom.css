@@ -8,9 +8,26 @@
 
 #side-bar  {width:220px;margin-right:10px;margin-top:15px;float:left;}
 
-#footer    {margin:auto;clear:both;border-top:1px solid black;margin-top:25px;}
-#footer p  {text-align:center; padding-top:10px; font-size:11px;}
+#footer    {clear:both;border-top:1px solid black;height:45px;}
+#footer p  {text-align:center;padding-top:10px;font-size:11px;}
 
 .header-nav {width:68px;}
 
 .kern {letter-spacing: -0.15em;}
+
+/* Sticky footer */
+* {
+margin: 0;
+}
+html, body {
+height: 100%;
+}
+.wrapper {
+min-height: 100%;
+height: auto !important;
+height: 100%;
+margin: 0 auto -4em;
+}
+.footer, .push {
+height: 4em;
+}
