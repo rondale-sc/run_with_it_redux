@@ -12,22 +12,13 @@
 #footer p  {text-align:center;padding-top:10px;font-size:11px;}
 
 .header-nav {width:68px;}
+.site-nav {text-align:center;width:75px;margin-left:10px;float:left;}
+.nav-offset {margin-left:660px;}
 
 .kern {letter-spacing: -0.15em;}
 
-/* Sticky footer */
-* {
-margin: 0;
-}
-html, body {
-height: 100%;
-}
-.wrapper {
-min-height: 100%;
-height: auto !important;
-height: 100%;
-margin: 0 auto -4em;
-}
-.footer, .push {
-height: 4em;
-}
+/* Sticky footer -RF*/
+* {margin:0;}
+html, body { height: 100%; }
+.wrapper {min-height: 100%;height:auto !important;height: 100%;margin: 0 auto -4em;}
+.footer, .push {height: 4em;}
