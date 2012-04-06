@@ -1,0 +1,9 @@
+require 'rake'
+
+task :default => [:deploy]
+
+task :deploy do |t,args|
+  system('jekyll')
+  system("cp -R ./_site/ ../rondale-sc.github.com/")
+  system("cd ../rondale-sc.github.com/ && git add . && git commit -m 'Auto deploy @ #{Time.now}' && git push origin master")
+end

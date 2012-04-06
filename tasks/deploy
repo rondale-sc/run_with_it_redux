@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-jekyll && rsync -avz --delete _site/ linode:/home/administrator/jekyll_rwi
