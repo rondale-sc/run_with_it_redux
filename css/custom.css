@@ -10,7 +10,7 @@
 #side-bar  {width:220px;margin-right:10px;margin-top:15px;float:left;}
 
 .footer    {border-top:1px solid lightgray;padding-top:10px;width:100%;}
-.footer p  {text-align:center;}
+.footer p  {text-align:center;font-size:13px;}
 
 .header-nav {width:68px;}
 .site-nav {text-align:center;width:75px;margin-left:10px;float:left;}
