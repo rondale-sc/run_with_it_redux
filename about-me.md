@@ -17,6 +17,8 @@ So, this blog is where I'm going to try and share what I've learned from you and
 
 <a href="https://github.com/rondale-sc/image_viewer" alt="ImageViewer image browser w/controls" title="Image Viewer">ImageViewer</a> - A jQuery plugin for displaying and manipulating images.  Its interface is modal so it can be easily used for web-forms or demographic entry forms without the user having to take their hands off the home row.
 
+<a href="https://github.com/rjackson/pivot.js" alt="Pivot.js - reporting lib" title="Pivot.js">Pivot.js</a> - A javascript library that lets you create extremely flexible reports on the fly.
+
 <a href="https://github.com/rondale-sc">My Github Page</a> - Where you can see what I'm up to.  All of the code snippets from this blog are available through this account.
 
 <a href="https://github.com/rondale-sc/run_with_it_redux"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://a248.e.akamai.net/assets.github.com/img/7afbc8b248c68eb468279e8c17986ad46549fb71/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub"></a>
