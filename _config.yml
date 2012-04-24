@@ -3,3 +3,4 @@ redcarpet:
   extensions: [fenced_code, gh_blockcode, no_intraemphasis]
 comments: true
 baseurl:  /
+paginate: 15

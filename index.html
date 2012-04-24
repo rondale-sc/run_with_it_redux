@@ -5,10 +5,59 @@ title: Run With It
 <div class="span9" id="articles">
   <h1>Articles</h1>
   <ul>
-  {% for post in site.posts %}
+  {% for post in paginator.posts %}
   <li><a href="{{  post.url | remove_extension  }}">{{ post.title }}</a> (<span>{{ post.date | date_to_string }}</span>)<br/>
     <p>{{ post.description }}</p>
   </li>
   {% endfor %}
   </ul>
+
+<div class="pagination">
+  <ul>
+    {% if paginator.previous_page %}
+      {% if paginator.previous_page == 1 %}
+        <li>
+          <a href="/">&larr;</a>
+        </li>
+      {% else %}
+        <li>
+          <a href="/page{{paginator.previous_page}}">&larr;</a>
+        </li>
+      {% endif %}
+    {% else %}
+      <li class="disabled">
+        <a href="#">&larr;</a>
+      </li>
+    {% endif %}
+    {% if paginator.page == 1 %}
+      <li class="active">
+        <a href="#">1</a>
+      </li>
+    {% else %}
+      <li>
+        <a href="/">1</a>
+      </li>
+    {% endif %}
+    {% for count in (2..paginator.total_pages) %}
+      {% if count == paginator.page %}
+        <li class="active">
+          <a href="#">{{count}}</a>
+        </li>
+      {% else %}
+        <li>
+          <a href="/page{{count}}">{{count}}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+    {% if paginator.next_page %}
+      <li>
+        <a href="/page{{paginator.next_page}}">&rarr;</a>
+      </li>
+    {% else %}
+      <li class="disabled">
+        <a href="#">&rarr;</a>
+      </li>
+    {% endif %}
+  </ul>
+</div>
 </div>
