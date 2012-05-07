@@ -13,6 +13,16 @@
 
   <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 
+  {% if page.description %}
+    <meta name="description" content="{{page.description}}" />
+  {% else %}
+    <meta name="Description" content="Author: Jonathan Paul Jackson, Description: A great place to level up your programming prowess.  Learn more about Ruby, Javascript, and much more here at Run With It.">
+  {% endif %}
+
+  {% if page.date %}
+    <meta http-equiv="date" content="{{page.date |date: '%A, %d  %Y %H:%M:%S GMT'}}" />
+  {% endif %}
+
   {% include _google.html %}
 </head>
 
