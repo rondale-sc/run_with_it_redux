@@ -35,6 +35,7 @@ SiteMap = Backbone.Model.extend({
 SearchView = Backbone.View.extend({
   initialize: function(){
     this.render();
+    $(this.options.el + 'input[type="text"]').focus();
   },
   render: function(){
     var template = _.template( $("#search_template").html(), {} );
