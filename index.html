@@ -8,9 +8,13 @@ title: Run With It
 <script src="/javascripts/run_with_it.js"></script>
 
 <div class="span9" id="articles">
-  <div id="search_container"></div>
+  <div style="margin:0;padding:0;">
+    <h1 id="articles-header">Articles:</h1>
+    <div id="search_container"></div>
+    <div style="clear:both;width:100%;"></div>
+  </div>
   <div id="search_results"></div>
-  <h1>Articles</h1><hr style="width:675px;"/>
+  <hr style="width:675px;"/>
   <div id="article-listing">
     <ul>
     {% for post in paginator.posts %}
@@ -74,7 +78,6 @@ title: Run With It
 <script type="text/template" id="search_template">
     <div class="form-horizontal" style="margin-bottom:10px;">
       <input type="text" id="search_input" placeholder="Search by Title" />
-      <input type="button" id="search_button" value="Search" class="btn" />
     </div>
 </script>
 
