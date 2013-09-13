@@ -20,6 +20,8 @@
 .footer    {border-top:1px solid lightgray;padding-top:10px;width:100%;}
 .footer p  {text-align:center;font-size:13px;}
 
+h1.title { margin-bottom:15px; }
+
 .header-nav {width:68px;}
 .site-nav {text-align:center;width:75px;margin-left:10px;float:left;}
 .nav-offset {margin-left:660px;}
