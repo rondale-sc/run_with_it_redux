@@ -25,4 +25,4 @@ So, this blog is where I'm going to try and share what I've learned from you and
 
 
 ### Additional Information
-I work at <a href="http://www.promedicalinc.com/">Pro Medical, Inc</a>, a great company doing really innovative things.  The content of this blog is not affiliated with Pro Medical, Inc.  Any views or comments are my own.
+I work at <a href="http://hashrocket.com/team/jonathan-jackson">Hashrocket</a>, a great company doing really innovative things. Any views or comments are my own.
